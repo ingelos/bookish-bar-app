@@ -1,3 +1,50 @@
+nav {
+    width: 100%;
+    background-color: var(--color-primary);
+    display: flex;
+    flex-direction: row;
+    height: 75px;
+}
+
+.nav-container {
+    flex-basis: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation-links {
+    width: 450px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+}
+
+li {
+    font-size: 28px;
+}
+
+nav a,
+nav a:hover {
+    color: black;
+}
+
+.search-input {
+    border: none;
+    border-radius: 25px 0 0 25px;
+    padding: 8px 350px 8px 15px;
+}
+
+.get-book-info {
+    border: none;
+    border-radius: 0 25px 25px 0;
+    background-color: var(--color-secondary);
+    padding: 8px 10px;
+}
+
 .active-menu-link {
     text-decoration: underline;
 }

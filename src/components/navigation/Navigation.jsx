@@ -21,6 +21,10 @@ function Navigation() {
                                      to='/browse'>Browse</NavLink>
                         </li>
                     </ul>
+                    <form className='search-form'>
+                        <input type='text' id='search-field' className='search-input' placeholder='Search by title or author'/>
+                        <button type='submit' className='get-book-info'>Search</button>
+                    </form>
                 </div>
             </nav>
         </>
