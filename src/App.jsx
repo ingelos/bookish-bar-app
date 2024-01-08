@@ -14,6 +14,7 @@ import BrowseGenre from './pages/BrowseGenre/BrowseGenre.jsx'
 import SearchResults from './pages/searchResults/SearchResults.jsx'
 import NotFound from './pages/notFound/NotFound.jsx'
 import UserIcon from './assets/icons/user-circle.svg'
+import Copyright from './assets/icons/copyright.svg'
 
 function App() {
 
@@ -44,6 +45,11 @@ function App() {
             <Route path='/search-results' element={<SearchResults/>}/>
             <Route path='*' element={<NotFound/>}/>
         </Routes>
+        <footer>
+            <p className='footer-content'>Bookish Bar 2024</p>
+            <img src={Copyright} id='copyright-icon' alt='copyright-icon'/>
+            <p>created by Inge Los</p>
+        </footer>
     </>
   )
 }
