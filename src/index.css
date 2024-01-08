@@ -9,3 +9,13 @@
   --color-secondary: #D9D9D9;
   font-family: Optima, sans-serif;
 }
+
+h1 {
+  font-size: 64px;
+  font-weight: 300;
+}
+
+button, input {
+  font-family: Optima, sans-serif;
+  font-size: 14px;
+}

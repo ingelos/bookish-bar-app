@@ -13,13 +13,22 @@ import Browse from './pages/browse/Browse.jsx'
 import BrowseGenre from './pages/BrowseGenre/BrowseGenre.jsx'
 import SearchResults from './pages/searchResults/SearchResults.jsx'
 import NotFound from './pages/notFound/NotFound.jsx'
-
+import UserIcon from './assets/icons/user-circle.svg'
 
 function App() {
 
 
   return (
     <>
+        <header>
+            <div className='header-container'>
+            <h1 className='header-title'>BOOKISH BAR</h1>
+            <div className='login-container'>
+                <button type='submit' className='login-button'>Login</button>
+                <img src={UserIcon} id='user-icon' alt='user-icon'/>
+            </div>
+            </div>
+        </header>
      <Navigation/>
         <Routes>
             <Route path='/' element={<Home/>}/>

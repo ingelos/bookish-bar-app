@@ -42,7 +42,7 @@ nav a:hover {
     border: none;
     border-radius: 0 25px 25px 0;
     background-color: var(--color-secondary);
-    padding: 8px 10px;
+    padding: 8px 15px;
 }
 
 .active-menu-link {
