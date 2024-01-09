@@ -7,7 +7,7 @@
 }
 
 
-.inner-content-container {
+.inner-container {
     display: flex;
     flex-basis: 700px;
     flex-direction: column;
@@ -64,3 +64,4 @@ footer {
 #copyright-icon {
     width: 20px;
 }
+

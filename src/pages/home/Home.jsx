@@ -5,7 +5,7 @@ function Home() {
         <>
 
             <section className='home-section outer-container'>
-                <div className='home-section inner-content-container'>
+                <div className='home-section inner-container'>
                     <div className='home-section list-items'>
                         <h2 className='list-title'>New Releases</h2>
                         <ul className='book-list'>
