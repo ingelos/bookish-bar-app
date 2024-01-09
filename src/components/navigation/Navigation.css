@@ -3,16 +3,17 @@ nav {
     background-color: var(--color-primary);
     display: flex;
     flex-direction: row;
-    height: 75px;
+    height: 65px;
 }
 
 .nav-container {
     flex-basis: 1200px;
-    margin: 0 auto;
+    margin: 0 20px 0 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
 }
 
 .navigation-links {

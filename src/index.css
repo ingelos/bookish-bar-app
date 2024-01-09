@@ -16,6 +16,7 @@ h1 {
 }
 
 button, input {
-  font-family: Optima, sans-serif;
+  font-family: inherit;
   font-size: 14px;
 }
+
