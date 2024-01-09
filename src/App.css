@@ -48,7 +48,6 @@
     width: 25px;
 }
 
-
 footer {
     width: 100%;
     background-color: var(--color-primary);
@@ -63,5 +62,6 @@ footer {
 
 #copyright-icon {
     width: 20px;
+    margin: 0 2px;
 }
 

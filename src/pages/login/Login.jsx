@@ -20,6 +20,7 @@ const navigate = useNavigate();
         <>
             <div className='login-page outer-container'>
                 <div className='login-page inner-container'>
+                    <div className='inner-content-container'>
                     <form className='login-form' onSubmit={handleSubmit}>
                         <h3 className='login-title'>Login</h3>
                         <p className='login-subtitle'>Have an account? Log in with your e-mail and password:</p>
@@ -46,6 +47,7 @@ const navigate = useNavigate();
                     </form>
                     <p><strong>New here?</strong></p>
                     <Link to='/register'>Make an account in one minute!</Link>
+                </div>
                 </div>
             </div>
         </>
