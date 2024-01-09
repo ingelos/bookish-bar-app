@@ -1,7 +1,5 @@
 import './Login.css'
 import {Link, useNavigate} from "react-router-dom";
-import Envelope from '../../assets/icons/envelope-simple.svg';
-import Lock from '../../assets/icons/lock.svg';
 import Caret from '../../assets/icons/caret-right.svg'
 
 function Login() {
