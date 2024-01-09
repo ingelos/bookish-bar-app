@@ -31,7 +31,7 @@ function handleClick() {
             <div className='header-container'>
                 <h1 className='header-title'>BOOKISH BAR</h1>
                 <div className='login-container'>
-                    <button type='submit' className='login-button' onClick={handleClick}>Login</button>
+                    <button type='submit' className='login-link' onClick={handleClick}>Login</button>
                     <img src={UserIcon} id='user-icon' alt='user-icon'/>
                 </div>
             </div>

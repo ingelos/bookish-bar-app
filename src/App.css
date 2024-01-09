@@ -37,7 +37,7 @@
     align-items: center;
 }
 
-.login-button {
+.login-link {
     padding: 5px;
     border: none;
     background-color: transparent;
@@ -47,7 +47,6 @@
 #user-icon {
     width: 25px;
 }
-
 
 footer {
     width: 100%;
@@ -63,5 +62,6 @@ footer {
 
 #copyright-icon {
     width: 20px;
+    margin: 0 2px;
 }
 
