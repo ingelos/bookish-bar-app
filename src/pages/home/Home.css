@@ -1,0 +1,25 @@
+
+.list-title {
+    padding: 0 0 5px 0;
+}
+
+.book-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+    padding: 20px 0 10px 0;
+    border-top: 2px solid var(--color-primary);
+}
+
+.book-list li {
+    width: 120px;
+    border: 2px solid deeppink;
+}
+
+
+.more-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

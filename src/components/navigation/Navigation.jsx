@@ -1,5 +1,6 @@
 import './Navigation.css'
 import {NavLink} from "react-router-dom";
+import MagnifyingGlass from "../../assets/icons/magnifying-glass.svg";
 
 
 function Navigation() {

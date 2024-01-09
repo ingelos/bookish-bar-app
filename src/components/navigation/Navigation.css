@@ -3,16 +3,17 @@ nav {
     background-color: var(--color-primary);
     display: flex;
     flex-direction: row;
-    height: 75px;
+    height: 65px;
 }
 
 .nav-container {
     flex-basis: 1200px;
-    margin: 0 auto;
+    margin: 0 20px 0 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
 }
 
 .navigation-links {
@@ -42,7 +43,7 @@ nav a:hover {
     border: none;
     border-radius: 0 25px 25px 0;
     background-color: var(--color-secondary);
-    padding: 8px 10px;
+    padding: 8px 15px;
 }
 
 .active-menu-link {

@@ -1,5 +1,5 @@
 import './App.css'
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import Navigation from './components/navigation/Navigation.jsx'
 import Home from './pages/home/Home.jsx'
 import Register from './pages/register/Register.jsx'
@@ -13,13 +13,29 @@ import Browse from './pages/browse/Browse.jsx'
 import BrowseGenre from './pages/BrowseGenre/BrowseGenre.jsx'
 import SearchResults from './pages/searchResults/SearchResults.jsx'
 import NotFound from './pages/notFound/NotFound.jsx'
-
+import UserIcon from './assets/icons/user-circle.svg'
+import Copyright from './assets/icons/copyright.svg'
 
 function App() {
 
+const navigate = useNavigate();
+
+function handleClick() {
+    console.log(`You're being send to the login page!`)
+    navigate('/login')
+}
 
   return (
     <>
+        <header>
+            <div className='header-container'>
+                <h1 className='header-title'>BOOKISH BAR</h1>
+                <div className='login-container'>
+                    <button type='submit' className='login-button' onClick={handleClick}>Login</button>
+                    <img src={UserIcon} id='user-icon' alt='user-icon'/>
+                </div>
+            </div>
+        </header>
      <Navigation/>
         <Routes>
             <Route path='/' element={<Home/>}/>
@@ -35,6 +51,11 @@ function App() {
             <Route path='/search-results' element={<SearchResults/>}/>
             <Route path='*' element={<NotFound/>}/>
         </Routes>
+        <footer>
+            <p className='footer-content'>Bookish Bar 2024</p>
+            <img src={Copyright} id='copyright-icon' alt='copyright-icon'/>
+            <p>created by Inge Los</p>
+        </footer>
     </>
   )
 }
