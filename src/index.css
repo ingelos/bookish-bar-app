@@ -21,3 +21,6 @@ button, input {
   font-size: 14px;
 }
 
+button:hover {
+  cursor: pointer;
+}
