@@ -1,43 +1,52 @@
 import './Login.css'
 import {Link, useNavigate} from "react-router-dom";
 import Caret from '../../assets/icons/caret-right.svg'
+import {useForm} from "react-hook-form";
 
 function Login() {
 
-const navigate = useNavigate();
+    const {register, handleSubmit, formState: {errors}} = useForm();
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        navigate('/');
+    const navigate = useNavigate();
+
+    function handleFormSubmit(data) {
+        console.log(data);
+        navigate('/profile');
 
         console.log(`You're logged in!`)
     }
-
 
     return(
         <>
             <div className='login-page outer-container'>
                 <div className='login-page inner-container'>
                     <div className='inner-content-container'>
-                    <form className='login-form' onSubmit={handleSubmit}>
+                    <form className='login-form' onSubmit={handleSubmit(handleFormSubmit)}>
                         <h3 className='login-title'>Login</h3>
                         <p className='login-subtitle'>Have an account? Log in with your e-mail and password:</p>
-                        <label htmlFor='login-email'>E-mail*</label>
+                        <label htmlFor='login-email'>E-mail
                         <input type='email'
                                id='email-field'
-                               name='email'
-                               value={''}
-                               onChange={''}
-                               required
+                               {...register('email', {
+                                   required: 'Email is required',
+                                   validate: (value) => value.includes('@') || 'Please enter a valid email address',
+                               })}
                         />
-                        <label htmlFor='login-password'>Password*</label>
+                            {errors.email && <p>{errors.email.message}</p>}
+                        </label>
+                        <label htmlFor='login-password'>Password
                         <input type='password'
                                id='password-field'
-                               name='password'
-                               value={''}
-                               onChange={''}
-                               required
+                               {...register('password', {
+                                   required: 'Password is required',
+                                   minLength: {
+                                       value: 8,
+                                       message: 'A password requires a minimum of 8 characters'
+                                   }
+                               })}
                         />
+                            {errors.password && <p>{errors.password.message}</p>}
+                        </label>
                         <span>
                         <button type='submit' className='login-button'>Log in</button>
                         <Link to='' id='password-link'><img src={Caret} alt='caret-icon'/>Forget password?</Link>
