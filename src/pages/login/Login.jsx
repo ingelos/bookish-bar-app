@@ -13,7 +13,6 @@ const navigate = useNavigate();
         console.log(`You're logged in!`)
     }
 
-
     return(
         <>
             <div className='login-page outer-container'>
