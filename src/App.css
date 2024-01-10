@@ -6,7 +6,6 @@
     margin: 20px;
 }
 
-
 .inner-container {
     display: flex;
     flex-basis: 700px;
@@ -15,13 +14,13 @@
     padding: 20px;
 }
 
-
 .header-container {
     height: 90px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    position: relative;
 }
 
 .header-title {
@@ -29,7 +28,7 @@
 }
 
 .login-container {
-    position: fixed;
+    position: absolute;
     right: 20px;
     top: 55px;
     display: flex;

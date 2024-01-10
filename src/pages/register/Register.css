@@ -1,0 +1,63 @@
+.inner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-title {
+    padding: 10px 0;
+    font-size: 24px;
+}
+
+.register-subtitle {
+    padding: 10px 0;
+}
+
+.personal-information-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.password-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    padding: 20px 0;
+}
+
+.register-form label {
+    padding: 10px 0 5px;
+}
+
+.register-form input {
+    background-color: white;
+    border: 2px solid var(--color-secondary);
+    border-radius: 4px;
+    padding: 10px;
+    max-width: 300px;
+}
+
+.register-button {
+    background-color: var(--color-secondary);
+    border-radius: 25px;
+    border: none;
+    margin: 20px 0 15px 0;
+    padding: 10px;
+    max-width: 120px;
+}
+.notes {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+}
+
+#required {
+    margin-left: 15px;
+}
+
