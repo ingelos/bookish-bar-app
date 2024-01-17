@@ -5,13 +5,11 @@ import {useForm} from "react-hook-form";
 function Register() {
 
     const {register, handleSubmit, formState: { errors}, watch } = useForm();
-
     const navigate = useNavigate();
 
     function handleFormSubmit(data) {
         console.log(data);
         navigate('/edit-profile');
-
 
         console.log(`You've created an account! Now create your profile!`)
     }
@@ -33,7 +31,7 @@ function Register() {
                                        {...register('firstName', {
                                                required: 'First name is required',
                                                 minLength: {
-                                                   value: 3,
+                                                    value: 3,
                                                     message: 'Please enter a name that is at least 3 characters long'
                                             },
                                            })}

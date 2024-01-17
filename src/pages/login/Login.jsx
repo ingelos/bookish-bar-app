@@ -6,7 +6,6 @@ import {useForm} from "react-hook-form";
 function Login() {
 
     const {register, handleSubmit, formState: {errors}} = useForm();
-
     const navigate = useNavigate();
 
     function handleFormSubmit(data) {
