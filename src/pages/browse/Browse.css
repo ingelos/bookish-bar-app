@@ -6,6 +6,12 @@
 
 .browse-title {
     text-transform: uppercase;
+    font-weight: 400;
+}
+
+.browse-subtitle {
+    font-size: 20px;
+    font-weight: 400;
     margin-bottom: 25px;
 }
 
@@ -25,8 +31,8 @@
     border: 4px solid var(--color-primary);
     border-radius: 100px;
     margin: 20px;
-    width: 175px;
-    height: 175px;
+    width: 165px;
+    height: 165px;
 }
 
 .subject-icon {
@@ -35,4 +41,6 @@
 
 .subject-title {
     font-size: 24px;
+    font-weight: 400;
 }
+

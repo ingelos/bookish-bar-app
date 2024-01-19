@@ -18,11 +18,9 @@
     height: 110px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    position: relative;
 }
-
 
 footer {
     width: 100%;

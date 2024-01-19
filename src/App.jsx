@@ -13,7 +13,6 @@ import Browse from './pages/browse/Browse.jsx'
 import BrowseGenre from './pages/BrowseGenre/BrowseGenre.jsx'
 import SearchResults from './pages/searchResults/SearchResults.jsx'
 import NotFound from './pages/notFound/NotFound.jsx'
-import UserIcon from './assets/icons/user-circle.svg'
 import Copyright from './assets/icons/copyright.svg'
 
 function App() {
@@ -37,7 +36,7 @@ function App() {
             <Route path='/my-books' element={<MyBooks/>}/>
             <Route path='/books/:id' element={<BookDetail/>}/>
             <Route path='/browse' element={<Browse/>}/>
-            <Route path='/browse:id' element={<BrowseGenre/>}/>
+            <Route path='/browse/sci-fi' element={<BrowseGenre/>}/>
             <Route path='/search-results' element={<SearchResults/>}/>
             <Route path='*' element={<NotFound/>}/>
         </Routes>
