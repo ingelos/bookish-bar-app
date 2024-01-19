@@ -1,26 +1,30 @@
 import './Navigation.css'
-import {NavLink, useNavigate} from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
 import MagnifyingGlass from "../../assets/icons/magnifying-glass.svg";
-
+import UserIcon from "../../assets/icons/user-circle.svg";
 
 function Navigation() {
-
     const navigate = useNavigate();
+
+    function handleClick() {
+        console.log(`You're being send to the login page!`)
+        navigate('/login')
+    }
 
     return (
         <>
             <nav>
                 <div className='nav-container'>
                     <ul className='navigation-links'>
-                        <li>
+                        <li  className='nav-link'>
                             <NavLink className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'}
                                      to='/'>Home</NavLink>
                         </li>
-                        <li>
+                        <li className='nav-link'>
                             <NavLink className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'}
                                      to='/my-books'>MyBooks</NavLink>
                         </li>
-                        <li>
+                        <li className='nav-link'>
                             <NavLink className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'}
                                      to='/browse'>Browse</NavLink>
                         </li>
@@ -31,18 +35,25 @@ function Navigation() {
                         <button type='submit' className='get-book-info'>Search</button>
                     </form>
 
-                    <button
-                        type="button"
-                        onClick={()=> navigate('/')}
-                    >
-                        Log out
-                    </button>
-                    <button
-                        type="button"
-                        onClick={()=> navigate('/login')}
-                    >
-                        Log in
-                    </button>
+                    <div className='login-container'>
+                        {/*<button type='submit' className='login-link' onClick={handleClick}>Login</button>*/}
+                        <button
+                            type="button"
+                            className='login-link'
+                            onClick={()=> navigate('/login')}
+                        >
+                            Login
+                        </button>
+                        <Link to={'/profile'}><img src={UserIcon} id='user-icon' alt='user-icon'/></Link>
+                    </div>
+
+
+                    {/*<button*/}
+                    {/*    type="button"*/}
+                    {/*    onClick={()=> navigate('/')}*/}
+                    {/*>*/}
+                    {/*    Log out*/}
+                    {/*</button>*/}
                 </div>
             </nav>
         </>

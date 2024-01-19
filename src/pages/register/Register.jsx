@@ -25,32 +25,20 @@ function Register() {
                             <h2 className='register-title'>Create account</h2>
                             <h3 className='register-subtitle'>Personal information</h3>
                             <div className='personal-information-field'>
-                                <label htmlFor='register-first-name'>First name
+                                <label htmlFor='register-username'>Username
                                 <input type='text'
-                                       id='first-name-field'
-                                       {...register('firstName', {
-                                               required: 'First name is required',
+                                       id='username-field'
+                                       {...register('userName', {
+                                               required: 'Username is required',
                                                 minLength: {
                                                     value: 3,
-                                                    message: 'Please enter a name that is at least 3 characters long'
+                                                    message: 'Please enter a username that is at least 3 characters long'
                                             },
                                            })}
                                 />
-                                    {errors.firstName && <p>{errors.firstName.message}</p>}
+                                    {errors.userName && <p>{errors.userName.message}</p>}
                                 </label>
-                                <label htmlFor='register-last-name'>Last name
-                                <input type='text'
-                                       id='last-name-field'
-                                       {...register('lastName', {
-                                           required: 'Last name is required',
-                                           minLength: {
-                                               value: 3,
-                                               message: 'Please enter a last name that is at least 3 characters long'
-                                           }
-                                       })}
-                                />
-                                    {errors.lastName && <p>{errors.lastName.message}</p>}
-                                </label>
+
                             <label htmlFor='login-email'>E-mail
                             <input type='email'
                                    id='email-field'
@@ -73,27 +61,14 @@ function Register() {
                                        {...register('password', {
                                            required: 'Password is required',
                                            minLength: {
-                                               value: 8,
-                                               message: 'A password requires a minimum of 8 characters'
+                                               value: 6,
+                                               message: 'A password requires a minimum of 6 characters'
                                            }
                                        })}
                                 />
                                     {errors.password && <p>{errors.password.message}</p>}
                                 </label>
-                                <label htmlFor='login-password-confirm'>Confirm password
-                                <input type='password'
-                                       id='confirm-password-field'
-                                    {...register('confirmPassword', {
-                                        required: 'Confirm password is required',
-                                        minLength: {
-                                            value: 8,
-                                            message: 'A password requires a minimum of 8 characters',
-                                        },
-                                        validate: (value) => value === watch('password') || 'Passwords do not match'
-                                    })}
-                                />
-                                    {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
-                                </label>
+
                             </div>
                             <button type='submit' className='register-button' >Create account</button>
                         </form>
@@ -105,3 +80,11 @@ function Register() {
 }
 
 export default Register;
+
+
+
+
+
+
+
+

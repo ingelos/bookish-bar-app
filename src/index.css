@@ -12,7 +12,7 @@
 }
 
 h1 {
-  font-size: 64px;
+  font-size: 70px;
   font-weight: 300;
 }
 
@@ -24,3 +24,4 @@ button, input {
 button:hover {
   cursor: pointer;
 }
+

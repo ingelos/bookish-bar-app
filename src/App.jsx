@@ -18,22 +18,12 @@ import Copyright from './assets/icons/copyright.svg'
 
 function App() {
 
-const navigate = useNavigate();
-
-function handleClick() {
-    console.log(`You're being send to the login page!`)
-    navigate('/login')
-}
 
   return (
     <>
         <header>
             <div className='header-container'>
                 <h1 className='header-title'>BOOKISH BAR</h1>
-                <div className='login-container'>
-                    <button type='submit' className='login-link' onClick={handleClick}>Login</button>
-                    <img src={UserIcon} id='user-icon' alt='user-icon'/>
-                </div>
             </div>
         </header>
      <Navigation/>

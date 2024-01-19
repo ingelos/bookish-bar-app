@@ -3,12 +3,13 @@ nav {
     background-color: var(--color-primary);
     display: flex;
     flex-direction: row;
+    /*justify-content: space-between;*/
     height: 65px;
 }
 
 .nav-container {
     flex-basis: 1200px;
-    margin: 0 20px 0 50px;
+    margin: 0 50px 0 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -17,15 +18,16 @@ nav {
 }
 
 .navigation-links {
-    width: 450px;
     display: flex;
+    flex-basis: 350px;
     flex-direction: row;
     justify-content: space-between;
     list-style: none;
 }
 
-li {
-    font-size: 28px;
+.nav-link {
+    font-size: 24px;
+    margin-right: 20px;
 }
 
 nav a,
@@ -33,17 +35,45 @@ nav a:hover {
     color: black;
 }
 
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 0 30px;
+    flex-basis: 400px;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
 .search-input {
     border: none;
     border-radius: 25px 0 0 25px;
-    padding: 8px 350px 8px 15px;
+    padding: 8px 250px 8px 15px;
 }
 
 .get-book-info {
     border: none;
     border-radius: 0 25px 25px 0;
     background-color: var(--color-secondary);
-    padding: 8px 15px;
+    padding: 8px 20px;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: row;
+    margin-left: 30px;
+}
+
+.login-link {
+    padding: 5px;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+}
+
+#user-icon {
+    width: 30px;
+    background-color:  var(--color-secondary);
+    border-radius: 25px;
 }
 
 .active-menu-link {
