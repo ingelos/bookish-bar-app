@@ -6,7 +6,6 @@ import {useForm} from "react-hook-form";
 function Login() {
 
     const {register, handleSubmit, formState: {errors}} = useForm();
-
     const navigate = useNavigate();
 
     function handleFormSubmit(data) {
@@ -24,15 +23,14 @@ function Login() {
                     <form className='login-form' onSubmit={handleSubmit(handleFormSubmit)}>
                         <h3 className='login-title'>Login</h3>
                         <p className='login-subtitle'>Have an account? Log in with your e-mail and password:</p>
-                        <label htmlFor='login-email'>E-mail
-                        <input type='email'
-                               id='email-field'
-                               {...register('email', {
-                                   required: 'Email is required',
-                                   validate: (value) => value.includes('@') || 'Please enter a valid email address',
-                               })}
+                        <label htmlFor='login-email'>Username
+                        <input type='text'
+                               id='username-field'
+                               {...register('username', {
+                                   required: 'Username is required'
+                                   })}
                         />
-                            {errors.email && <p>{errors.email.message}</p>}
+                            {errors.username && <p>{errors.username.message}</p>}
                         </label>
                         <label htmlFor='login-password'>Password
                         <input type='password'
@@ -40,7 +38,7 @@ function Login() {
                                {...register('password', {
                                    required: 'Password is required',
                                    minLength: {
-                                       value: 8,
+                                       value: 6,
                                        message: 'A password requires a minimum of 8 characters'
                                    }
                                })}
@@ -62,3 +60,17 @@ function Login() {
 }
 
 export default Login;
+
+
+
+
+//
+// <input type='email'
+//        id='email-field'
+//        {...register('email', {
+//            required: 'Email is required',
+//            validate: (value) => value.includes('@') || 'Please enter a valid email address',
+//        })}
+// />
+// {errors.email && <p>{errors.email.message}</p>}
+// </label>

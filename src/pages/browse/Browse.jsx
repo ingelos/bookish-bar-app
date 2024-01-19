@@ -3,7 +3,7 @@ import './Browse.css'
 function Browse() {
     return (
         <section className='browse-section outer-container'>
-            <div className='browse-section inner-container'>
+            <div className='browse-section left-container'>
                 <div className='browse-section browse-content'>
                 <div className='browse-section list-items'>
                     <h2 className='list-title'>Classics</h2>
@@ -54,6 +54,9 @@ function Browse() {
                         <li></li>
                     </ul>
                 </div>
+            </div>
+            <div className='browse-section right-container'>
+
             </div>
         </section>
     )
