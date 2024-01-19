@@ -3,14 +3,14 @@
     justify-content: center;
     flex-basis: 1200px;
     border: 2px dotted black;
-    margin: 20px;
+    margin: 40px;
 }
 
 .inner-container {
     display: flex;
-    flex-basis: 700px;
+    flex-basis: 800px;
     flex-direction: column;
-    border: 2px solid blue;
+    border: 2px dotted blue;
     padding: 20px;
 }
 

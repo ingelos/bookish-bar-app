@@ -37,7 +37,7 @@ function App() {
             <Route path='/my-books' element={<MyBooks/>}/>
             <Route path='/books/:id' element={<BookDetail/>}/>
             <Route path='/browse' element={<Browse/>}/>
-            <Route path='/browse-genre' element={<BrowseGenre/>}/>
+            <Route path='/browse:id' element={<BrowseGenre/>}/>
             <Route path='/search-results' element={<SearchResults/>}/>
             <Route path='*' element={<NotFound/>}/>
         </Routes>

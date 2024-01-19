@@ -64,13 +64,4 @@ export default Login;
 
 
 
-//
-// <input type='email'
-//        id='email-field'
-//        {...register('email', {
-//            required: 'Email is required',
-//            validate: (value) => value.includes('@') || 'Please enter a valid email address',
-//        })}
-// />
-// {errors.email && <p>{errors.email.message}</p>}
-// </label>
+

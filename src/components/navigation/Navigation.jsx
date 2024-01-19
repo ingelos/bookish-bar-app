@@ -6,10 +6,10 @@ import UserIcon from "../../assets/icons/user-circle.svg";
 function Navigation() {
     const navigate = useNavigate();
 
-    function handleClick() {
-        console.log(`You're being send to the login page!`)
-        navigate('/login')
-    }
+    // function handleClick() {
+    //     console.log(`You're being send to the login page!`)
+    //     navigate('/login')
+    // }
 
     return (
         <>
