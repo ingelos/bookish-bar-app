@@ -1,57 +1,50 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
+import SearchBar from "../../components/searchBar/SearchBar.jsx";
 
 
 function SearchResults() {
 
-    // const [searchQuery, setSearchQuery] = useState();
-    // const [books, setBooks] = useState();
-    // const [error, setError] = useState();
-    //
-    // async function handleSubmit(event) {
-    //     event.preventDefault();
-    //     setError('');
-    //
-    //     try {
-    //         const response = await axios.get(`https://openlibrary.org/search.json/${searchQuery}`)
-    //         const book = response.data[0];
-    //         console.log(book);
-    //         setBooks(book);
-    //         setSearchQuery('');
-    //
-    //     } catch (e) {
-    //         console.error(e);
-    //         setError(`${searchQuery} does not exist. Try again.`);
-    //     }
-    // }
+    const [books, setBooks] = useState([]);
+    const [error, toggleError] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('')
 
+    async function handleSubmit() {
+        toggleError(false);
 
-    return (
-    <>
-    <section className='search-results-page section-column'>
-        <div className='search-results-page inner-container'>
-            <h2>Search</h2>
-            {/*<form className='search-form' onSubmit={handleSubmit}>*/}
-            {/*    <input*/}
-            {/*        type='text'*/}
-            {/*        name='search'*/}
-            {/*        id='search-field'*/}
-            {/*        placeholder='Search by title or author'*/}
-            {/*        value={searchQuery}*/}
-            {/*        onChange={(event) => setSearchQuery(event.target.value)}*/}
-            {/*    />*/}
-            {/*    <button type='submit'>Search</button>*/}
-            {/*    {error && <p>{error}</p>}*/}
-            {/*</form>*/}
-            {/*{Object.keys(books).length > 0 &&*/}
-            {/*    <article>*/}
-            {/*        <h2>{books.title}</h2>*/}
-            {/*    </article>*/}
-            {/*}*/}
-        </div>
-    </section>
-    </>
+        try {
+            const {data} = await axios.get(`https://openlibrary.org/search.json?q=${searchQuery}`);
+            console.log(data.docs)
+            setBooks(data.docs);
+            setSearchQuery('')
+        } catch(e) {
+            console.error(e);
+            toggleError(true);
+        }
+
+            }
+
+                return (
+                    <section className='search-result-section outer-container'>
+                        <div className='search-result-section inner-conatiner'>
+                <form className='search-bar' onSubmit={handleSubmit}>
+                    <input type='text'
+                           className='search-input'
+                           placeholder='Search by title or author'
+                           value={searchQuery}
+                           onChange={(event) => setSearchQuery(event.target.value)}
+                    />
+                    <button type='submit'>
+                        Search
+                    </button>
+                </form>
+            </div>
+        </section>
     )
+
 }
 
 export default SearchResults;
+
+
+

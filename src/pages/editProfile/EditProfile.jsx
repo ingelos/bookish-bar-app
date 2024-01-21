@@ -1,13 +1,19 @@
 import {useForm} from "react-hook-form";
 import './EditProfile.css'
+import {Link, useNavigate} from "react-router-dom";
+import {useState} from "react";
 
 
 function EditProfile() {
 
     const {register, handleSubmit, formState: {errors}} = useForm()
+    const [submitSuccess, setSubmitSucces] = useState(null);
+
 
     function handleFormSubmit(data) {
         console.log(data)
+        console.log(`You've updated your profile!`)
+        setSubmitSucces(true);
     }
 
 
@@ -17,7 +23,8 @@ function EditProfile() {
                 <div className='edit-profile-page inner-container'>
                     <div className='inner-content-container'>
                         <h2>Edit Profile</h2>
-                        <form className='edit-profile-form' onSubmit={handleSubmit(handleFormSubmit)}>
+                        {!submitSuccess ?
+                            <form className='edit-profile-form' onSubmit={handleSubmit(handleFormSubmit)}>
                                 <label htmlFor='user-name-field'>
                                     User name
                                     <input
@@ -43,6 +50,9 @@ function EditProfile() {
                                 </label>
                             <button type='submit'>Save profile settings</button>
                         </form>
+                            : <p>You've updated your profile! You can see it <Link
+                                to={`/profile`}><strong>here.</strong></Link></p>
+                        }
                     </div>
                 </div>
             </section>

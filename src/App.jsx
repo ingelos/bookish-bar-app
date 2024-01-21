@@ -10,7 +10,7 @@ import AccountSettings from './pages/accountSettings/AccountSettings.jsx'
 import MyBooks from './pages/myBooks/MyBooks.jsx'
 import BookDetail from './pages/bookDetail/BookDetail.jsx'
 import Browse from './pages/browse/Browse.jsx'
-import BrowseGenre from './pages/BrowseGenre/BrowseGenre.jsx'
+import BrowseRomance from './pages/browseRomance/BrowseRomance.jsx'
 import SearchResults from './pages/searchResults/SearchResults.jsx'
 import NotFound from './pages/notFound/NotFound.jsx'
 import Copyright from './assets/icons/copyright.svg'
@@ -36,7 +36,7 @@ function App() {
             <Route path='/my-books' element={<MyBooks/>}/>
             <Route path='/books/:id' element={<BookDetail/>}/>
             <Route path='/browse' element={<Browse/>}/>
-            <Route path='/browse/sci-fi' element={<BrowseGenre/>}/>
+            <Route path='/browse/romance' element={<BrowseRomance/>}/>
             <Route path='/search-results' element={<SearchResults/>}/>
             <Route path='*' element={<NotFound/>}/>
         </Routes>

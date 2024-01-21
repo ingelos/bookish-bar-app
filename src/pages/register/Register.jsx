@@ -1,31 +1,33 @@
 import './Register.css'
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
+import {useState} from "react";
 
 function Register() {
 
     const {register, handleSubmit, formState: { errors}, watch } = useForm();
-    const navigate = useNavigate();
+    const [error, setError] = useState(false);
+    const [submitSuccess, setSubmitSucces] = useState(null);
 
     function handleFormSubmit(data) {
         console.log(data);
-        navigate('/edit-profile');
-
-        console.log(`You've created an account! Now create your profile!`)
+        setError(false);
+        console.log(`You've created an account!`);
+        setSubmitSucces(true);
     }
-
-    console.log('ERRORS', errors);
 
     return (
         <>
             <div className='register-page outer-container'>
                 <div className='register-page inner-container'>
                     <div className='inner-content-container'>
-                        <form className='register-form' onSubmit={handleSubmit(handleFormSubmit)}>
-                            <h2 className='register-title'>Create account</h2>
-                            <h3 className='register-subtitle'>Personal information</h3>
-                            <div className='personal-information-field'>
-                                <label htmlFor='register-username'>Username
+
+                        <h2 className='register-title'>Create account</h2>
+                        {!submitSuccess ?
+                            <form className='register-form' onSubmit={handleSubmit(handleFormSubmit)}>
+                            <h3 className='register-subtitle'>Fill in your email and choose your username and password</h3>
+                                <label htmlFor='register-username'>
+                                    Username:
                                 <input type='text'
                                        id='username-field'
                                        {...register('userName', {
@@ -38,8 +40,8 @@ function Register() {
                                 />
                                     {errors.userName && <p>{errors.userName.message}</p>}
                                 </label>
-
-                            <label htmlFor='login-email'>E-mail
+                            <label htmlFor='email-field'>
+                                E-mail:
                             <input type='email'
                                    id='email-field'
                                    {...register('email', {
@@ -52,10 +54,8 @@ function Register() {
                             />
                                 {errors.email && <p>{errors.email.message}</p>}
                             </label>
-                            </div>
-                            <div className='password-field'>
-                                <h3 className='register-subtitle'>Choose password</h3>
-                                <label htmlFor='login-password'>Password
+                                <label htmlFor='password-field'>
+                                    Password:
                                 <input type='password'
                                        id='password-field'
                                        {...register('password', {
@@ -68,10 +68,12 @@ function Register() {
                                 />
                                     {errors.password && <p>{errors.password.message}</p>}
                                 </label>
-
-                            </div>
                             <button type='submit' className='register-button' >Create account</button>
+                            {error && <p className='error-message'>Something went wrong, try again.</p>}
                         </form>
+                            : <p>Congratulations! You've created an account! You can now log in <Link
+                                to={`/login`}><strong>here.</strong></Link></p>
+                        }
                     </div>
                 </div>
             </div>

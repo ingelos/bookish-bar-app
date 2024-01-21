@@ -22,9 +22,14 @@ function Profile() {
                             <img src={''} alt='user-profile-picture'/>
                             <Link to={'./my-books'}>Go to MyBooks list</Link>
                         </div>
+
                     </div>
                     <button type='submit' className='edit-profile' onClick={handleClick}>Edit profile</button>
+                    <div>
+                        <h3>Click <Link to={'./account-settings'}>here</Link> to go to your account settings</h3>
+                    </div>
                 </div>
+
             </section>
         </>
     )
