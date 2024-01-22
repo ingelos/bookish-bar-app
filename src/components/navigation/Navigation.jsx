@@ -7,7 +7,7 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 
 function Navigation() {
     const navigate = useNavigate();
-    const {isAuth, logout, user} = useContext(AuthContext);
+    const {isAuth, logout, username} = useContext(AuthContext);
 
     function handleSubmit() {
 
@@ -52,7 +52,8 @@ function Navigation() {
                                 >
                                 Logout
                             </button>
-                            <Link to={'/profile'}><img src={UserIcon} id='user-icon' alt='user-icon'/>
+                            <Link to={'/profile'}>
+                                <img src={UserIcon} id='user-icon' alt='user-icon'/>
                             </Link>
                         </div>
                             :

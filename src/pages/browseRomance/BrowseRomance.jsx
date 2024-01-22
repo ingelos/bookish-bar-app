@@ -4,24 +4,24 @@ import axios from "axios";
 
 function BrowseRomance() {
 
-    const [books, setBooks] = useState([]);
-
-    useEffect(() => {
-
-        async function fetchRomance() {
-            try {
-                const result = await axios.get('https://openlibrary.org/search.json?q=emma');
-                console.log(result.docs);
-                setBooks(result.docs);
-            } catch (e) {
-                console.error(e);
-                console.log('er gaat iets fout')
-            }
-        }
-
-        fetchRomance();
-
-    }, []);
+    // const [books, setBooks] = useState([]);
+    //
+    // useEffect(() => {
+    //
+    //     async function fetchRomance() {
+    //         try {
+    //             const result = await axios.get('https://openlibrary.org/search.json?q=emma');
+    //             console.log(result.docs);
+    //             setBooks(result.docs);
+    //         } catch (e) {
+    //             console.error(e);
+    //             console.log('er gaat iets fout')
+    //         }
+    //     }
+    //
+    //     fetchRomance();
+    //
+    // }, []);
 
 
     return (
@@ -38,8 +38,6 @@ function BrowseRomance() {
                         ))}
                     {/*</ul>*/}
                 </>
-            )
-            )
         </div>
     );
 
