@@ -7,37 +7,30 @@ import axios from "axios";
 function Register() {
 
     const {register, handleSubmit, formState: { errors,
-        },  } = useForm();
+        }} = useForm();
     const [error, setError] = useState(false);
     const [submitSuccess, setSubmitSucces] = useState(null);
 
 
     async function handleFormSubmit(data) {
         setError(false);
-        console.log({
-            username: 'username',
-            email: 'email',
-            password: 'password',
-            // role: ['user'],
-        })
 
         try {
             const response = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup', {
                 username: data.username,
                 email: data.email,
                 password: data.password,
-                // role: [data.user],
+                role: [data.user],
             });
-            console.log(response.data);
+            console.log(response);
             console.log(`You've created an account!`);
             setSubmitSucces(true);
 
         } catch (e) {
-            console.error(error);
+            console.error(e.response);
             setError(true);
             console.log('something went wrong')
         }
-
     }
 
 
@@ -46,8 +39,6 @@ function Register() {
             <div className='register-page outer-container'>
                 <div className='register-page inner-container'>
                     <div className='inner-content-container'>
-
-
 
                         {!submitSuccess ?
                             <form className='register-form' onSubmit={handleSubmit(handleFormSubmit)}>

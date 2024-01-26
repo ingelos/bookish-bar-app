@@ -2,18 +2,33 @@ import './Login.css'
 import {Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {AuthContext} from "../../context/AuthContext.jsx";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import axios from "axios";
 
 function Login() {
 
     const {register, handleSubmit, formState: {errors}} = useForm();
     const {login} = useContext(AuthContext);
+    const [error, setError] = useState(false);
 
 
-    function onSubmit(data) {
+    async function handleFormSubmit(data) {
+        setError(false);
+
+        try {
+            const response = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin', {
+                username: data.username,
+                password: data.password,
+            });
+            console.log(response.data.accessToken);
+            login(response.data.accessToken);
+
+        } catch(e) {
+            console.error(e);
+            setError(true);
+        }
         console.log(data);
-        login(data.email);
+
     }
 
 
@@ -24,20 +39,16 @@ function Login() {
                     <div className='inner-content-container'>
                         <h3 className='login-title'>Login</h3>
                         <p className='login-subtitle'>Have an account? Log in with your e-mail and password:</p>
-                        <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
-                            <label htmlFor='email-field'>
-                                E-mail:
-                                <input type='email'
-                                       id='email-field'
-                                       {...register('email', {
-                                           required: 'Email is required',
-                                           pattern: {
-                                               value: /^\S+@\S+$/i,
-                                               message: 'Please enter a valid email address',
-                                           }
+                        <form className='login-form' onSubmit={handleSubmit(handleFormSubmit)}>
+                            <label htmlFor='username'>
+                                Username:
+                                <input type='text'
+                                       id='username-field'
+                                       {...register('username', {
+                                           required: 'Username is required'
                                        })}
                                 />
-                                {errors.email && <p>{errors.email.message}</p>}
+                                {errors.userName && <p>{errors.userName.message}</p>}
                             </label>
                             <label htmlFor='password-field'>
                                 Password:

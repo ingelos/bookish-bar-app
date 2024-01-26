@@ -1,36 +1,77 @@
-import {createContext, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import {jwtDecode} from "jwt-decode";
+import isTokenValid from "../helpers/isTokenValid.js";
 
 export const AuthContext = createContext({});
 
 function AuthContextProvider({children}) {
-    const [isAuth, toggleIsAuth] = useState({
+    const [auth, setAuth] = useState({
         isAuth: false,
-        user: '',
+        user: null,
+        status: 'pending',
     });
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token && isTokenValid(token)) {
+            void login(token);
+        } else {
+            setAuth( {
+                isAuth: false,
+                user: null,
+                status: 'done',
+            })
+        }
+    }, []);
+
+
     const navigate = useNavigate();
 
-    function login(email) {
+    async function login(token) {
+        localStorage.setItem('token', token);
+        const decodedToken = jwtDecode(token);
+        console.log(decodedToken);
+
+        try {
+            const response = await axios.get('https://frontend-educational-backend.herokuapp.com/api/user', {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            console.log(response.data);
+            setAuth( {
+                isAuth: true,
+                user: {
+                    username: response.data.username,
+                    email: response.data.email,
+                    id: response.data.id,
+                },
+                status: 'done',
+            });
+        } catch(e) {
+            console.error(e);
+            logout();
+        }
         console.log('user is logged in!');
-        toggleIsAuth( {
-            isAuth: true,
-            user: email,
-        });
         navigate('./profile');
     }
 
     function logout() {
-        console.log('user is logged out!');
-        toggleIsAuth( {
+        setAuth( {
             isAuth: false,
-            user: '',
+            user: null,
+            status: 'done',
         });
+        console.log('user is logged out!');
         navigate('./');
     }
 
     const contextData = {
-        isAuth: isAuth.isAuth,
-        user: isAuth.user,
+        isAuth: auth.isAuth,
+        user: auth.user,
         login: login,
         logout: logout,
     };
@@ -38,7 +79,7 @@ function AuthContextProvider({children}) {
 
     return (
         <AuthContext.Provider value={contextData}>
-            {children}
+            {auth.status === 'done' ? children : <p>Loading...</p>}
         </AuthContext.Provider>
     )
 }

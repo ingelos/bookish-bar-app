@@ -19,7 +19,7 @@ function MyBooks() {
 
     return (
         <div>
-            <button type='submit' onClick={fetchBackend}>Blogs ophalen</button>
+            <button type='submit' onClick={fetchBackend}>backend connecten</button>
         </div>
     )
 
