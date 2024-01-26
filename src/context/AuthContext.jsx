@@ -12,6 +12,7 @@ function AuthContextProvider({children}) {
         user: null,
         status: 'pending',
     });
+    const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -22,26 +23,24 @@ function AuthContextProvider({children}) {
                 isAuth: false,
                 user: null,
                 status: 'done',
-            })
+            });
         }
     }, []);
 
 
-    const navigate = useNavigate();
-
     async function login(token) {
         localStorage.setItem('token', token);
         const decodedToken = jwtDecode(token);
-        console.log(decodedToken);
+        console.log(decodedToken.sub);
 
         try {
-            const response = await axios.get('https://frontend-educational-backend.herokuapp.com/api/user', {
+            const response = await axios.get(`https://frontend-educational-backend.herokuapp.com/api/user`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 }
-            })
-            console.log(response.data);
+            });
+            console.log(response);
             setAuth( {
                 isAuth: true,
                 user: {
@@ -51,22 +50,24 @@ function AuthContextProvider({children}) {
                 },
                 status: 'done',
             });
+            console.log('user is logged in!');
+            navigate('/profile');
         } catch(e) {
             console.error(e);
             logout();
         }
-        console.log('user is logged in!');
-        navigate('./profile');
+        // navigate('/profile');
     }
 
     function logout() {
+        localStorage.clear();
         setAuth( {
             isAuth: false,
             user: null,
             status: 'done',
         });
         console.log('user is logged out!');
-        navigate('./');
+        navigate('/');
     }
 
     const contextData = {

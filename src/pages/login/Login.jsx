@@ -1,8 +1,8 @@
 import './Login.css'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {AuthContext} from "../../context/AuthContext.jsx";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 
 function Login() {
@@ -10,7 +10,14 @@ function Login() {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const {login} = useContext(AuthContext);
     const [error, setError] = useState(false);
+    const navigate = useNavigate();
+    const controller = new AbortController();
 
+    useEffect(() => {
+        return function cleanup() {
+            controller.abort();
+        }
+    });
 
     async function handleFormSubmit(data) {
         setError(false);
@@ -26,8 +33,9 @@ function Login() {
         } catch(e) {
             console.error(e);
             setError(true);
+            console.log('Wrong password, try again')
         }
-        console.log(data);
+        // console.log(data);
 
     }
 

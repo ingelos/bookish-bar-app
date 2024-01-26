@@ -16,7 +16,7 @@ function AccountSettings() {
                 <div className='account-page inner-container'>
                     <div className='account-container'>
                         <div className='account-information'>
-                            <p>Username:</p>
+                            <p>Username: {}</p>
                             <p></p>
                             <p>Email:</p>
                             <p></p>

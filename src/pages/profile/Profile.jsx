@@ -1,24 +1,22 @@
 import {Link, useNavigate} from "react-router-dom";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
+import axios from "axios";
 
 
 function Profile() {
+    const { user } = useContext(AuthContext);
 
-    const navigate = useNavigate();
-
-    function handleClick() {
-        console.log(`You're being send to page where you can edit your profile!`)
-        navigate('/edit-profile');
-    }
 
     return (
         <>
             <section className='profile-page outer-container'>
                 <div className='profile-page inner-container'>
                     <div className='profile-container'>
+                        <h2>Profile information</h2>
                         <div className='profile-information'>
-                            <h2></h2>
+                            <p>Username: {user.username}</p>
+                            <p>Email: {user.email}</p>
                         </div>
                         <div className='profile-picture-list'>
                             <img src={''} alt='user-profile-picture'/>
@@ -26,9 +24,9 @@ function Profile() {
                         </div>
 
                     </div>
-                    <button type='submit' className='edit-profile' onClick={handleClick}>Edit profile</button>
+                    {/*<button type='submit' className='edit-profile' onClick={handleClick}>Edit profile</button>*/}
                     <div>
-                        <h3>Click <Link to={'/account-settings'}>here</Link> to go to your account settings</h3>
+                        <h3>Click <Link to={'/edit-profile'}>here</Link> to edit your profile or personal information</h3>
                     </div>
                 </div>
 
