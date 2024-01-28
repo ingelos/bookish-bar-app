@@ -2,13 +2,17 @@ import './Navigation.css'
 import {Link, NavLink, useNavigate} from "react-router-dom";
 import MagnifyingGlass from "../../assets/icons/magnifying-glass.svg";
 import UserIcon from "../../assets/icons/user-circle.svg";
+import {useContext} from "react";
+import {AuthContext} from "../../context/AuthContext.jsx";
+import Button from "../button/Button.jsx";
+import SearchBar from "../searchBar/SearchBar.jsx";
 
 function Navigation() {
     const navigate = useNavigate();
+    const {isAuth, logout, username} = useContext(AuthContext);
 
-    function handleClick() {
-        console.log(`You're being send to the login page!`)
-        navigate('/login')
+    function handleSubmit() {
+
     }
 
     return (
@@ -30,30 +34,43 @@ function Navigation() {
                         </li>
                     </ul>
 
-                    <form className='search-bar'>
-                        <input type='text' id='search-field' className='search-input' placeholder='Search by title or author'/>
-                        <button type='submit' className='get-book-info'>Search</button>
+                    <form className='search-bar' onSubmit={handleSubmit}>
+                        <input type='text'
+                               id='search-field'
+                               className='search-input'
+                               placeholder='Search by title or author'/>
+                        <button type='submit' className='get-book-info'>
+                            Search
+                        </button>
                     </form>
 
-                    <div className='login-container'>
-                        {/*<button type='submit' className='login-link' onClick={handleClick}>Login</button>*/}
-                        <button
-                            type="button"
-                            className='login-link'
-                            onClick={()=> navigate('/login')}
-                        >
-                            Login
-                        </button>
-                        <Link to={'/profile'}><img src={UserIcon} id='user-icon' alt='user-icon'/></Link>
+                    <div >
+                        {isAuth ?
+                        <div className='user-container'>
+                            <Button
+                                type='button'
+                                className='log-link'
+                                onClick={logout}
+                                >
+                                Logout
+                            </Button>
+                            <Link to={'/profile'}>
+                                <img src={UserIcon} id='user-icon' alt='user-icon'/>
+                            </Link>
+                        </div>
+                            :
+                            <div className='user-container'>
+                                <Button
+                                    type='button'
+                                    className='log-link'
+                                    onClick={() => navigate('./login')}
+                                    >
+                                    Login
+                                </Button>
+                                <img src={UserIcon} id='user-icon' alt='user-icon'/>
+                            </div>
+                        }
                     </div>
-
-
-                    {/*<button*/}
-                    {/*    type="button"*/}
-                    {/*    onClick={()=> navigate('/')}*/}
-                    {/*>*/}
-                    {/*    Log out*/}
-                    {/*</button>*/}
                 </div>
             </nav>
         </>
@@ -61,3 +78,5 @@ function Navigation() {
 }
 
 export default Navigation;
+
+

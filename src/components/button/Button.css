@@ -1,0 +1,9 @@
+
+button {
+    background-color: var(--color-secondary);
+    border-radius: 25px;
+    border: none;
+    margin: 20px 0 15px 0;
+    padding: 8px 20px;
+    width: fit-content;
+}

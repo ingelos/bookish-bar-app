@@ -10,11 +10,11 @@ import AccountSettings from './pages/accountSettings/AccountSettings.jsx'
 import MyBooks from './pages/myBooks/MyBooks.jsx'
 import BookDetail from './pages/bookDetail/BookDetail.jsx'
 import Browse from './pages/browse/Browse.jsx'
-import BrowseGenre from './pages/BrowseGenre/BrowseGenre.jsx'
+import BrowseRomance from './pages/browseRomance/BrowseRomance.jsx'
 import SearchResults from './pages/searchResults/SearchResults.jsx'
 import NotFound from './pages/notFound/NotFound.jsx'
-import UserIcon from './assets/icons/user-circle.svg'
 import Copyright from './assets/icons/copyright.svg'
+import Footer from "./components/footer/footer.jsx";
 
 function App() {
 
@@ -37,15 +37,11 @@ function App() {
             <Route path='/my-books' element={<MyBooks/>}/>
             <Route path='/books/:id' element={<BookDetail/>}/>
             <Route path='/browse' element={<Browse/>}/>
-            <Route path='/browse-genre' element={<BrowseGenre/>}/>
+            <Route path='/browse/romance' element={<BrowseRomance/>}/>
             <Route path='/search-results' element={<SearchResults/>}/>
             <Route path='*' element={<NotFound/>}/>
         </Routes>
-        <footer>
-            <p className='footer-content'>Bookish Bar 2024</p>
-            <img src={Copyright} id='copyright-icon' alt='copyright-icon'/>
-            <p>created by Inge Los</p>
-        </footer>
+       <Footer/>
     </>
   )
 }

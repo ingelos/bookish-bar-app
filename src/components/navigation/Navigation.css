@@ -3,7 +3,6 @@ nav {
     background-color: var(--color-primary);
     display: flex;
     flex-direction: row;
-    /*justify-content: space-between;*/
     height: 65px;
 }
 
@@ -26,7 +25,8 @@ nav {
 }
 
 .nav-link {
-    font-size: 24px;
+    font-size: 20px;
+    text-transform: uppercase;
     margin-right: 20px;
 }
 
@@ -57,14 +57,14 @@ nav a:hover {
     padding: 8px 20px;
 }
 
-.login-container {
+.user-container {
     display: flex;
     flex-direction: row;
-    margin-left: 30px;
 }
 
-.login-link {
+.log-link {
     padding: 5px;
+    margin: 0;
     border: none;
     background-color: transparent;
     font-size: 16px;
