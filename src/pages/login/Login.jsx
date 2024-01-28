@@ -4,6 +4,8 @@ import {useForm} from "react-hook-form";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
+import Input from "../../components/input/Input.jsx";
+import Button from "../../components/button/Button.jsx";
 
 function Login() {
 
@@ -33,10 +35,8 @@ function Login() {
         } catch(e) {
             console.error(e);
             setError(true);
-            console.log('Wrong password, try again')
+            // console.log('Wrong password, try again')
         }
-        // console.log(data);
-
     }
 
 
@@ -47,34 +47,39 @@ function Login() {
                     <div className='inner-content-container'>
                         <h3 className='login-title'>Login</h3>
                         <p className='login-subtitle'>Have an account? Log in with your e-mail and password:</p>
+
                         <form className='login-form' onSubmit={handleSubmit(handleFormSubmit)}>
-                            <label htmlFor='username'>
-                                Username:
-                                <input type='text'
-                                       id='username-field'
-                                       {...register('username', {
-                                           required: 'Username is required'
-                                       })}
+                            <Input
+                                inputType='text'
+                                inputName='username'
+                                inputId='username-field'
+                                inputLabel='Username:'
+                                validationRules={{
+                                    required: 'Username is required'
+                                }}
+                                register={register}
+                                errors={errors}
                                 />
-                                {errors.userName && <p>{errors.userName.message}</p>}
-                            </label>
-                            <label htmlFor='password-field'>
-                                Password:
-                                <input type='password'
-                                       id='password-field'
-                                       {...register('password', {
-                                           required: 'Password is required',
-                                           minLength: {
-                                               value: 6,
-                                               message: 'A password requires a minimum of 8 characters'
-                                           }
-                                       })}
+                            <Input
+                                inputType='password'
+                                inputName='password'
+                                inputId='password-field'
+                                inputLabel='Password:'
+                                validationRules={{
+                                    required: 'Password is required',
+                                    minLength: {
+                                        value: 6,
+                                        message: 'A password requires a minimum of 6 characters'
+                                    }
+                                }}
+                                register={register}
+                                errors={errors}
                                 />
-                                {errors.password && <p>{errors.password.message}</p>}
-                            </label>
-                            <button type='submit' className='login-button'>
+                            <Button
+                                type='submit'
+                                className='login-button'>
                                 Login
-                            </button>
+                            </Button>
                         </form>
                         <p><strong>New here?</strong></p>
                         <Link to='/register'>Make an account in one minute!</Link>

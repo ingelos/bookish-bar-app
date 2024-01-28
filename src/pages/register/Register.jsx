@@ -3,14 +3,13 @@ import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import Input from "../../components/input/Input.jsx";
+import Button from "../../components/button/Button.jsx";
 
 function Register() {
 
-    const {
-        register, handleSubmit, formState: {
-            errors,
-        }
-    } = useForm();
+    const { register, handleSubmit, formState: {
+            errors}} = useForm();
     const [error, setError] = useState(false);
     const [submitSuccess, setSubmitSucces] = useState(null);
     const controller = new AbortController();
@@ -50,55 +49,63 @@ function Register() {
                     <div className='inner-content-container'>
 
                         {!submitSuccess ?
+
                             <form className='register-form' onSubmit={handleSubmit(handleFormSubmit)}>
                                 <h2 className='register-title'>Create account</h2>
                                 <p className='register-subtitle'>Fill in your email and choose your username and
                                     password</p>
-                                <label htmlFor='email-field'>
-                                    E-mail: *
-                                    <input type='email'
-                                           id='email-field'
-                                           {...register('email', {
-                                               required: 'Email is required',
-                                               pattern: {
-                                                   value: /^\S+@\S+$/i,
-                                                   message: 'Please enter a valid email address',
-                                               }
-                                           })}
+                                <Input
+                                    inputType='email'
+                                    inputName='email'
+                                    inputId='email-field'
+                                    inputLabel='Email: *'
+                                    validationRules={{
+                                        required: 'Email is required',
+                                        pattern: {
+                                            value:  /^\S+@\S+$/i,
+                                            message: 'Please enter a valid email address',
+                                        }
+                                    }}
+                                    register={register}
+                                    errors={errors}
                                     />
-                                    {errors.email && <p>{errors.email.message}</p>}
-                                </label>
-                                <label htmlFor='register-username'>
-                                    Username: *
-                                    <input type='text'
-                                           id='username-field'
-                                           {...register('username', {
-                                               required: 'Username is required',
-                                               minLength: {
-                                                   value: 3,
-                                                   message: 'Please enter a username that is at least 3 characters long'
-                                               },
-                                           })}
-                                    />
-                                    {errors.username && <p>{errors.username.message}</p>}
-                                </label>
-                                <label htmlFor='password-field'>
-                                    Password: *
-                                    <input type='password'
-                                           id='password-field'
-                                           {...register('password', {
-                                               required: 'Password is required',
-                                               minLength: {
-                                                   value: 6,
-                                                   message: 'A password requires a minimum of 6 characters'
-                                               }
-                                           })}
-                                    />
-                                    {errors.password && <p>{errors.password.message}</p>}
-                                </label>
-
+                                <Input
+                                    inputType='text'
+                                    inputName='username'
+                                    inputId='username-field'
+                                    inputLabel='Username: *'
+                                    validationRules={{
+                                        required: 'Username is required',
+                                        minLength: {
+                                            value: 3,
+                                            message: 'Please enter a username that is at least 3 characters long'
+                                        },
+                                    }}
+                                    register={register}
+                                    errors={errors}
+                                />
+                                <Input
+                                    inputType='password'
+                                    inputName='password'
+                                    inputId='password-field'
+                                    inputLabel='Password: *'
+                                    validationRules={{
+                                        required: 'Password is required',
+                                        minLength: {
+                                            value: 6,
+                                            message: 'A password requires a minimum of 6 characters'
+                                        }
+                                    }}
+                                    register={register}
+                                    errors={errors}
+                                />
                                 <p>* required</p>
-                                <button type='submit' className='register-button'>Create account</button>
+                                <Button
+                                    type='submit'
+                                    className='register-button'
+                                >
+                                    Create account
+                                </Button>
                                 {error && <p className='error-message'>Something went wrong, try again.</p>}
                             </form>
                             : <p>Congratulations! You've created an account! You can now log in <Link

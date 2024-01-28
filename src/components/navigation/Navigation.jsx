@@ -4,6 +4,8 @@ import MagnifyingGlass from "../../assets/icons/magnifying-glass.svg";
 import UserIcon from "../../assets/icons/user-circle.svg";
 import {useContext} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
+import Button from "../button/Button.jsx";
+import SearchBar from "../searchBar/SearchBar.jsx";
 
 function Navigation() {
     const navigate = useNavigate();
@@ -42,29 +44,29 @@ function Navigation() {
                         </button>
                     </form>
 
-                    <div className='login-container'>
+                    <div >
                         {isAuth ?
-                        <div className='user' id='login-container'>
-                            <button
+                        <div className='user-container'>
+                            <Button
                                 type='button'
                                 className='log-link'
                                 onClick={logout}
                                 >
                                 Logout
-                            </button>
+                            </Button>
                             <Link to={'/profile'}>
                                 <img src={UserIcon} id='user-icon' alt='user-icon'/>
                             </Link>
                         </div>
                             :
-                            <div id='login-container'>
-                                <button
+                            <div className='user-container'>
+                                <Button
                                     type='button'
                                     className='log-link'
                                     onClick={() => navigate('./login')}
                                     >
                                     Login
-                                </button>
+                                </Button>
                                 <img src={UserIcon} id='user-icon' alt='user-icon'/>
                             </div>
                         }
