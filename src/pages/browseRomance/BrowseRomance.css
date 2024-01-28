@@ -1,0 +1,13 @@
+.subject-container {
+    width: 100%;
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.subject-header-title {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.book-card-container {
+    width: 100%;
+}

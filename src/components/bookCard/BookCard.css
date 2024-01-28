@@ -1,0 +1,33 @@
+.book-card {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 800px;
+    border-bottom: 1px solid var(--color-primary);
+}
+
+.book-card-list {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 20px 0;
+}
+
+.book-cover {
+    width: 65px;
+}
+
+.book-card-info {
+    margin-left: 30px;
+}
+
+.book-card-info h3, h4 {
+    margin-bottom: 5px;
+}
+
+.book-card-info p {
+    margin-top: 15px;
+}
+
+.book-link {
+    text-decoration: none;
+}
