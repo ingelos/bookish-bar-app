@@ -17,6 +17,10 @@ function BrowseRomance() {
 
     useEffect(() => {
         const controller = new AbortController();
+        const books = JSON.parse(localStorage.getItem('books'));
+        if (books) {
+            setBooks(books);
+        }
 
         async function fetchRomance() {
             setError(false);
@@ -26,6 +30,7 @@ function BrowseRomance() {
                 const {data} = await axios.get(`https://openlibrary.org/subjects/love.json?limit=100`, {
                     signal: controller.signal,
                 });
+                localStorage.setItem('books', JSON.stringify(books));
                 console.log(data);
                 console.log(data.works);
                 setBooks(data.works);
@@ -47,6 +52,7 @@ function BrowseRomance() {
 
         return function cleanup() {
             controller.abort();
+            localStorage.clear();
         }
 
     }, []);

@@ -11,6 +11,7 @@ function BookList({books}) {
                             return (
                                 <BookCard
                                     id={book.id}
+                                    cover={book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : 'no cover available'}
                                     key={`${book.title}-${book.authors[0].name}-${book.key}`}
                                     title={book.title}
                                     author={book.authors[0].name}

@@ -1,18 +1,14 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import SearchBar from "../../components/searchBar/SearchBar.jsx";
-import BookList from "../../components/bookList/BookList.jsx";
-import {Link} from "react-router-dom";
-
 
 
 function SearchResults() {
+
 
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [searchQuery, setSearchQuery] = useState('')
-
 
 
     useEffect(() => {
@@ -46,53 +42,43 @@ function SearchResults() {
             controller.abort();
         }
 
-}, [searchQuery])
+    }, [searchQuery])
+
+ 
+
+    return (
+        <section className='search-result-section outer-container'>
+            <div className='search-result-section inner-conatiner'>
+
+                <form className='search-bar'>
+                        <input
+                            type='text'
+                            id='search-bar-input'
+                            placeholder='Search by title...'
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                        <button
+                            type='submit'>
+                            Search
+                        </button>
+                    </form>
 
 
-                return (
-                    <section className='search-result-section outer-container'>
-                        <div className='search-result-section inner-conatiner'>
-
-                            {/*<SearchBar*/}
-                            {/*    onChange={(searchQuery) => {setSearchQuery(searchQuery)}}*/}
-                            {/*    />*/}
-                            {/*<form className='search-bar' onSubmit={fetchSearchResults}>*/}
-                                <input
-                                    type='text'
-                                    id='search-bar-input'
-                                    placeholder='Search by title or author...'
-                                    value={searchQuery}
-                                    onChange={fetchSearchResults}
-                                />
-                                <button
-                                    className='search-bar-button'
-                                    type='submit'
-                                    onClick={fetchSearchResults}
-                                />
-                            {/*</form>*/}
-
-
-
-
-                                        {/*<ul>*/}
-                                        {/*    {books.map((book) => {*/}
-                                        {/*        return (*/}
-                                        {/*            <div className='book-card'>*/}
-                                        {/*                <li className='book-card-list' key={`${title}-${author}`}>*/}
-                                        {/*                    <img src={cover} alt={`cover of ${title}`} className='book-cover'/>*/}
-                                        {/*                    <div className='book-card-info'>*/}
-                                        {/*                        <h3><Link to={`/books/${id}`} className='book-link'>{title}</Link></h3>*/}
-                                        {/*                        <h4>{author}</h4>*/}
-                                        {/*                        <p>First published in {year}</p>*/}
-                                        {/*                    </div>*/}
-                                        {/*                </li>*/}
-                                        {/*            </div>*/}
-                                        {/*        )*/}
-                                        {/*    })}*/}
-                                        {/*</ul>*/}
+                    {loading ? (
+                        <p>Loading...</p>
+                    ) : (
+                        <ul>
+                            {books.map((result) => (
+                                <li key={result.id}>{result.title}</li>
+                            ))}
+                        </ul>
+                    )}
+                    {error && <p>{error}</p>}
             </div>
         </section>
-    )
+
+)
 
 }
 

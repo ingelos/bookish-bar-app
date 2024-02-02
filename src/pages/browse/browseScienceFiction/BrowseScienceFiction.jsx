@@ -1,9 +1,8 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useParams} from "react-router-dom";
 import BookList from "../../../components/bookList/BookList.jsx";
-import Button from "../../../components/button/Button.jsx";
 import Pagination from "../../../components/pagination/Pagination.jsx";
+
 
 function BrowseScienceFiction() {
 
@@ -62,13 +61,13 @@ function BrowseScienceFiction() {
             <div className='scifi-section inner-container'>
                 {loading && <p>Loading...</p>}
                 <div className='subject-container'>
-                    <h2 className='subject-header-title'>Sci Fi</h2>
+                    <h2 className='subject-header-title'>Science Fiction</h2>
                     {Object.keys(books).length > 0 &&
                         <h4>Total works: {works}</h4>
                     }
                 </div>
                 <>
-                    <BookList data={currentBooks}/>
+                    <BookList books={currentBooks}/>
                     <Pagination
                         booksPerPage={booksPerPage}
                         totalBooks={books.length}
