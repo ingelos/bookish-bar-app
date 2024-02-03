@@ -5,7 +5,6 @@ import BookList from "../../../components/bookList/BookList.jsx";
 import Pagination from "../../../components/pagination/Pagination.jsx";
 
 
-
 function BrowseRomance() {
 
     const [books, setBooks] = useState([]);
@@ -16,6 +15,7 @@ function BrowseRomance() {
     const [booksPerPage] = useState(10);
 
     useEffect(() => {
+
         const controller = new AbortController();
         const books = JSON.parse(localStorage.getItem('books'));
         if (books) {
@@ -24,10 +24,10 @@ function BrowseRomance() {
 
         async function fetchRomance() {
             setError(false);
-            setLoading(true);
 
             try {
-                const {data} = await axios.get(`https://openlibrary.org/subjects/love.json?limit=100`, {
+                setLoading(true);
+                const {data} = await axios.get(`https://openlibrary.org/subjects/love.json?limit=20`, {
                     signal: controller.signal,
                 });
                 localStorage.setItem('books', JSON.stringify(books));
@@ -35,6 +35,9 @@ function BrowseRomance() {
                 console.log(data.works);
                 setBooks(data.works);
                 setWorks(data.work_count);
+
+                localStorage.setItem("bookData", JSON.stringify(data));
+                console.log("Data fetched and stored in local storage:", data);
 
             } catch (e) {
                 if (axios.isCancel(e)) {
@@ -69,20 +72,20 @@ function BrowseRomance() {
         <section className='romance-section outer-container'>
             <div className='romance-section inner-container'>
                 {loading && <p>Loading...</p>}
-                <div className='subject-container'>
-                    <h2 className='subject-header-title'>Romance</h2>
-                    {Object.keys(books).length > 0 &&
-                        <h4>Total works: {works}</h4>
-                    }
-                </div>
-                <>
+                <article className='result-container'>
+                    <div className='header-container'>
+                        <h2 className='result-header-title'>Romance</h2>
+                        {Object.keys(books).length > 0 &&
+                            <h4>Total works: {works}</h4>
+                        }
+                    </div>
                     <BookList books={currentBooks}/>
                     <Pagination
                         booksPerPage={booksPerPage}
                         totalBooks={books.length}
-                        paginate={paginate} />
-                </>
-                {books.length === 0 && error && <p>Something went wrong fetching your book data...</p>}
+                        paginate={paginate}/>
+                    {books.length === 0 && error && <p>Something went wrong fetching your book data...</p>}
+                </article>
             </div>
         </section>
     )

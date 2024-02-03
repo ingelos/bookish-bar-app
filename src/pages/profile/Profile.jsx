@@ -5,7 +5,7 @@ import axios from "axios";
 
 
 function Profile() {
-    const { user } = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
 
 
     return (
@@ -18,7 +18,7 @@ function Profile() {
                             <p>Username: {user.username}</p>
                             <p>Email: {user.email}</p>
                         </div>
-                        <div className='profile-picture-list'>
+                        <div className='user-profile-picture'>
                             <img src={''} alt='user-profile-picture'/>
                             <Link to={'./my-books'}>Go to MyBooks list</Link>
                         </div>
@@ -26,7 +26,8 @@ function Profile() {
                     </div>
                     {/*<button type='submit' className='edit-profile' onClick={handleClick}>Edit profile</button>*/}
                     <div>
-                        <h3>Click <Link to={'/edit-profile'}>here</Link> to edit your profile or personal information</h3>
+                        <h3>Click <Link to={'/edit-profile'}>here</Link> to edit your profile or personal information
+                        </h3>
                     </div>
                 </div>
 

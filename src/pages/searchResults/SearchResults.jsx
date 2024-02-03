@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import BookCard from "../../components/bookCard/BookCard.jsx";
 
 
 function SearchResults() {
@@ -11,25 +12,38 @@ function SearchResults() {
     const [searchQuery, setSearchQuery] = useState('')
 
 
+
     useEffect(() => {
         const controller = new AbortController();
+        const signal = controller.signal
+
 
         async function fetchSearchResults() {
             setError(false);
 
+
             try {
-                const {data} = await axios.get(`https://openlibrary.org/search.json?q=${searchQuery}`, {
-                    signal: controller.signal,
+                setLoading(true);
+
+                let endpoint = 'https://openlibrary.org/search.json'
+                if (searchQuery) {
+                    endpoint = `https://openlibrary.org/search.json?limit=20&q=${searchQuery}`;
+                }
+                const response = await axios.get(endpoint, {
+                    signal: signal,
                 });
-                console.log(data);
-                console.log(data.docs);
-                setBooks(data.docs);
-                setSearchQuery('')
-            } catch (e) {
-                if (axios.isCancel(e)) {
+                console.log(response.data.docs);
+                setBooks(response.data.docs);
+
+                // localStorage.setItem("bookData", JSON.stringify(response.data));
+                // console.log("Data fetched and stored in local storage:", response.data);
+
+
+            } catch (error) {
+                if (axios.isCancel(error)) {
                     console.error('Request is cancelled');
                 } else
-                    console.error(e);
+                    console.error(error);
                 setError(true);
             } finally {
                 setLoading(false);
@@ -38,45 +52,51 @@ function SearchResults() {
 
         fetchSearchResults()
 
-        return function cleanup() {
+        return () => {
+            console.log('Clean up')
             controller.abort();
         }
 
-    }, [searchQuery])
+    }, [searchQuery]);
 
- 
 
     return (
         <section className='search-result-section outer-container'>
-            <div className='search-result-section inner-conatiner'>
-
-                <form className='search-bar'>
-                        <input
-                            type='text'
-                            id='search-bar-input'
-                            placeholder='Search by title...'
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                        <button
-                            type='submit'>
-                            Search
-                        </button>
-                    </form>
-
-
-                    {loading ? (
-                        <p>Loading...</p>
-                    ) : (
-                        <ul>
-                            {books.map((result) => (
-                                <li key={result.id}>{result.title}</li>
-                            ))}
-                        </ul>
-                    )}
+            <div className='search-result-section inner-container'>
+                <div className='input-container'>
+                    <input
+                        type='search'
+                        id='search-bar-input'
+                        placeholder='Search by title...'
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <button
+                        type='submit'>
+                        Search
+                    </button>
+                </div>
+                    {loading && <p>Loading...</p>}
                     {error && <p>{error}</p>}
-            </div>
-        </section>
+                    <div className='result-container'>
+                        <h2 className='result-header'>Search results:</h2>
+                    </div>
+                        <article className='book-card-container'>
+                            <ul>
+                                {books?.map((book) => (
+                                    <BookCard
+                                        key={`${book.title}-${book.key}-${book._version_}`}
+                                        title={book.title}
+                                        author={book.author_name}
+                                        cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : `no cover available`}
+                                        year={book.first_publish_year}
+                                    />
+                                ))}
+                            </ul>
+                        </article>
+                </div>
+
+</section>
 
 )
 

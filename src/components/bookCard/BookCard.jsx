@@ -1,24 +1,26 @@
 import {Link} from "react-router-dom";
 import './BookCard.css'
 
-function BookCard({cover, id, title, author, year}) {
+function BookCard({cover, id, title, name, author, year}) {
+
+
     return (
         <div className='book-card'>
             <li
                 className='book-card-list'
-                key={`${title}-${author}`}>
+                key={`${title}-${name}`}
+            >
                 <img
                     src={cover}
-                    alt={`cover of ${title}`}
+                    alt={'no cover available'}
                     className='book-cover'
                 />
                 <div className='book-card-info'>
-                    <h3><Link
-                        to={`/books/${id}`}
-                        className='book-link'
-                    >
-                        {title}
-                    </Link></h3>
+                    <h3 className='book-link'>
+                        <Link to={`/browse/${id}`}>
+                            {title}
+                        </Link>
+                    </h3>
                     <h4 className='book-author'>{author}</h4>
                     <p>First published in {year}</p>
                 </div>

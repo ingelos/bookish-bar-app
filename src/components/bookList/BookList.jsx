@@ -10,9 +10,10 @@ function BookList({books}) {
                         {books.map((book) => {
                             return (
                                 <BookCard
-                                    id={book.id}
+                                    id={book.key}
                                     cover={book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : 'no cover available'}
-                                    key={`${book.title}-${book.authors[0].name}-${book.key}`}
+                                    // key={`${book.title}-${book.authors[0].name}-${book.key}`}
+                                    key={`${book.title}-${book.cover_id}`}
                                     title={book.title}
                                     author={book.authors[0].name}
                                     year={book.first_publish_year}
