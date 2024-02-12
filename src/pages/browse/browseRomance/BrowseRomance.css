@@ -1,21 +1,3 @@
-.result-header-title {
-    text-align: left;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-}
-
-
-.result-header {
+.subject-container {
     margin-bottom: 15px;
-    text-transform: none;
-}
-
-.result-container {
-    width: 100%;
-    border-bottom: 2px solid var(--color-primary);
-    padding: 20px 0 10px;
-}
-
-.book-card-container {
-    width: 100%;
 }

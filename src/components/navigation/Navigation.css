@@ -3,6 +3,7 @@ nav {
     background-color: var(--color-primary);
     display: flex;
     flex-direction: row;
+    justify-content: center;
     height: 65px;
 }
 
@@ -11,9 +12,8 @@ nav {
     margin: 0 50px 0 50px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-
 }
 
 .navigation-links {
@@ -27,7 +27,6 @@ nav {
 .nav-link {
     font-size: 20px;
     text-transform: uppercase;
-    margin-right: 20px;
 }
 
 nav a,
@@ -35,31 +34,16 @@ nav a:hover {
     color: black;
 }
 
-.search-bar {
-    display: flex;
-    flex-direction: row;
-    margin: 0 0 0 30px;
-    flex-basis: 400px;
-    flex-shrink: 1;
-    flex-grow: 1;
-}
-
-.search-input {
+.nav-search-bar #search-field {
     border: none;
-    border-radius: 25px 0 0 25px;
-    padding: 8px 250px 8px 15px;
-}
-
-.get-book-info {
-    border: none;
-    border-radius: 0 25px 25px 0;
-    background-color: var(--color-secondary);
-    padding: 8px 20px;
+    padding: 10px;
+    background-color: pink;
 }
 
 .user-container {
     display: flex;
     flex-direction: row;
+    margin-left: 20px;
 }
 
 .log-link {

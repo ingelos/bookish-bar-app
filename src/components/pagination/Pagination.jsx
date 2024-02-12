@@ -1,31 +1,36 @@
 
 import './Pagination.css'
+import Button from "../button/Button.jsx";
 
-function Pagination({booksPerPage, totalBooks, paginate}) {
-    const pageNumbers = [];
+function Pagination({page, totalPages, onPageChange}) {
 
-    for(let i = 1; i <= Math.ceil(totalBooks / booksPerPage); i++) {
-        pageNumbers.push(i);
+    function pageChange(e, pageNumber) {
+        e.preventDefault();
+        onPageChange(pageNumber);
     }
 
     return (
         <div className='pagination'>
-            <ul className='pagination-list'>
-                {pageNumbers.map(number => (
-                    <li key={number} className='page-item'>
-                        <a onClick={() => paginate(number)}
-                           href=''
-                           className='page-link'
-                        >
-                            {number}
-                        </a>
-                    </li>
-                ))}
-            </ul>
+            {page > 1 && (
+                <Button
+                    onClick={(e) => pageChange(e, page - 1)}
+                    className='pagination-button'
+                >
+                    Previous
+                </Button>
+            )}
+            {page < totalPages && (
+                <Button
+                    onClick={(e) => pageChange(e, page + 1)}
+                    className='pagination-button'
+                >
+                    Next
+                </Button>
+            )}
         </div>
     )
-
 }
+
 
 export default Pagination;
 

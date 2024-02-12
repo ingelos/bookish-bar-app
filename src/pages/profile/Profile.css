@@ -1,4 +1,24 @@
 .profile-container {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    margin: 50px;
+}
+
+.user-profile-picture, .profile-information {
+    margin: 0 30px;
+ }
+
+.profile-information {
+
+}
+
+.link-to-edit {
+    margin: 60px 0 0;
+}
+
+.img-box {
+    width: 50px;
+    height: 80px;
+
 }

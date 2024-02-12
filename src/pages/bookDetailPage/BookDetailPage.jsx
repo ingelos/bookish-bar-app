@@ -1,6 +1,7 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import BookCard from "../../components/bookCard/BookCard.jsx";
 
 
 function BookDetailPage() {
@@ -12,23 +13,29 @@ function BookDetailPage() {
 
     useEffect(() => {
         const controller = new AbortController();
-        setError(false);
-        setLoading(true);
 
         async function getBookDetails() {
+            setError(false);
 
             try {
+                setLoading(true);
                 const {data} = await axios.get(`https://openlibrary.org${id}.json`, {
-                    'Accept': 'application/json',
                     signal: controller.signal,
                 })
                 console.log(data);
-                setBook(data);
+                console.log(data.works);
+                setBook(data.works);
 
             } catch (e) {
-                console.error(error);
-                setError(true);
+                if (axios.isCancel(e)) {
+                    console.error('Request is cancelled');
+                } else {
+                    console.error(e);
+                    setError(true);
+                }
+            } finally {
                 setLoading(false);
+
             }
         }
 
@@ -46,7 +53,22 @@ function BookDetailPage() {
             <section className='detail-page outer-container'>
                 <div className='detail-page inner-container'>
                     <article>
-                        <h2>Book details:</h2>
+                        <h2>Book details of {id}:</h2>
+                        {loading && <p>Loading...</p>}
+                        {error && <p>{error}</p>}
+                        {book?.map((book) => (
+                            <div className='result-inner-content-container'>
+                            <BookCard
+                                id={book.key}
+                                key={`${book.title}-${book.key}-${book.isbn}-${book._version_}`}
+                                title={book.title}
+                                author={book.author_name}
+                                cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : `no cover available`}
+                                year={book.first_publish_year}
+                            />
+                        </div>
+                        ))}
+
                         {Object.keys(book).length > 0 && (
                             <>
                                 <h2>{book.title}</h2>

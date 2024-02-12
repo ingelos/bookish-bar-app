@@ -106,10 +106,9 @@ function EditProfile() {
                                     register={register}
                                     errors={errors}
                                 />
-
-
                             <button type='submit'>Save information</button>
                         </form>
+
                         {/*    : <p>You've updated your profile! You can see it <Link*/}
                         {/*        to={`/profile`}><strong>here.</strong></Link></p>*/}
                         {/*}*/}
