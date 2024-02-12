@@ -1,10 +1,10 @@
 import './Button.css';
 
-function Button({ children, clickHandler, disabled, type = 'submit', className }) {
+function Button({ children, onClick, disabled, type, className }) {
     return (
         <button
             type={type}
-            onClick={clickHandler}
+            onClick={onClick}
             disabled={disabled}
             className={className}
         >

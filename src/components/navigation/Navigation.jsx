@@ -1,6 +1,5 @@
 import './Navigation.css'
 import {Link, NavLink, useNavigate} from "react-router-dom";
-import MagnifyingGlass from "../../assets/icons/magnifying-glass.svg";
 import UserIcon from "../../assets/icons/user-circle.svg";
 import {useContext} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
@@ -11,16 +10,13 @@ function Navigation() {
     const navigate = useNavigate();
     const {isAuth, logout, username} = useContext(AuthContext);
 
-    function handleSubmit() {
-
-    }
 
     return (
         <>
             <nav>
                 <div className='nav-container'>
                     <ul className='navigation-links'>
-                        <li  className='nav-link'>
+                        <li className='nav-link'>
                             <NavLink className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'}
                                      to='/'>Home</NavLink>
                         </li>
@@ -34,17 +30,13 @@ function Navigation() {
                         </li>
                     </ul>
 
-                    <form className='search-bar' onSubmit={handleSubmit}>
-                        <input type='text'
-                               id='search-field'
-                               className='search-input'
-                               placeholder='Search by title or author'/>
-                        <button type='submit' className='get-book-info'>
-                            Search
-                        </button>
-                    </form>
+                    <div className='nav-search-bar'>
+                        <Link to='/search-results'>
+                    <SearchBar />
+                        </Link>
+                    </div>
 
-                    <div >
+                    <div>
                         {isAuth ?
                         <div className='user-container'>
                             <Button

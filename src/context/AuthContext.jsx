@@ -51,7 +51,7 @@ function AuthContextProvider({children}) {
                 status: 'done',
             });
             console.log('user is logged in!');
-            navigate('/profile');
+            // navigate('/profile');
         } catch(e) {
             console.error(e);
             logout();

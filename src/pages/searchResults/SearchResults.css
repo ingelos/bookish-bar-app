@@ -1,14 +1,31 @@
-.search-bar {
-    display: flex;
-    flex-direction: row;
-    margin: 0 0 0 30px;
-    flex-basis: 400px;
-    flex-shrink: 1;
-    flex-grow: 1;
+.result-container {
+    width: 100%;
+    padding: 20px 0 10px;
 }
 
-.search-input {
-    border: none;
-    border-radius: 25px 0 0 25px;
-    padding: 8px 250px 8px 15px;
+.result-header {
+    margin-bottom: 15px;
+    text-transform: none;
+}
+
+.book-card-container {
+    border-top: 2px solid var(--color-primary);
+}
+
+.book-inner-content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#add-to-list {
+    width: 100%;
+    border: 2px solid var(--color-primary);
+    border-radius: 25px;
+    padding: 5px;
+}
+
+.result-inner-content-container {
+    display: flex;
+    flex-direction: row;
 }
