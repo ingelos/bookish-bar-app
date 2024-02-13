@@ -19,7 +19,7 @@ function BookDetailPage() {
 
             try {
                 setLoading(true);
-                const {data} = await axios.get(`https://openlibrary.org${id}.json`, {
+                const {data} = await axios.get(`https://openlibrary.org/works/${id}.json`, {
                     signal: controller.signal,
                 })
                 console.log(data);

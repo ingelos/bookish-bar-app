@@ -6,7 +6,6 @@ import SearchBar from "../../components/searchBar/SearchBar.jsx";
 import Pagination from "../../components/pagination/Pagination.jsx";
 
 
-
 function SearchResults() {
 
     const [books, setBooks] = useState([]);
@@ -41,10 +40,8 @@ function SearchResults() {
                 });
                 console.log(data);
                 console.log(data.numFound);
-
                 setBooks(data.docs);
                 setTotalPages(Math.ceil(data.numFound / 100))
-
 
             } catch (error) {
                 if (axios.isCancel(error)) {
@@ -56,6 +53,7 @@ function SearchResults() {
                 setLoading(false);
             }
         }
+
 
     async function pageChange(pageNumber){
         setCurrentPage(pageNumber);
@@ -73,7 +71,6 @@ function SearchResults() {
             console.error(error);
         }
     }
-
 
 
     return (
@@ -114,7 +111,6 @@ function SearchResults() {
                             totalPages={totalPages}
                             onPageChange={pageChange}
                         />
-
                     </div>
                 </div>
             </div>
