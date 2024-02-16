@@ -1,7 +1,8 @@
 import './Home.css'
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import BookCard from "../../components/bookCard/BookCard.jsx";
 
 
 function Home() {
@@ -10,7 +11,7 @@ function Home() {
     const [newRelease, setNewRelease] = useState([])
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-
+    const {bookId} = useParams();
 
     useEffect(() => {
         const controller = new AbortController();
@@ -20,7 +21,7 @@ function Home() {
 
             try {
                 setLoading(true);
-                const {data} = await axios.get(`https://openlibrary.org/trending/daily.json?limit=5`, {
+                const {data} = await axios.get(`https://openlibrary.org/trending/now.json?limit=5`, {
                     signal: controller.signal,
                 });
                 console.log(data.works);
@@ -47,7 +48,6 @@ function Home() {
     }, []);
 
 
-
     return (
         <>
 
@@ -56,27 +56,33 @@ function Home() {
                     <div className='home-section inner-content-container'>
                         {loading && <p>Loading...</p>}
                         <div className='title-container'>
-                        <h2 className='list-title'>Trending</h2>
+                            <h2 className='list-title'>Trending</h2>
                         </div>
 
 
                         <div className='trending-container'>
-                        {books.length > 0 && (
-                            <>
-                            <ul className='trending-list'>
-                                {books.map((book) => {
-                                    return (
-                                        <li key={`${book.key}-${book.cover_edition_key}`} className='cover-home'>
-                                            <img src={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : `${book.title}`} alt='' className='cover-img-home'/>
+                            {books.length > 0 && (
+                                <>
+                                    <ul className='trending-list'>
+                                        {books.map((book) => {
+                                            return(
+                                                <>
+                                                <li key={`${book.key}-${book.cover_edition_key}`}
+                                                    className='cover-home'>
+                                                    <img
+                                                        src={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : `${book.title}`}
+                                                        alt='' className='cover-img-home'/>
 
+                                                    {/*<p><Link to={`/browse/${bookId}`}>{book.title}</Link></p>*/}
                                         </li>
-                                    )
-                                })}
-                            </ul>
-                            <Link to='/trending'><h3 className='more-link'>More Trending...</h3></Link>
-                            </>
-                        )
-                        }
+                                                </>
+                                        )
+                                        })}
+                                    </ul>
+                                    <Link to='/trending'><h3 className='more-link'>More Trending...</h3></Link>
+                                </>
+                            )
+                            }
                         </div>
                         {/*{books.length > 0 &&*/}
                         {/*    <ul className='book-list'>*/}

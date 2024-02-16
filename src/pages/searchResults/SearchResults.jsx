@@ -6,7 +6,6 @@ import SearchBar from "../../components/searchBar/SearchBar.jsx";
 import Pagination from "../../components/pagination/Pagination.jsx";
 import {useParams} from "react-router-dom";
 
-
 function SearchResults() {
 
     const [books, setBooks] = useState([]);
@@ -16,7 +15,7 @@ function SearchResults() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const controller = new AbortController()
-    const {bookId} = useParams();
+
 
     useEffect(() => {
         return function cleanup() {
@@ -32,6 +31,7 @@ function SearchResults() {
 
                 const {data} = await axios.get(`https://openlibrary.org/search.json?q=${query}`, {
                     params: {
+                        q: query,
                         limit: 20,
                         offset: (currentPage - 1) * 20
                     }
@@ -39,7 +39,7 @@ function SearchResults() {
                 console.log(data);
                 setBooks(data.docs);
                 setTotalPages(Math.ceil(data.numFound / 100))
-
+                setQuery(query)
 
             } catch (error) {
                 if (axios.isCancel(error)) {
@@ -49,7 +49,6 @@ function SearchResults() {
                 setError(true);
             } finally {
                 setLoading(false);
-                setQuery('');
             }
         }
 
@@ -58,8 +57,7 @@ function SearchResults() {
         setCurrentPage(pageNumber);
 
         try {
-            console.log(query);
-            const {data} = await axios.get('https://openlibrary.org/search.json', {
+            const {data} = await axios.get(`https://openlibrary.org/search.json?q=${query}`, {
                 params: {
                     q: query,
                     page: pageNumber,
@@ -91,12 +89,12 @@ function SearchResults() {
                     <h2 className='result-header'>
                         Search results:
                     </h2>
-
                     <article className='book-card-container'>
                         <div className='result-content-container'>
                                 {books?.map((book) => {
                                     return <BookCard
                                         bookId={(book.key).replace("/works/", "")}
+                                        authorId={(book.author_key)}
                                         key={`${book.title}-${book.isbn}-${book._version_}`}
                                         title={book.title}
                                         author={book.author_name}

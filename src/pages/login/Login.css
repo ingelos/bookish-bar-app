@@ -24,18 +24,6 @@
     text-decoration: underline;
 }
 
-#password-link {
-    text-decoration: none;
-    font-weight: 600;
-    margin-left: 20px;
-}
-
 a {
     color: black;
-}
-
-img {
-    width: 16px;
-    line-height: 16px;
-    vertical-align: -3px;
 }

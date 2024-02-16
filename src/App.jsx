@@ -24,6 +24,7 @@ import BrowseLiterature from "./pages/browse/browseLiterature/BrowseLiterature.j
 import BrowseThriller from "./pages/browse/browseThriller/BrowseThriller.jsx";
 import BrowseHumor from "./pages/browse/browseHumor/BrowseHumor.jsx";
 import TrendingPage from "./pages/trendingPage/TrendingPage.jsx";
+import AuthorPage from "./pages/authorPage/AuthorPage.jsx";
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
                 <Route path='/search-results' element={<SearchResults/>}/>
                 <Route path='/trending' element={<TrendingPage/>}/>
                 <Route path='/browse/:bookId' element={<BookDetailPage/>}/>
+                <Route path='/:authorId' element={<AuthorPage/>}/>
 
                 <Route path='/browse' element={<Browse/>}/>
 

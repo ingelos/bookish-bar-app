@@ -1,18 +1,19 @@
-.book-detail-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-basis: 800px;
-}
-
 .detail-content-container {
     display: flex;
     flex-direction: row;
+    margin-top: 50px;
+    border: 2px solid pink;
 }
 
-.detail-cover {
-   width: 75%
+.detail-cover-img {
+    width: 100%;
+    border: 2px solid red;
 }
+
+.detail-info {
+    border: 2px solid green;
+}
+
 .detail-description {
     max-width: 550px;
 }

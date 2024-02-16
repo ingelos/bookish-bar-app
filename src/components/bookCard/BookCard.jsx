@@ -5,7 +5,7 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 import NoCoverImage from "../../assets/icons/No_Cover.jpg"
 import AddToList from "../addToList/AddToList.jsx";
 
-function BookCard({cover, bookId, title, name, author, year, bookList, setBookList}) {
+function BookCard({cover, bookId, title, name, author, year, authorId}) {
 
     const {isAuth} = useContext(AuthContext);
     const noCoverImage = NoCoverImage;
@@ -33,8 +33,11 @@ function BookCard({cover, bookId, title, name, author, year, bookList, setBookLi
                                 {title}
                             </Link>
                         </h3>
-                        <h4 className='book-author'>{author}</h4>
-                        <p>First published in {year}</p>
+                        <h4 className='book-author'>
+                            <Link to={`/${authorId}`}>
+                                {author}
+                            </Link></h4>
+                        <p className='book-published'>First published in {year}</p>
                     </div>
                 </li>
             </ul>

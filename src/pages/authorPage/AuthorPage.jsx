@@ -1,30 +1,30 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import './BookDetailPage.css';
+import './AuthorPage.css';
 
 
-function BookDetailPage() {
 
-    const [book, setBook] = useState({});
+function AuthorCard() {
+
+    const [author, setAuthor] = useState({});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const {bookId} = useParams();
     const {authorId} = useParams();
 
     useEffect(() => {
         const controller = new AbortController();
 
-        async function getBookDetails() {
+        async function getAuthorDetails() {
             setError(false);
 
             try {
                 setLoading(true);
-                const {data} = await axios.get(`https://openlibrary.org/works/${bookId}.json`, {
+                const {data} = await axios.get(`https://openlibrary.org/authors/${authorId}.json`, {
                     signal: controller.signal,
                 })
                 console.log(data);
-                setBook(data);
+                setAuthor(data);
 
             } catch (e) {
                 if (axios.isCancel(e)) {
@@ -38,7 +38,7 @@ function BookDetailPage() {
             }
         }
 
-        getBookDetails();
+        getAuthorDetails();
 
         return function cleanup() {
             controller.abort();
@@ -56,18 +56,20 @@ function BookDetailPage() {
 
                     <div className='detail-content-container'>
 
-                        {Object.keys(book).length > 0 &&
-                        <>
-                            <div className='detail-cover'>
-                            <img src={book.covers[0] ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-M.jpg` : 'no cover available'} alt={''} className='detail-cover-img'/>
-                            </div>
-                            <div className='detail-info'>
-                                <h2>{book.title}</h2>
-                                <h3>{authorId}</h3>
-                                <p className='detail-description'>{book.description}</p>
-                                <p className='first-line'>{book.excerpts[0].comment}: {book.excerpts[0].excerpt}</p>
-                            </div>
-                        </>
+                        {Object.keys(author).length > 0 &&
+                            <>
+                                <div className='detail-cover'>
+                                    <img src={author.photos[0] ? `https://covers.openlibrary.org/b/id/${author.photos[0]}-M.jpg` : 'no picture available'} alt={''} className='author-img'/>
+                                </div>
+                                <div className='detail-info'>
+                                    <h2>{author.name}</h2>
+                                    <p>{author.bio}</p>
+                                    <p>Date of birth: {author.birth_date}</p>
+                                    <p>{author.links[0].title}: {author.links[0].url}</p>
+
+                                    {/*<p className='first-line'>{book.excerpts[0].comment}: {book.excerpts[0].excerpt}</p>*/}
+                                </div>
+                            </>
                         }
 
                         {/*<AddToList />*/}
@@ -78,5 +80,5 @@ function BookDetailPage() {
     );
 }
 
-export default BookDetailPage;
+export default AuthorCard;
 
