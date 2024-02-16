@@ -8,8 +8,11 @@ import Button from "../../components/button/Button.jsx";
 
 function Register() {
 
-    const { register, handleSubmit, formState: {
-            errors}} = useForm();
+    const {
+        register, handleSubmit, formState: {
+            errors
+        }
+    } = useForm();
     const [error, setError] = useState(false);
     const [submitSuccess, setSubmitSucces] = useState(null);
     const controller = new AbortController();
@@ -62,13 +65,13 @@ function Register() {
                                     validationRules={{
                                         required: 'Email is required',
                                         pattern: {
-                                            value:  /^\S+@\S+$/i,
+                                            value: /^\S+@\S+$/i,
                                             message: 'Please enter a valid email address',
                                         }
                                     }}
                                     register={register}
                                     errors={errors}
-                                    />
+                                />
                                 <Input
                                     inputType='text'
                                     inputName='username'
@@ -108,8 +111,14 @@ function Register() {
                                 </Button>
                                 {error && <p className='error-message'>Something went wrong, try again.</p>}
                             </form>
-                            : <p>Congratulations! You've created an account! You can now log in <Link
-                                to={`/login`}><strong>here.</strong></Link></p>
+                            : <>
+                            <div className='succes-container'>
+                                <h3>Congratulations!</h3>
+                                <p>You've created an account!</p>
+                                <p>You can now log in <Link
+                                    to={`/login`}><strong>here.</strong></Link></p>
+                            </div>
+                            </>
                         }
                     </div>
                 </div>

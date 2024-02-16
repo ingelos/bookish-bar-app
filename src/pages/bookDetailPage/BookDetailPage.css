@@ -1,0 +1,18 @@
+.book-detail-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-basis: 800px;
+}
+
+.detail-content-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.detail-cover {
+   width: 75%
+}
+.detail-description {
+    max-width: 550px;
+}

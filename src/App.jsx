@@ -23,6 +23,7 @@ import BrowseMystery from "./pages/browse/browseMystery/BrowseMystery.jsx";
 import BrowseLiterature from "./pages/browse/browseLiterature/BrowseLiterature.jsx";
 import BrowseThriller from "./pages/browse/browseThriller/BrowseThriller.jsx";
 import BrowseHumor from "./pages/browse/browseHumor/BrowseHumor.jsx";
+import TrendingPage from "./pages/trendingPage/TrendingPage.jsx";
 
 
 function App() {
@@ -46,7 +47,8 @@ function App() {
                 <Route path='/account-settings' element={<AccountSettings/>}/>
                 <Route path='/my-books' element={<MyBooks/>}/>
                 <Route path='/search-results' element={<SearchResults/>}/>
-                <Route path='/browse/:id' element={<BookDetailPage/>}/>
+                <Route path='/trending' element={<TrendingPage/>}/>
+                <Route path='/browse/:bookId' element={<BookDetailPage/>}/>
 
                 <Route path='/browse' element={<Browse/>}/>
 

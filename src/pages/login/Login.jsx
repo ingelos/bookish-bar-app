@@ -31,11 +31,11 @@ function Login() {
             });
             console.log(response.data.accessToken);
             login(response.data.accessToken);
+            navigate('/profile')
 
         } catch(e) {
             console.error(e);
             setError(true);
-            // console.log('Wrong password, try again')
         }
     }
 
@@ -83,7 +83,7 @@ function Login() {
                             </Button>
                         </form>
                         <p><strong>New here?</strong></p>
-                        <Link to='/register'>Make an account in one minute!</Link>
+                        <Link to='/register'><p className='link-to-register'>Make an account in one minute!</p></Link>
                     </div>
                 </div>
             </div>

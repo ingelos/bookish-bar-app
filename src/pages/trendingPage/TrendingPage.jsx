@@ -1,41 +1,39 @@
+import BrowseSubject from "../../components/browseSubject/BrowseSubject.jsx";
+
 import {useEffect, useState} from "react";
 import axios from "axios";
 import BookCard from "/src/components/bookCard/BookCard.jsx";
-import Pagination from "../pagination/Pagination.jsx";
-import {useParams} from "react-router-dom";
+import Pagination from "../../components/pagination/Pagination.jsx";
 
 
-function BrowseSubject({subject, subjectTitle}) {
+function Trending() {
 
     const [books, setBooks] = useState([]);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [works, setWorks] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const {bookId} = useParams();
 
     useEffect(() => {
         const controller = new AbortController();
 
-        async function fetchSubject() {
+        async function fetchTrending() {
             setError(false);
 
             try {
                 setLoading(true);
-                const {data} = await axios.get(`https://openlibrary.org/subjects/${subject}.json`, {
+                const {data} = await axios.get(`https://openlibrary.org/trending/daily.json`, {
                     signal: controller.signal,
                     params:  {
-                        limit: 20,
-                        page: currentPage,
-                        offset: (currentPage - 1) * 20
+                        // limit: 20,
+                        // page: currentPage,
+                        // offset: (currentPage - 1) * 20
                     },
                 });
 
                 console.log(data);
                 console.log(data.works);
                 setBooks(data.works);
-                setWorks(data.work_count);
                 setTotalPages(Math.ceil(data.numFound / 100));
 
 
@@ -51,7 +49,7 @@ function BrowseSubject({subject, subjectTitle}) {
             }
         }
 
-        fetchSubject();
+        fetchTrending();
 
 
         return function cleanup() {
@@ -61,23 +59,22 @@ function BrowseSubject({subject, subjectTitle}) {
     }, []);
 
 
-    async function pageChange(pageNumber){
-        setCurrentPage(pageNumber);
-        try {
-            console.log(subject);
-            const {data} = await axios.get(`https://openlibrary.org/subjects/${subject}.json`, {
-                params:
-                    {   subject: subject,
-                        page: pageNumber,
-                        limit: 20,
-                        offset: (pageNumber - 1) * 20
-                    },
-            });
-            setBooks(data.docs)
-        } catch(e) {
-            console.error(error);
-        }
-    }
+    // async function pageChange(pageNumber){
+    //     setCurrentPage(pageNumber);
+    //     try {
+    //         const {data} = await axios.get(`https://openlibrary.org/trending/daily.json`, {
+    //             params:
+    //                 {
+    //                     page: pageNumber,
+    //                     limit: 20,
+    //                     offset: (pageNumber - 1) * 20
+    //                 },
+    //         });
+    //         setBooks(data.docs)
+    //     } catch(e) {
+    //         console.error(error);
+    //     }
+    // }
 
 
     return (
@@ -89,40 +86,37 @@ function BrowseSubject({subject, subjectTitle}) {
 
                 <div className='result-container'>
                     <div className='subject-container'>
-                        <h2 className='result-header-title'>{subjectTitle}</h2>
-                        {Object.keys(books).length > 0 &&
-                            <p>Total works: {works}</p>
-                        }
+                        <h2 className='result-header-title'>Trending today:</h2>
                     </div>
                     <article className='book-card-container'>
                         <div className='result-content-container'>
-                            {books?.map((book) => {
-                                return  <BookCard
-                                    bookId={(book.key).replace("/works/", "")}
-                                    cover={book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}
-                                    key={`${book.title}-${book.cover_id}`}
+                            {books?.map((book) => (
+                                <BookCard
+                                    id={(book.key).replace("/works/", "")}
+                                    cover={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : ''}
+                                    key={`${book.title}-${book.cover_edition_key}`}
                                     title={book.title}
-                                    author={book.authors[0].name}
+                                    author={book.author_name}
                                     year={book.first_publish_year}
                                 />
-                            })}
+                            ))}
                         </div>
                     </article>
                     {books.length === 0 && error && <p>Something went wrong fetching your book data...</p>}
                 </div>
 
                 <div>
-                    <Pagination
-                        page={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={pageChange}
-                    />
+                    {/*<Pagination*/}
+                    {/*    page={currentPage}*/}
+                    {/*    totalPages={totalPages}*/}
+                    {/*    onPageChange={pageChange}*/}
+                    {/*/>*/}
                 </div>
             </div>
         </section>
     )
 }
 
-export default BrowseSubject;
+export default Trending;
 
 

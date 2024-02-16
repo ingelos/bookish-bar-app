@@ -20,6 +20,9 @@
     padding: 20px 0;
 }
 
+.link-to-register {
+    text-decoration: underline;
+}
 
 #password-link {
     text-decoration: none;

@@ -1,17 +1,18 @@
 import './Home.css'
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 
 function Home() {
 
     const [books, setBooks] = useState([]);
+    const [newRelease, setNewRelease] = useState([])
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
-
         const controller = new AbortController();
 
         async function fetchTrending() {
@@ -19,12 +20,11 @@ function Home() {
 
             try {
                 setLoading(true);
-                const {data} = await axios.get(`https://openlibrary.org/trending/now.json?limit=5`, {
+                const {data} = await axios.get(`https://openlibrary.org/trending/daily.json?limit=5`, {
                     signal: controller.signal,
                 });
                 console.log(data.works);
-                setBooks(data);
-
+                setBooks(data.works);
 
             } catch (e) {
                 if (axios.isCancel(e)) {
@@ -47,49 +47,49 @@ function Home() {
     }, []);
 
 
+
     return (
         <>
 
             <section className='home-section outer-container'>
                 <div className='home-section inner-container'>
-                    <div className='home-section list-items'>
-                        <h2 className='list-title'>New Releases</h2>
-                        <ul className='book-list'>
-                        </ul>
-                        {/*<h3 className='more-link'>More new...</h3>*/}
-                    </div>
-                    <div className='home-section list-items'>
+                    <div className='home-section inner-content-container'>
+                        {loading && <p>Loading...</p>}
+                        <div className='title-container'>
                         <h2 className='list-title'>Trending</h2>
-                            {loading && <p>Loading...</p>}
+                        </div>
 
+
+                        <div className='trending-container'>
                         {books.length > 0 && (
-                            <ul>
+                            <>
+                            <ul className='trending-list'>
                                 {books.map((book) => {
                                     return (
-                                        <li key={book.key}>
-                                            <h2>title: {book.title}</h2>
+                                        <li key={`${book.key}-${book.cover_edition_key}`} className='cover-home'>
+                                            <img src={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : `${book.title}`} alt='' className='cover-img-home'/>
+
                                         </li>
-                                        )
-                                    // <BookCard
-                                    //     title={book.title}
-                                    // />
+                                    )
                                 })}
                             </ul>
+                            <Link to='/trending'><h3 className='more-link'>More Trending...</h3></Link>
+                            </>
                         )
                         }
-
-                            {/*{books.length > 0 &&*/}
-                            {/*    <ul className='book-list'>*/}
-                            {/*        {books.map((book) => {*/}
-                            {/*            return (*/}
-                            {/*                <li key={`${book.title}-${book.key}`}>*/}
-                            {/*                    /!*<img src={book.cover_edition_key ? `https://covers.openlibrary.org/b/id/${book.cover_edition_key}-M.jpg` : 'no cover available'} alt={`cover of ${book.title}`}/>*!/*/}
-                            {/*                    <h2>Title: {book.title}</h2>*/}
-                            {/*                </li>*/}
-                            {/*            )*/}
-                            {/*        })}*/}
-                            {/*    </ul>*/}
-                            {/*}*/}
+                        </div>
+                        {/*{books.length > 0 &&*/}
+                        {/*    <ul className='book-list'>*/}
+                        {/*        {books.map((book) => {*/}
+                        {/*            return (*/}
+                        {/*                <li key={`${book.title}-${book.key}`}>*/}
+                        {/*                    /!*<img src={book.cover_edition_key ? `https://covers.openlibrary.org/b/id/${book.cover_edition_key}-M.jpg` : 'no cover available'} alt={`cover of ${book.title}`}/>*!/*/}
+                        {/*                    <h2>Title: {book.title}</h2>*/}
+                        {/*                </li>*/}
+                        {/*            )*/}
+                        {/*        })}*/}
+                        {/*    </ul>*/}
+                        {/*}*/}
                         {/*<h3 className='more-link'>More trending...</h3>*/}
                     </div>
                 </div>

@@ -30,3 +30,13 @@
     margin-left: 15px;
 }
 
+.succes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+}
+
+.succes-container h3, p {
+    padding: 5px;
+}

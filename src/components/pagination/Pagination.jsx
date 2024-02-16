@@ -10,6 +10,7 @@ function Pagination({page, totalPages, onPageChange}) {
     }
 
     return (
+
         <div className='pagination'>
             {page > 1 && (
                 <Button

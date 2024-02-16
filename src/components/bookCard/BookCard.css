@@ -36,7 +36,8 @@
 .book-card-result-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
+    max-width: 625px;
 }
 
 .book-list-add {

@@ -4,6 +4,7 @@ import BookCard from "../../components/bookCard/BookCard.jsx";
 import './SearchResults.css'
 import SearchBar from "../../components/searchBar/SearchBar.jsx";
 import Pagination from "../../components/pagination/Pagination.jsx";
+import {useParams} from "react-router-dom";
 
 
 function SearchResults() {
@@ -15,6 +16,7 @@ function SearchResults() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const controller = new AbortController()
+    const {bookId} = useParams();
 
     useEffect(() => {
         return function cleanup() {
@@ -28,20 +30,16 @@ function SearchResults() {
             try {
                 setLoading(true);
 
-                let endpoint = 'https://openlibrary.org/search.json'
-                if (query) {
-                    endpoint = `https://openlibrary.org/search.json?q=${query}`
-                }
-                const {data} = await axios.get(endpoint, {
+                const {data} = await axios.get(`https://openlibrary.org/search.json?q=${query}`, {
                     params: {
                         limit: 20,
-                        offset: (currentPage - 1) * 10
+                        offset: (currentPage - 1) * 20
                     }
                 });
                 console.log(data);
-                console.log(data.numFound);
                 setBooks(data.docs);
                 setTotalPages(Math.ceil(data.numFound / 100))
+
 
             } catch (error) {
                 if (axios.isCancel(error)) {
@@ -51,22 +49,25 @@ function SearchResults() {
                 setError(true);
             } finally {
                 setLoading(false);
+                setQuery('');
             }
         }
 
 
     async function pageChange(pageNumber){
         setCurrentPage(pageNumber);
+
         try {
             console.log(query);
-            const response = await axios.get('https://openlibrary.org/search.json', {
-                params:
-                    {q: query,
-                        page: pageNumber,
-                        limit: 20,
-                        offset: (pageNumber - 1) * 10},
+            const {data} = await axios.get('https://openlibrary.org/search.json', {
+                params: {
+                    q: query,
+                    page: pageNumber,
+                    limit: 20,
+                    offset: (pageNumber - 1) * 20},
             })
-            setBooks(response.data.docs)
+            console.log(data)
+            setBooks(data.docs)
         } catch(e) {
             console.error(error);
         }
@@ -90,21 +91,22 @@ function SearchResults() {
                     <h2 className='result-header'>
                         Search results:
                     </h2>
+
                     <article className='book-card-container'>
                         <div className='result-content-container'>
-                                {books?.map((book) => (
-                                        <BookCard
-                                            id={(book.key).replace("/works/", "")}
-                                            // id={book.key}
-                                            key={`${book.title}-${book.isbn}-${book._version_}`}
-                                            title={book.title}
-                                            author={book.author_name}
-                                            cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
-                                            year={book.first_publish_year}
-                                        />
-                                ))}
+                                {books?.map((book) => {
+                                    return <BookCard
+                                        bookId={(book.key).replace("/works/", "")}
+                                        key={`${book.title}-${book.isbn}-${book._version_}`}
+                                        title={book.title}
+                                        author={book.author_name}
+                                        cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
+                                        year={book.first_publish_year}
+                                    />
+                                })}
                         </div>
                     </article>
+
                     <div>
                         <Pagination
                             page={currentPage}

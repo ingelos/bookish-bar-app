@@ -8,6 +8,8 @@ function Profile() {
     const {user} = useContext(AuthContext);
 
 
+
+
     return (
         <>
             <section className='profile-page outer-container'>
@@ -20,7 +22,12 @@ function Profile() {
                         </div>
 
                         <div className='user-profile-picture'>
-                            <img className='img-box' src={''} alt='user-profile-picture'/>
+                            {/*{user.map((user) => {*/}
+                            {/*    return <li> {user.file &&*/}
+                            {/*        <img className='img-box' src={user.file.url} alt={user.name}/>*/}
+                            {/*    }*/}
+                            {/*    </li>*/}
+                            {/*})}*/}
                             <p>Add or change profile picture <Link to={'/edit-picture'}><strong>here</strong></Link></p>
                         </div>
 

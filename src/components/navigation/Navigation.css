@@ -22,11 +22,13 @@ nav {
     flex-direction: row;
     justify-content: space-between;
     list-style: none;
+    margin-right: 20px;
 }
 
 .nav-link {
     font-size: 20px;
     text-transform: uppercase;
+    margin: 0 10px;
 }
 
 nav a,
