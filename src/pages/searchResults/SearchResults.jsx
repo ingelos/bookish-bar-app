@@ -12,6 +12,7 @@ function SearchResults() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [query, setQuery] = useState('');
+    const [searchSucces, setSearchSucces] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const controller = new AbortController()
@@ -38,8 +39,9 @@ function SearchResults() {
                 });
                 console.log(data);
                 setBooks(data.docs);
-                setTotalPages(Math.ceil(data.numFound / 100))
-                setQuery(query)
+                setTotalPages(Math.ceil(data.numFound / 100));
+                setQuery(query);
+                setSearchSucces(data.docs)
 
             } catch (error) {
                 if (axios.isCancel(error)) {
@@ -86,9 +88,13 @@ function SearchResults() {
                 {error && <p>{error}</p>}
 
                 <div className='result-container'>
-                    <h2 className='result-header'>
-                        Search results:
-                    </h2>
+                    {!searchSucces ?
+                        <></>
+                        :
+                        <h2 className='result-header'>
+                            Search results:
+                        </h2>
+                    }
                     <article className='book-card-container'>
                         <div className='result-content-container'>
                                 {books?.map((book) => {
@@ -97,7 +103,7 @@ function SearchResults() {
                                         authorId={(book.author_key)}
                                         key={`${book.title}-${book.isbn}-${book._version_}`}
                                         title={book.title}
-                                        author={book.author_name}
+                                        author={book.author_name?.join(', ')}
                                         cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
                                         year={book.first_publish_year}
                                     />
@@ -114,11 +120,8 @@ function SearchResults() {
                     </div>
                 </div>
             </div>
-
         </section>
-
     )
-
 }
 
 export default SearchResults;

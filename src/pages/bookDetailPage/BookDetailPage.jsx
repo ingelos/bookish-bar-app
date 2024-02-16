@@ -2,6 +2,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import './BookDetailPage.css';
+import AuthorDetails from "../../components/authorDetails/AuthorDetails.jsx";
 
 
 function BookDetailPage() {
@@ -57,17 +58,19 @@ function BookDetailPage() {
                     <div className='detail-content-container'>
 
                         {Object.keys(book).length > 0 &&
-                        <>
-                            <div className='detail-cover'>
-                            <img src={book.covers[0] ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-M.jpg` : 'no cover available'} alt={''} className='detail-cover-img'/>
+                            <div className='detail-article'>
+                                <div className='detail-cover'>
+                                    <img
+                                        src={book.covers[0] ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-M.jpg` : 'no cover available'}
+                                        alt={''} className='detail-cover-img'/>
+                                </div>
+                                <div className='detail-info'>
+                                    <h2>{book.title}</h2>
+
+                                    <p className='detail-description'>{book.description}</p>
+                                    {/*<p className='first-line'>{book.excerpts[0] ? book.excerpts[0].comment && book.excerpts[0].excerpt : ''}</p>*/}
+                                </div>
                             </div>
-                            <div className='detail-info'>
-                                <h2>{book.title}</h2>
-                                <h3>{authorId}</h3>
-                                <p className='detail-description'>{book.description}</p>
-                                <p className='first-line'>{book.excerpts[0].comment}: {book.excerpts[0].excerpt}</p>
-                            </div>
-                        </>
                         }
 
                         {/*<AddToList />*/}

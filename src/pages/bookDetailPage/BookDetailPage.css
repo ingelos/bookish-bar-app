@@ -1,7 +1,18 @@
 .detail-content-container {
+    margin-top: 50px;
+    padding: 30px 0;
+    border-top: 2px solid var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.detail-article {
     display: flex;
     flex-direction: row;
-    margin-top: 50px;
+    gap: 25px;
+}
+
+.detail-cover {
+    flex-basis: 200px;
     border: 2px solid pink;
 }
 
@@ -10,8 +21,8 @@
     border: 2px solid red;
 }
 
-.detail-info {
-    border: 2px solid green;
+.detail-info h2, h3, p {
+    margin-bottom: 10px;
 }
 
 .detail-description {

@@ -63,14 +63,13 @@ function BrowseSubject({subject, subjectTitle}) {
 
     async function pageChange(pageNumber){
         setCurrentPage(pageNumber);
+
         try {
-            console.log(subject);
             const {data} = await axios.get(`https://openlibrary.org/subjects/${subject}.json`, {
-                params:
-                    {   subject: subject,
-                        page: pageNumber,
-                        limit: 20,
-                        offset: (pageNumber - 1) * 20
+                params: {
+                    page: pageNumber,
+                    limit: 20,
+                    offset: (pageNumber - 1) * 20
                     },
             });
             setBooks(data.docs)
