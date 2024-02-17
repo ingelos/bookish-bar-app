@@ -1,8 +1,10 @@
 import {Link} from "react-router-dom";
 import {useContext} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
+import Button from "../button/Button.jsx";
+import './AddToList.css';
 
-function AddToList(bookList, setBookList) {
+function AddToList(handleAddToMyBooks, book) {
 
     const {isAuth} = useContext(AuthContext);
 
@@ -10,30 +12,22 @@ function AddToList(bookList, setBookList) {
         <div>
         {isAuth ?
                 <div className='book-list-add'>
-                    <label htmlFor='book-list'>
-                        <select
-                            id='add-to-list'
-                            name='add-to-list'
-                            value={bookList}
-                            onChange={(e) => setBookList(e.target.value)}
-                        >
-                            <option value='want-to-read'>
-                                Want to read
-                            </option>
-                            <option value='read'>
-                                Read
-                            </option>
-                        </select>
-                    </label>
+                    <Button
+                        onClick={handleAddToMyBooks(book)}
+                        className='book-list'
+                    >
+                        Add to MyBooks
+                    </Button>
                 </div>
                 :
                 <div className='book-list-add'>
                     <Link to={'/login'}>
-                        <select id='add-to-list'>
-                            <option value='want-to-read'>
-                                Want to read
-                            </option>
-                        </select>
+                       <Button
+                           className='book-list'
+                           id='book-list'
+                       >
+                                Add to MyBooks
+                        </Button>
                     </Link>
                 </div>
 

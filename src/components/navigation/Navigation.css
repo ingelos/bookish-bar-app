@@ -36,12 +36,6 @@ nav a:hover {
     color: black;
 }
 
-.nav-search-bar #search-field {
-    border: none;
-    padding: 10px;
-    background-color: pink;
-}
-
 .user-container {
     display: flex;
     flex-direction: row;

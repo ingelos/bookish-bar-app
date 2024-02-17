@@ -7,17 +7,18 @@
 .detail-article {
     display: flex;
     flex-direction: row;
-
 }
 
 .detail-author-img {
     flex-basis: 200px;
-    border: 2px solid pink;
 }
 
 .author-img {
     width: 100%;
-    border: 2px solid red;
+}
+
+.detail-info {
+    max-width: 500px;
 }
 
 .detail-info h2 {

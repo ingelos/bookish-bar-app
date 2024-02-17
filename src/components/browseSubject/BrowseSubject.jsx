@@ -13,7 +13,6 @@ function BrowseSubject({subject, subjectTitle}) {
     const [works, setWorks] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const {bookId} = useParams();
 
     useEffect(() => {
         const controller = new AbortController();
@@ -98,6 +97,7 @@ function BrowseSubject({subject, subjectTitle}) {
                             {books?.map((book) => {
                                 return  <BookCard
                                     bookId={(book.key).replace("/works/", "")}
+                                    authorId={(book.authors[0].key).replace("/authors/", "")}
                                     cover={book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}
                                     key={`${book.title}-${book.cover_id}`}
                                     title={book.title}

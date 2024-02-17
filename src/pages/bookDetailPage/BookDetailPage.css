@@ -13,18 +13,17 @@
 
 .detail-cover {
     flex-basis: 200px;
-    border: 2px solid pink;
 }
 
 .detail-cover-img {
     width: 100%;
-    border: 2px solid red;
 }
 
-.detail-info h2, h3, p {
+.detail-info h2 {
     margin-bottom: 10px;
 }
 
 .detail-description {
     max-width: 550px;
 }
+

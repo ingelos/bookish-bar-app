@@ -6,7 +6,7 @@ import AuthorDetails from "../../components/authorDetails/AuthorDetails.jsx";
 
 
 
-function AuthorCard() {
+function AuthorPage() {
 
     const [author, setAuthor] = useState({});
     const [loading, setLoading] = useState(false);
@@ -61,11 +61,12 @@ function AuthorCard() {
 
                             <AuthorDetails
                                 name={author.name}
-                                bio={author.bio}
+                                bio={JSON.stringify(author.bio)}
+                                // bio={author.bio}
                                 birth_date={author.birth_date}
                                 death_date={author.death_date}
                                 photo={author.photos[0] ? `https://covers.openlibrary.org/b/id/${author.photos[0]}-L.jpg` : ''}
-                                links={`${author.links[0].title}: ${author.links[0].url}`}
+                                links={author.links ? author.links[0].url : ''}
                             />
                             // <>
                             //     <div className='detail-cover'>
@@ -90,5 +91,5 @@ function AuthorCard() {
     );
 }
 
-export default AuthorCard;
+export default AuthorPage;
 

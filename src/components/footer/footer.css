@@ -1,5 +1,5 @@
 
-footer {
+.footer-container {
     width: 100%;
     background-color: var(--color-primary);
     height: 65px;
@@ -9,14 +9,13 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0;
 }
 
 .by-info {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    /*align-items: center;*/
+    align-items: center;
 }
 
 #copyright-icon {

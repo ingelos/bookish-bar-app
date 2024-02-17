@@ -1,10 +1,12 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import BookCard from "../../components/bookCard/BookCard.jsx";
 import './SearchResults.css'
 import SearchBar from "../../components/searchBar/SearchBar.jsx";
 import Pagination from "../../components/pagination/Pagination.jsx";
-import {useParams} from "react-router-dom";
+import {AuthContext} from "../../context/AuthContext.jsx";
+import {useNavigate} from "react-router-dom";
+import AddToList from "../../components/addToList/AddToList.jsx";
 
 function SearchResults() {
 
@@ -17,6 +19,10 @@ function SearchResults() {
     const [totalPages, setTotalPages] = useState(1);
     const controller = new AbortController()
 
+    const [myBooks, setMyBooks] = useState([]);
+    const [addedBook, setAddedBook] = useState({});
+    const {isAuth} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         return function cleanup() {
@@ -73,6 +79,15 @@ function SearchResults() {
         }
     }
 
+    function handleAddToMyBooks(book) {
+        const updatedMyBooks = [...myBooks, book];
+        setMyBooks(updatedMyBooks);
+        localStorage.setItem('mybooks', JSON.stringify(updatedMyBooks))
+        setAddedBook((prev) => ({
+            ...prev,
+            [book.key]: true,
+        }));
+    }
 
     return (
         <section className='search-result-section outer-container'>
@@ -97,17 +112,21 @@ function SearchResults() {
                     }
                     <article className='book-card-container'>
                         <div className='result-content-container'>
-                                {books?.map((book) => {
-                                    return <BookCard
-                                        bookId={(book.key).replace("/works/", "")}
-                                        authorId={(book.author_key)}
-                                        key={`${book.title}-${book.isbn}-${book._version_}`}
-                                        title={book.title}
-                                        author={book.author_name?.join(', ')}
-                                        cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
-                                        year={book.first_publish_year}
-                                    />
-                                })}
+                        {books.map((book) => (
+                            <div className='books' key={`${book.title}-${book.isbn}-${book._version_}`}>
+                                {!addedBook[book.key] && (
+                                <BookCard
+                                    bookId={(book.key).replace("/works/", "")}
+                                    authorId={(book.author_key)}
+                                    key={`${book.title}-${book.isbn}-${book._version_}`}
+                                    title={book.title}
+                                    author={book.author_name?.join(', ')}
+                                    cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
+                                    year={book.first_publish_year}
+                                />
+                                    )}
+                            </div>
+                        ))}
                         </div>
                     </article>
 

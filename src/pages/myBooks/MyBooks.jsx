@@ -4,8 +4,6 @@ import BookCard from "../../components/bookCard/BookCard.jsx";
 
 
 function MyBooks() {
-    // const [error, setError] = useState();
-    // const [loading, setLoading] = useState(false);
     const [myBooks, setMyBooks] = useState([])
 
     useEffect(() => {
@@ -13,24 +11,36 @@ function MyBooks() {
         setMyBooks(savedBooks);
     }, []);
 
+    function removeFromMyBooks(bookKey) {
+        const updatedMyBooks = myBooks.filter((book) => book.key !== bookKey);
+        setMyBooks(updatedMyBooks);
+        localStorage.setItem('mybooks', JSON.stringify(updatedMyBooks));
+    }
+
     return (
 
         <section className='my-books outer-container'>
             <div className='my-books inner-container'>
                 <div>
-                    <h2>My Books</h2>
+                    <h2>MY BOOKS</h2>
                 </div>
                 <div className='result-content-container'>
+
+                    {/*{myBooks.map((book) => (*/}
+                    {/*    <BookCard*/}
+                    {/*        id={(book.key).replace("/works/", "")}*/}
+                    {/*        cover={book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}*/}
+                    {/*        // key={`${book.title}-${book.cover_id}`}*/}
+                    {/*        title={book.title}*/}
+                    {/*        // author={book.authors[0].name}*/}
+                    {/*        year={book.first_publish_year}*/}
+                    {/*    />*/}
+                    {/*))}*/}
                     {myBooks.map((book) => (
-                        <BookCard
-                            id={(book.key).replace("/works/", "")}
-                            // id={book.key}
-                            cover={book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}
-                            key={`${book.title}-${book.cover_id}`}
-                            title={book.title}
-                            author={book.authors[0].name}
-                            year={book.first_publish_year}
-                        />
+                        <div className='books' key={`${book.title}-${book.isbn}-${book._version_}`}>
+                            <h2>{book.title}</h2>
+                            <button onClick={() => removeFromMyBooks(book.key)}>Remove from MyBooks</button>
+                        </div>
                     ))}
                 </div>
             </div>
