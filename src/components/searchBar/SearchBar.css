@@ -1,4 +1,5 @@
 
+
 .search-bar-container {
     display: flex;
     flex-direction: row;
@@ -8,10 +9,12 @@
 }
 
 .search-bar-input {
+
     border: 2px solid var(--color-secondary);
     border-radius: 25px 0 0 25px;
     margin: 20px 0 15px;
-    padding: 8px 80px 8px 10px;
+    padding-left: 10px;
+    width: 300px;
 }
 
 .search-bar-button {

@@ -1,15 +1,17 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import BookCard from "../../components/bookCard/BookCard.jsx";
+import './BookDetailPage.css';
+
 
 
 function BookDetailPage() {
 
-    const [book, setBook] = useState([]);
+    const [book, setBook] = useState({});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const {id} = useParams();
+    const {bookId} = useParams();
+    const {authorId} = useParams();
 
     useEffect(() => {
         const controller = new AbortController();
@@ -19,12 +21,11 @@ function BookDetailPage() {
 
             try {
                 setLoading(true);
-                const {data} = await axios.get(`https://openlibrary.org${id}.json`, {
+                const {data} = await axios.get(`https://openlibrary.org/works/${bookId}.json`, {
                     signal: controller.signal,
                 })
                 console.log(data);
-                console.log(data.works);
-                setBook(data.works);
+                setBook(data);
 
             } catch (e) {
                 if (axios.isCancel(e)) {
@@ -35,7 +36,6 @@ function BookDetailPage() {
                 }
             } finally {
                 setLoading(false);
-
             }
         }
 
@@ -45,37 +45,38 @@ function BookDetailPage() {
             controller.abort();
         }
 
-    }, [id]);
+    }, []);
 
 
     return (
         <>
             <section className='detail-page outer-container'>
                 <div className='detail-page inner-container'>
-                    <article>
-                        <h2>Book details of {id}:</h2>
-                        {loading && <p>Loading...</p>}
-                        {error && <p>{error}</p>}
-                        {book?.map((book) => (
-                            <div className='result-inner-content-container'>
-                            <BookCard
-                                id={book.key}
-                                key={`${book.title}-${book.key}-${book.isbn}-${book._version_}`}
-                                title={book.title}
-                                author={book.author_name}
-                                cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : `no cover available`}
-                                year={book.first_publish_year}
-                            />
-                        </div>
-                        ))}
+                    {loading && <p>Loading...</p>}
+                    {error && <p>{error}</p>}
 
-                        {Object.keys(book).length > 0 && (
-                            <>
-                                <h2>{book.title}</h2>
-                                <p>{book.description}</p>
-                            </>
-                        )}
-                    </article>
+                    <div className='detail-content-container'>
+
+                        {Object.keys(book).length > 0 &&
+                            <div className='detail-article'>
+                                <div className='detail-cover'>
+                                    <img
+                                        src={book.covers ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-M.jpg` : 'no cover available'}
+                                        alt={''} className='detail-cover-img'/>
+                                </div>
+                                <div className='detail-info'>
+                                    <h2>{book.title}</h2>
+                                    <h3>{authorId}</h3>
+
+                                    <p className='detail-description'>{book.description}</p>
+                                    <p><em>{book.excerpts ? `First line: ${book.excerpts[0].excerpt}` : ''}</em></p>
+
+                                </div>
+                            </div>
+                        }
+
+                        {/*<AddToList />*/}
+                    </div>
                 </div>
             </section>
         </>
@@ -84,58 +85,3 @@ function BookDetailPage() {
 
 export default BookDetailPage;
 
-//
-//
-// function BookDetail() {
-//
-//     const [books, setBooks] = useState([]);
-//     const [error, setError] = useState(false);
-//     const [loading, setLoading] = useState(false);
-//     const {work} = useParams();
-//
-//     useEffect(() => {
-//         const controller = new AbortController();
-//
-//         async function fetchRomance() {
-//             setError(false);
-//             setLoading(true);
-//
-//             try {
-//                 const {data} = await axios.get(`https://openlibrary.org/works/${work}/${title}`, {
-//                     signal: controller.signal,
-//                 });
-//                 console.log(data);
-//                 console.log(data.works);
-//                 setBooks(data.works);
-//                 setWorks(data.work_count);
-//
-//             } catch (e) {
-//                 if (axios.isCancel(e)) {
-//                     console.error('Request is cancelled');
-//                 } else {
-//                     console.error(e);
-//                     setError(true);
-//                 }
-//             } finally {
-//                 setLoading(false);
-//             }
-//         }
-//
-//         fetchRomance();
-//
-//         return function cleanup() {
-//             controller.abort();
-//         }
-//
-//     }, []);
-//
-// return (
-//     <>
-//
-//     </>
-// )
-//
-//
-//
-// }
-// export default BookDetail;

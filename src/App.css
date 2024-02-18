@@ -3,7 +3,7 @@
     justify-content: center;
     flex-basis: 1200px;
     border: 2px dotted black;
-    margin: 40px 40px 50px 40px;
+    margin: 50px 40px;
 }
 
 .inner-container {
@@ -12,6 +12,7 @@
     flex-direction: column;
     border: 2px dotted blue;
     padding: 20px;
+    margin: 50px 0;
 }
 
 .header-container {

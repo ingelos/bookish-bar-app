@@ -1,0 +1,27 @@
+.detail-container {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.detail-article {
+    display: flex;
+    flex-direction: row;
+}
+
+.detail-author-img {
+    flex-basis: 200px;
+}
+
+.author-img {
+    width: 100%;
+}
+
+.detail-info {
+    max-width: 500px;
+}
+
+.detail-info h2 {
+    margin-bottom: 10px;
+}
+

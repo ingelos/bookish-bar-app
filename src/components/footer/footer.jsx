@@ -4,7 +4,7 @@ import './footer.css'
 function Footer() {
     return (
         <footer>
-            <div className='footer'>
+            <div className='footer-container'>
                 <div className='by-info'>
                     <p className='footer-content'>Bookish Bar 2024</p>
                     <img src={Copyright} id='copyright-icon' alt='copyright-icon'/>

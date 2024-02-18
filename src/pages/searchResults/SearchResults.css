@@ -12,17 +12,25 @@
     border-top: 2px solid var(--color-primary);
 }
 
-.book-inner-content-container {
+.book-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-basis: 800px;
+    border-bottom: 1px solid var(--color-primary);
 }
 
-#add-to-list {
+/*.book-inner-content-container {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: space-between;*/
+/*}*/
+
+#add-button {
     width: 100%;
     border: 2px solid var(--color-primary);
     border-radius: 25px;
-    padding: 5px;
+    background-color: transparent;
 }
 
 .result-inner-content-container {

@@ -8,7 +8,7 @@ import SearchBar from "../searchBar/SearchBar.jsx";
 
 function Navigation() {
     const navigate = useNavigate();
-    const {isAuth, logout, username} = useContext(AuthContext);
+    const {isAuth, logout} = useContext(AuthContext);
 
 
     return (
