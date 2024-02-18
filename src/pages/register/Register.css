@@ -37,6 +37,12 @@
     margin: 50px;
 }
 
-.succes-container h3, p {
+.succes-container h2 {
+    font-size: 20px;
+    padding: 5px;
+}
+
+.succes-container p {
+    font-size: 16px;
     padding: 5px;
 }

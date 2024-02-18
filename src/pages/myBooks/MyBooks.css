@@ -1,0 +1,10 @@
+
+.link-to-login {
+    font-size: 16px;
+}
+
+.remove-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

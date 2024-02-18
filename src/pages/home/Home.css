@@ -1,11 +1,8 @@
 
-
 .title-container {
-
     /*flex-direction: row;*/
     /*flex-basis: 800px;*/
     border-bottom: 2px solid var(--color-primary);
-
 }
 
 .list-title {

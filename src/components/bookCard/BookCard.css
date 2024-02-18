@@ -1,10 +1,10 @@
-.book-card {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-basis: 800px;
-    border-bottom: 1px solid var(--color-primary);
-}
+/*.book-card {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: space-between;*/
+/*    flex-basis: 800px;*/
+/*    border-bottom: 1px solid var(--color-primary);*/
+/*}*/
 
 .book-card-list {
     display: flex;
@@ -39,7 +39,7 @@
 .book-card-result-container {
     display: flex;
     flex-direction: row;
-    max-width: 625px;
+    max-width: 600px;
 }
 
 .book-list-add {

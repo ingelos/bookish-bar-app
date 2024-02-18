@@ -5,8 +5,10 @@ import './SearchResults.css'
 import SearchBar from "../../components/searchBar/SearchBar.jsx";
 import Pagination from "../../components/pagination/Pagination.jsx";
 import {AuthContext} from "../../context/AuthContext.jsx";
-import {useNavigate} from "react-router-dom";
-import AddToList from "../../components/addToList/AddToList.jsx";
+import {Link, useNavigate} from "react-router-dom";
+import TinyCard from "../../components/bookCard/BookCard.jsx";
+import Button from "../../components/button/Button.jsx";
+
 
 function SearchResults() {
 
@@ -30,38 +32,42 @@ function SearchResults() {
         }
     })
 
-        async function fetchSearchResults(query) {
-            setError(false);
+    async function fetchSearchResults(query) {
+        setError(false);
 
-            try {
-                setLoading(true);
+        try {
+            setLoading(true);
 
-                const {data} = await axios.get(`https://openlibrary.org/search.json?q=${query}`, {
-                    params: {
-                        q: query,
-                        limit: 20,
-                        offset: (currentPage - 1) * 20
-                    }
-                });
-                console.log(data);
-                setBooks(data.docs);
-                setTotalPages(Math.ceil(data.numFound / 100));
-                setQuery(query);
-                setSearchSucces(data.docs)
+            const {data} = await axios.get(`https://openlibrary.org/search.json?q=${query}`, {
+                params: {
+                    q: query,
+                    limit: 20,
+                    offset: (currentPage - 1) * 20
+                }
+            });
+            console.log(data);
+            setBooks(data.docs);
+            setTotalPages(Math.ceil(data.numFound / 100));
+            setQuery(query);
+            setSearchSucces(data.docs)
 
-            } catch (error) {
-                if (axios.isCancel(error)) {
-                    console.error('Request is cancelled');
-                } else
-                    console.error(error);
-                setError(true);
-            } finally {
-                setLoading(false);
-            }
+            // if ({data} === 0) {
+            //     setError("No books were found, try again")
+            // }
+
+        } catch (error) {
+            if (axios.isCancel(error)) {
+                console.error('Request is cancelled');
+            } else
+                console.error(error);
+            setError(true);
+        } finally {
+            setLoading(false);
         }
+    }
 
 
-    async function pageChange(pageNumber){
+    async function pageChange(pageNumber) {
         setCurrentPage(pageNumber);
 
         try {
@@ -70,11 +76,12 @@ function SearchResults() {
                     q: query,
                     page: pageNumber,
                     limit: 20,
-                    offset: (pageNumber - 1) * 20},
+                    offset: (pageNumber - 1) * 20
+                },
             })
             console.log(data)
             setBooks(data.docs)
-        } catch(e) {
+        } catch (e) {
             console.error(error);
         }
     }
@@ -97,7 +104,7 @@ function SearchResults() {
                     query={query}
                     setQuery={setQuery}
                     onSearch={fetchSearchResults}
-                    />
+                />
 
                 {loading && <p>Loading...</p>}
                 {error && <p>{error}</p>}
@@ -112,21 +119,45 @@ function SearchResults() {
                     }
                     <article className='book-card-container'>
                         <div className='result-content-container'>
-                        {books.map((book) => (
-                            <div className='books' key={`${book.title}-${book.isbn}-${book._version_}`}>
-                                {!addedBook[book.key] && (
-                                <BookCard
-                                    bookId={(book.key).replace("/works/", "")}
-                                    authorId={(book.author_key)}
-                                    key={`${book.title}-${book.isbn}-${book._version_}`}
-                                    title={book.title}
-                                    author={book.author_name?.join(', ')}
-                                    cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
-                                    year={book.first_publish_year}
-                                />
-                                    )}
-                            </div>
-                        ))}
+                            {books.map((book) => (
+                                <div className='books' key={`${book.title}-${book.isbn}-${book._version_}`}>
+                                     <div className='book-container'>
+                                         <BookCard
+                                             bookId={(book.key).replace("/works/", "")}
+                                             authorId={(book.author_key)}
+                                             key={`${book.title}-${book.isbn}-${book._version_}`}
+                                             title={book.title}
+                                             author={book.author_name?.join(', ')}
+                                             cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
+                                             year={`First published in ${book.first_publish_year}`}
+                                         />
+                                         {isAuth ?
+                                             <div>
+                                                 {!addedBook[book.key] && (
+                                                     <Button
+                                                         id='add-button'
+                                                         onClick={() => handleAddToMyBooks(book)}
+                                                     >
+                                                         Add to MyBooks
+                                                     </Button>
+                                                 )}
+                                             </div>
+                                             :
+                                             <div>
+                                                 <Button
+                                                     id='add-button'
+                                                     onClick={() => navigate('/login')}
+                                                 >
+                                                     Add to MyBooks
+                                                 </Button>
+                                             </div>
+                                         }
+
+                                     </div>
+
+
+                                </div>
+                            ))}
                         </div>
                     </article>
 

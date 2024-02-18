@@ -12,7 +12,8 @@ function Login() {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const {login} = useContext(AuthContext);
     const [error, setError] = useState(false);
-    const navigate = useNavigate();
+    const [loginSucces, setLoginSucces] = useState(null);
+    // const navigate = useNavigate();
     const controller = new AbortController();
 
     useEffect(() => {
@@ -31,11 +32,13 @@ function Login() {
             });
             console.log(response.data.accessToken);
             login(response.data.accessToken);
-            navigate('/profile')
+
+            setLoginSucces(true);
 
         } catch(e) {
             console.error(e);
             setError(true);
+            console.log('something went wrong')
         }
     }
 
@@ -44,11 +47,15 @@ function Login() {
         <>
             <div className='login-page outer-container'>
                 <div className='login-page inner-container'>
+                    {/*{error && <p>{error}</p>}*/}
                     <div className='inner-content-container'>
-                        <h3 className='login-title'>Login</h3>
-                        <p className='login-subtitle'>Have an account? Log in with your e-mail and password:</p>
+
+                        {!loginSucces ?
+
 
                         <form className='login-form' onSubmit={handleSubmit(handleFormSubmit)}>
+                            <h3 className='login-title'>Login</h3>
+                            <p className='login-subtitle'>Have an account? Log in with your e-mail and password:</p>
                             <Input
                                 inputType='text'
                                 inputName='username'
@@ -81,10 +88,20 @@ function Login() {
                             >
                                 Login
                             </Button>
+                            <p><strong>New here?</strong></p>
+                            <Link to='/register'><p className='link-to-register'>Make an account in one minute!</p></Link>
                         </form>
-                        <p><strong>New here?</strong></p>
-                        <Link to='/register'><p className='link-to-register'>Make an account in one minute!</p></Link>
+                    :
+                    <>
+                        <div className='succes-container'>
+                            <h3>Welcome back!</h3>
+                            <p>You can go to your <Link to={`/profile`}><strong>profile</strong></Link> or <Link to={'/my-books'}><strong>MyBooks</strong></Link> page.</p>
+                        </div>
+                    </>
+                        }
                     </div>
+
+
                 </div>
             </div>
         </>

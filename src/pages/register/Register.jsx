@@ -8,11 +8,7 @@ import Button from "../../components/button/Button.jsx";
 
 function Register() {
 
-    const {
-        register, handleSubmit, formState: {
-            errors
-        }
-    } = useForm();
+    const {register, handleSubmit, formState: {errors}} = useForm();
     const [error, setError] = useState(false);
     const [submitSuccess, setSubmitSucces] = useState(null);
     const controller = new AbortController();
@@ -110,13 +106,13 @@ function Register() {
                                     Create account
                                 </Button>
                                 {error && <p className='error-message'>Something went wrong, try again.</p>}
+
                             </form>
                             : <>
                             <div className='succes-container'>
-                                <h3>Congratulations!</h3>
+                                <h2>Congratulations!</h2>
                                 <p>You've created an account!</p>
-                                <p>You can now log in <Link
-                                    to={`/login`}><strong>here.</strong></Link></p>
+                                <p>You can now log in <Link to={`/login`}><strong>here</strong></Link></p>
                             </div>
                             </>
                         }

@@ -1,9 +1,8 @@
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 import './BookCard.css'
 import {useContext} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import NoCoverImage from "../../assets/icons/No_Cover.jpg"
-import AddToList from "../addToList/AddToList.jsx";
 
 function BookCard({cover, bookId, title, name, author, year, authorId}) {
 
@@ -37,14 +36,14 @@ function BookCard({cover, bookId, title, name, author, year, authorId}) {
                             <Link to={`/${authorId}`}>
                                 {author}
                             </Link></h4>
-                        <p className='book-published'>First published in {year}</p>
+                        <p className='book-published'>{year}</p>
                     </div>
                 </li>
             </ul>
-
-            <AddToList />
         </div>
     )
 }
 
 export default BookCard;
+
+
