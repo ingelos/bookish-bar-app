@@ -22,3 +22,7 @@
     width: 20px;
     margin: 0 2px;
 }
+
+.library-link {
+    text-decoration: underline;
+}

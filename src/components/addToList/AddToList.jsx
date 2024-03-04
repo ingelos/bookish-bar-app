@@ -6,14 +6,6 @@
 //
 // function AddToList() {
 //
-//     return (
-//         <>
-//         </>
-//     )
-// }
-//
-// export default AddToList;
-
 //
 //     const {isAuth} = useContext(AuthContext);
 //     const [myBooks, setMyBooks] = useState([]);
@@ -57,3 +49,4 @@
 //     )
 // }
 //
+// export default AddToList;

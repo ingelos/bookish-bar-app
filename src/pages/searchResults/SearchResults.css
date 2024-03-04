@@ -26,11 +26,14 @@
 /*    justify-content: space-between;*/
 /*}*/
 
-#add-button {
-    width: 100%;
+#add-rem-button {
     border: 2px solid var(--color-primary);
-    border-radius: 25px;
     background-color: transparent;
+}
+
+#saved-button {
+    border: 2px solid var(--color-primary);
+    background-color: var(--color-primary);
 }
 
 .result-inner-content-container {

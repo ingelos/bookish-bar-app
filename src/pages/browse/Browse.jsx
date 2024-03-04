@@ -28,6 +28,8 @@ function Browse() {
     const handleClick9 = () => navigate('/browse/magic')
 
 
+
+
     return (
         <section className='browse-section outer-container'>
             <div className='browse-section inner-container'>

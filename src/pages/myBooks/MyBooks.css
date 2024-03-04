@@ -3,8 +3,20 @@
     font-size: 16px;
 }
 
-.remove-button {
+.rating-and-remove {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
+.rating-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.empty-container p {
+    padding: 5px 0;
+    font-size: 15px;
+}
+

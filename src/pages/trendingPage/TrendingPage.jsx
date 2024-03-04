@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import BookCard from "/src/components/bookCard/BookCard.jsx";
 import Pagination from "../../components/pagination/Pagination.jsx";
+import {useParams} from "react-router-dom";
 
 
 function Trending() {
@@ -13,6 +14,7 @@ function Trending() {
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const {bookId} = useParams();
 
     useEffect(() => {
         const controller = new AbortController();
@@ -25,9 +27,10 @@ function Trending() {
                 const {data} = await axios.get(`https://openlibrary.org/trending/daily.json`, {
                     signal: controller.signal,
                     params:  {
-                        // limit: 20,
-                        // page: currentPage,
-                        // offset: (currentPage - 1) * 20
+
+                        limit: 20,
+                        page: currentPage,
+                        offset: (currentPage - 1) * 20
                     },
                 });
 
@@ -59,22 +62,22 @@ function Trending() {
     }, []);
 
 
-    // async function pageChange(pageNumber){
-    //     setCurrentPage(pageNumber);
-    //     try {
-    //         const {data} = await axios.get(`https://openlibrary.org/trending/daily.json`, {
-    //             params:
-    //                 {
-    //                     page: pageNumber,
-    //                     limit: 20,
-    //                     offset: (pageNumber - 1) * 20
-    //                 },
-    //         });
-    //         setBooks(data.docs)
-    //     } catch(e) {
-    //         console.error(error);
-    //     }
-    // }
+    async function pageChange(pageNumber){
+        setCurrentPage(pageNumber);
+        try {
+            const {data} = await axios.get(`https://openlibrary.org/trending/daily.json`, {
+                params:
+                    {
+                        page: pageNumber,
+                        limit: 20,
+                        offset: (pageNumber - 1) * 20
+                    },
+            });
+            setBooks(data.docs)
+        } catch(e) {
+            console.error(error);
+        }
+    }
 
 
     return (
@@ -91,14 +94,16 @@ function Trending() {
                     <article className='book-card-container'>
                         <div className='result-content-container'>
                             {books?.map((book) => (
+                                <div className='book-container' key={book.key}>
                                 <BookCard
-                                    id={(book.key).replace("/works/", "")}
+                                    bookId={(book.key).replace("/works/", "")}
                                     cover={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : ''}
                                     key={`${book.title}-${book.cover_edition_key}`}
                                     title={book.title}
                                     author={book.author_name}
-                                    year={book.first_publish_year}
+                                    year={`First published in: ${book.first_publish_year}`}
                                 />
+                                </div>
                             ))}
                         </div>
                     </article>
@@ -106,11 +111,11 @@ function Trending() {
                 </div>
 
                 <div>
-                    {/*<Pagination*/}
-                    {/*    page={currentPage}*/}
-                    {/*    totalPages={totalPages}*/}
-                    {/*    onPageChange={pageChange}*/}
-                    {/*/>*/}
+                    <Pagination
+                        page={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={pageChange}
+                    />
                 </div>
             </div>
         </section>

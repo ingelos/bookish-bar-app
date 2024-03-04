@@ -1,8 +1,36 @@
-# React + Vite
+# Bookish Bar App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+Search for books provided by the Open Library Api and save your favorites on your personal MyBooks page.
 
-Currently, two official plugins are available:
+## Start application
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Clone the repository to your local machine: 
+
+``` 
+
+```
+
+
+Next, install the required dependencies by running the following command in terminal:
+
+```
+npm install
+```
+
+After this, start the application by running:
+
+``` 
+npm run dev
+```
+
+After running this command, the application will start and be accessible at http://
+
+## Acknowledgements
+
+This project is inspired by Goodreads.
+All book data used in this project is from the Open Library Api:
+
+https://openlibrary.org/developers/api
+    
+

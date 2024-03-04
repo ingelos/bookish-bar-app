@@ -13,7 +13,6 @@ function Login() {
     const {login} = useContext(AuthContext);
     const [error, setError] = useState(false);
     const [loginSucces, setLoginSucces] = useState(null);
-    // const navigate = useNavigate();
     const controller = new AbortController();
 
     useEffect(() => {
@@ -47,7 +46,7 @@ function Login() {
         <>
             <div className='login-page outer-container'>
                 <div className='login-page inner-container'>
-                    {/*{error && <p>{error}</p>}*/}
+                    {error && <p>{error}</p>}
                     <div className='inner-content-container'>
 
                         {!loginSucces ?
@@ -94,8 +93,8 @@ function Login() {
                     :
                     <>
                         <div className='succes-container'>
-                            <h3>Welcome back!</h3>
-                            <p>You can go to your <Link to={`/profile`}><strong>profile</strong></Link> or <Link to={'/my-books'}><strong>MyBooks</strong></Link> page.</p>
+                            <h2>Welcome back!</h2>
+                            <p>You can go to your <Link to={`/profile`}><strong>profile</strong></Link> or <Link to={'/my-books'}><strong>MyBooks</strong></Link> page</p>
                         </div>
                     </>
                         }

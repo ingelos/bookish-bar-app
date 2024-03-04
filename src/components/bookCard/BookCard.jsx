@@ -4,9 +4,8 @@ import {useContext} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import NoCoverImage from "../../assets/icons/No_Cover.jpg"
 
-function BookCard({cover, bookId, title, name, author, year, authorId}) {
+function BookCard({cover, bookId, title, id, author, year, authorId}) {
 
-    const {isAuth} = useContext(AuthContext);
     const noCoverImage = NoCoverImage;
 
     function onImageError(e) {
@@ -15,17 +14,18 @@ function BookCard({cover, bookId, title, name, author, year, authorId}) {
 
     return (
         <div className='book-card'>
-            <ul className='book-card-result-container'>
-                <li
+            <div className='book-card-result-container'>
+                <div
                     className='book-card-list'
-                    key={`${title}-${name}`}
+                    key={id}
                 >
+                    <Link to={`/browse/${bookId}`}>
                     <img
                         src={cover ? cover : noCoverImage}
                         alt=''
                         onError={onImageError}
                         className='book-cover'
-                    />
+                    /> </Link>
                     <div className='book-card-info'>
                         <h3 className='book-link'>
                             <Link to={`/browse/${bookId}`}>
@@ -38,8 +38,8 @@ function BookCard({cover, bookId, title, name, author, year, authorId}) {
                             </Link></h4>
                         <p className='book-published'>{year}</p>
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
     )
 }
