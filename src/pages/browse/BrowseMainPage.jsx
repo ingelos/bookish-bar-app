@@ -1,4 +1,4 @@
-import './Browse.css'
+import './BrowseMainPage.css'
 import HeartIcon from '../../assets/icons/heartL.svg'
 import FlyingSaucerIcon from '../../assets/icons/flying-saucer.svg'
 import DetectiveIcon from '../../assets/icons/detective.svg'
@@ -13,7 +13,7 @@ import Button from "../../components/button/Button.jsx";
 
 
 
-function Browse() {
+function BrowseMainPage() {
 
     const navigate = useNavigate();
 
@@ -28,13 +28,12 @@ function Browse() {
     const handleClick9 = () => navigate('/browse/magic')
 
 
-
-
     return (
         <section className='browse-section outer-container'>
+            {/*<h2 className='browse-title'>Browse by subject</h2>*/}
+
             <div className='browse-section inner-container'>
-                <h2 className='browse-title'>Discover all types of fiction</h2>
-                <h3 className='browse-subtitle'>Click on any subject and get transported into your world of choice!</h3>
+                {/*<h3 className='browse-subtitle'>Click on any subject and get transported into your world of choice!</h3>*/}
                 <div className='browse-section browse-content'>
                     <Button className='browse-section subjects' onClick={handleClick1}>
                         <img src={HeartIcon} className='subject-icon' alt='subject-icon'/>
@@ -80,4 +79,4 @@ function Browse() {
     )
 }
 
-export default Browse;
+export default BrowseMainPage;

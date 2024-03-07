@@ -1,10 +1,12 @@
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import BookCard from "/src/components/bookCard/BookCard.jsx";
-import Pagination from "../pagination/Pagination.jsx";
+import Pagination, {BrowsePagination} from "../pagination/Pagination.jsx";
 import Button from "../button/Button.jsx";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import {useNavigate} from "react-router-dom";
+import CheckIcon from "../../assets/icons/check.svg";
+import SubjectNavigation from "../subjectNavigation/SubjectNavigation.jsx";
 
 
 function BrowseSubject({subject, subjectTitle}) {
@@ -15,6 +17,10 @@ function BrowseSubject({subject, subjectTitle}) {
     const [works, setWorks] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const {resultsPerPage} = 20;
+
+    const [myBooks, setMyBooks] = useState([]);
+    const [addedBook, setAddedBook] = useState({});
 
     // const [myBooks, setMyBooks] = useState([]);
     // const [addedBook, setAddedBook] = useState({});
@@ -71,35 +77,50 @@ function BrowseSubject({subject, subjectTitle}) {
 
 
 
-    // async function pageChange(page){
-    //     const startIndex = (currentPage - 1) * resultsPerPage + 1;
-    //     const endIndex = Math.min(currentPage * resultsPerPage, totalResults);
-    //     // setCurrentPage(offset);
+    // async function pageChangeB(page){
     //
-    //     // try {
-    //     //     const {data} = await axios.get(`https://openlibrary.org/subjects/${subject}.json`, {
-    //     //         params: {
-    //     //             limit: 20,
-    //     //             offset: (offset - 1) * 20
-    //     //             },
-    //     //     });
-    //     //     setBooks(data.docs)
-    //     // } catch(e) {
-    //     //     console.error(error);
-    //     // }
-    // }
+    //     setCurrentPage(offset);
+
+        // try {
+        //     const {data} = await axios.get(`https://openlibrary.org/subjects/${subject}.json`, {
+        //         params: {
+        //             limit: 20,
+        //             offset: (offset - 1) * 20
+        //             },
+        //     });
+        //     setBooks(data.docs)
+        // } catch(e) {
+        //     console.error(error);
+        // }
+
 
     // const startIndex = (currentPage - 1) * resultsPerPage + 1;
     // const endIndex = Math.min(currentPage * resultsPerPage, totalResults);
     //
     //
-    // async function pageChange(pageN) {
+
+    const startIndex = (currentPage - 1) * resultsPerPage + 1;
+    const endIndex = Math.min(currentPage * resultsPerPage, totalPages);
+
+    async function pageChange(page = 1, newSearch = true) {
+        if (newSearch) {
+            setCurrentPage(1);
+        } else {
+            setCurrentPage(page);
+        }
+    }
+
+
+
+
+    // async function pageChange(pageNumber) {
+    // setCurrentPage(pageNumber);
     //
     //     try {
     //                 const {data} = await axios.get(`https://openlibrary.org/subjects/${subject}.json`, {
     //                     params: {
     //                         limit: 20,
-    //                         offset: (currentPage - 1) * 20
+    //                         offset: (pageNumber - 1) * 20
     //                         },
     //                 });
     //                 setBooks(data.docs)
@@ -119,6 +140,25 @@ function BrowseSubject({subject, subjectTitle}) {
     //     }));
     // }
 
+    function handleAddToMyBooks(book) {
+        const newBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
+        const alreadyAdded = newBooks.some((savedBook) => savedBook.key === book.key);
+        console.log(book.key)
+
+        if (!alreadyAdded) {
+            newBooks.push(book);
+            localStorage.setItem('mybooks', JSON.stringify(newBooks));
+            console.log('book added to mybooks')
+
+            setAddedBook((prev) => ({
+                ...prev,
+                [book.key]: true,
+            }));
+        } else {
+            console.log('book already added to mybooks')
+        }
+    }
+
 
     return (
 
@@ -126,6 +166,7 @@ function BrowseSubject({subject, subjectTitle}) {
             <div className='romance-section inner-container'>
 
                 {loading && <p>Loading...</p>}
+                {error && <p>Error...</p>}
 
                 <div className='result-container'>
                     <div className='subject-container'>
@@ -147,6 +188,16 @@ function BrowseSubject({subject, subjectTitle}) {
                                     author={book.authors[0].name}
                                     year={`First published in: ${book.first_publish_year}`}
                                 />
+                                    <div>
+                                        {!addedBook[book.key] ?
+                                            <Button id='add-rem-button'
+                                                    onClick={() => handleAddToMyBooks(book)}
+                                            >
+                                                {myBooks.some((savedBook) => savedBook.key === book.key) ? <p className='on-my-books-btn-text'>On MyBooks </p> : <p className='add-to-my-books-btn-text'>Add to MyBooks</p>}
+                                            </Button>
+                                            : <Button id='saved-button'>Saved <img src={CheckIcon} className='check-icon' alt=''/></Button>
+                                        }
+                                    </div>
                                     {/*{isAuth ?*/}
                                     {/*    <div>*/}
                                     {/*        {!addedBook[book.key] && (*/}
@@ -175,25 +226,34 @@ function BrowseSubject({subject, subjectTitle}) {
                     {books.length === 0 && error && <p>Something went wrong fetching your book data...</p>}
                 </div>
 
-                <div className='pagination'>
-                    <p>{startIndex} to {endIndex}</p>
-                    {currentPage > 1 && (
-                        <Button
-                            onClick={(e) => pageChange(e, currentPage - 1)}
-                            className='pagination-button'
-                        >
-                            Previous
-                        </Button>
-                    )}
-                    {currentPage < totalPages && (
-                        <Button
-                            onClick={(e) => pageChange(e, currentPage + 1)}
-                            className='pagination-button'
-                        >
-                            Next
-                        </Button>
-                    )}
+                <div>
+                    <BrowsePagination
+                        // startIndex={startIndex}
+                        // endIndex={endIndex}
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={pageChange}
+                    />
                 </div>
+                {/*<div className='pagination'>*/}
+                {/*    <p>{startIndex} to {endIndex}</p>*/}
+                {/*    {currentPage > 1 && (*/}
+                {/*        <Button*/}
+                {/*            onClick={(e) => pageChange(e, currentPage - 1)}*/}
+                {/*            className='pagination-button'*/}
+                {/*        >*/}
+                {/*            Previous*/}
+                {/*        </Button>*/}
+                {/*    )}*/}
+                {/*    {currentPage < totalPages && (*/}
+                {/*        <Button*/}
+                {/*            onClick={(e) => pageChange(e, currentPage + 1)}*/}
+                {/*            className='pagination-button'*/}
+                {/*        >*/}
+                {/*            Next*/}
+                {/*        </Button>*/}
+                {/*    )}*/}
+                {/*</div>*/}
 
                 {/*<div>*/}
                 {/*    <Pagination*/}
@@ -203,6 +263,7 @@ function BrowseSubject({subject, subjectTitle}) {
                 {/*    />*/}
                 {/*</div>*/}
             </div>
+            <SubjectNavigation />
         </section>
     )
 }

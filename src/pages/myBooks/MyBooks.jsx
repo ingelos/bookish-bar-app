@@ -11,7 +11,6 @@ function MyBooks() {
     const [myBooks, setMyBooks] = useState([])
     // const {isAuth} = useContext(AuthContext)
 
-
     useEffect(() => {
         const myBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         setMyBooks(myBooks);
@@ -51,18 +50,22 @@ function MyBooks() {
 
                                         {myBooks.map((book) => (
                                             <div className='books' key={book.key}>
-                                                {console.log('key', book.key)}
+                                                {/*{console.log('key', book.key)}*/}
                                                 <div className='book-container'>
                                                     <BookCard
-                                                        cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`}
+                                                        cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
                                                         title={book.title}
-                                                        author={book.author_name}
+                                                        author={book.author_name ? book.author_name[0] : book.authors[0].name}
                                                         bookId={(book.key).replace("/works/", "")}
                                                     />
                                                     <div className='rating-and-remove'>
-                                                        {/*<Rating*/}
-                                                        {/*    bookKEY={book.key}*/}
-                                                        {/*/>*/}
+                                                        <div>
+                                                        <h5 className='your-rating'>Your rating:</h5>
+                                                        <Rating
+                                                            // bookKEY={`${book.key}-${book.title}`}
+                                                            bookKEY={book.key}
+                                                        />
+                                                        </div>
                                                         <Button
                                                             id='add-rem-button'
                                                             onClick={() => removeFromMyBooks(book.key)}

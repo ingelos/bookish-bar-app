@@ -7,8 +7,7 @@ import Pagination from "../../components/pagination/Pagination.jsx";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import {useNavigate} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
-import getSavedBooks from "../../constants/savedBooks.jsx";
-import savedBooks from "../../constants/savedBooks.jsx";
+import CheckIcon from '../../assets/icons/check.svg'
 
 
 function SearchResults() {
@@ -93,7 +92,6 @@ function SearchResults() {
     function handleAddToMyBooks(book) {
         const newBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         const alreadyAdded = newBooks.some((savedBook) => savedBook.key === book.key);
-
         console.log(book.key)
 
         if (!alreadyAdded) {
@@ -105,12 +103,9 @@ function SearchResults() {
                 ...prev,
                 [book.key]: true,
             }));
-
         } else {
             console.log('book already added to mybooks')
-            // alert('this book is saved already')
         }
-
     }
 
 
@@ -143,7 +138,8 @@ function SearchResults() {
                                         authorId={(book.author_key)}
                                         id={book.key}
                                         title={book.title}
-                                        author={book.author_name?.join(', ')}
+                                        // author={book.author_name?.join(', ')}
+                                        author={book.author_name}
                                         cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
                                         year={`First published in ${book.first_publish_year}`}
                                     />
@@ -154,9 +150,9 @@ function SearchResults() {
                                                 <Button id='add-rem-button'
                                                         onClick={() => handleAddToMyBooks(book)}
                                                 >
-                                                    {myBooks.some((savedBook) => savedBook.key === book.key) ? <p className='on-my-books-btn-text'>On MyBooks!</p> : <p className='add-to-my-books-btn-text'>Add to MyBooks</p>}
+                                                    {myBooks.some((savedBook) => savedBook.key === book.key) ? <p className='on-my-books-btn-text'>On MyBooks </p> : <p className='add-to-my-books-btn-text'>Add to MyBooks</p>}
                                                 </Button>
-                                                : <Button id='saved-button'>Saved to MyBooks!</Button>
+                                                : <Button id='saved-button'>Saved <img src={CheckIcon} className='check-icon' alt=''/></Button>
                                             }
                                         </div>
 

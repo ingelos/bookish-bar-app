@@ -36,6 +36,33 @@ function Pagination({page, totalPages, onPageChange}) {
 export default Pagination;
 
 
+export function BrowsePagination({currentPage, onPageChange}) {
+
+
+    function pageChangeB(e) {
+        e.preventDefault();
+        onPageChange();
+    }
+
+
+    return (
+        <div className='pagination'>
+                <Button
+                    onClick={(e) => pageChangeB(e, currentPage - 1)}
+                    className='pagination-button'
+                >
+                    Previous
+                </Button>
+                <Button
+                    onClick={(e) => pageChangeB(e, currentPage + 1)}
+                    className='pagination-button'
+                >
+                    Next
+                </Button>
+        </div>
+    )
+
+}
 
 
 

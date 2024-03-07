@@ -1,0 +1,29 @@
+.subject-inner-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.subject-nav-container {
+    background-color: #f1e9da;
+    /*max-width: 200px;*/
+    /*max-height: 500px;*/
+    margin: 115px 0 115px 40px;
+    padding: 20px;
+    border: 2px solid var(--color-primary);
+    border-radius: 5px;
+}
+
+.subject-link {
+    list-style: none;
+    padding-bottom: 10px;
+    font-size: 15px;
+}
+
+.active-subject-link {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.default-subject-link {
+    text-decoration: none;
+}

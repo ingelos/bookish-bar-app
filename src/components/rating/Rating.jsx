@@ -14,31 +14,37 @@ function Rating({hoveredStars, bookKEY})  {
     const [rating, setRating] = useState(getRating());
     const [hover, setHover] = useState(null);
     const [starCounter, setStarCounter] = useState(1);
-    // const {bookId } = useParams();
 
     useEffect(() => {
         localStorage.setItem('rating', JSON.stringify(rating))
         return () => {};
+
     }, [rating]);
 
 
+
+
     return (
-        <div className='star-rating' key={`${bookKEY}-${starCounter}`}>
+        <div className='star-rating' key={bookKEY}>
+            {console.log('key', bookKEY)}
             {[...Array(5)].map((star, index) => {
                 const currentRating = index + 1;
+
+
+
                 // setStarCounter(starCounter + 1);
-                // console.log('key', bookKEY, starCounter )
+                // console.log('key', bookKEY)
+                // console.log('counter', starCounter)
 
                 return (
-                    <div>
-                    <label>
+                    <label key={index}>
                         <input
-                            key={index}
                             type='radio'
                             name='rating'
                             value={currentRating}
                             onClick={() => setRating(currentRating)}
                         />
+                        {/*{console.log('rating:', currentRating)}*/}
                         <FaStar
                             className={index <= hoveredStars ? 'hovered-stars' : ''}
                             size={18}
@@ -47,7 +53,6 @@ function Rating({hoveredStars, bookKEY})  {
                             onMouseLeave={() => setHover(null)}
                         />
                     </label>
-                    </div>
                 )
 
             })}

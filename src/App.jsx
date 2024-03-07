@@ -8,7 +8,7 @@ import Profile from './pages/profile/Profile.jsx'
 import EditProfile from './pages/editProfile/EditProfile.jsx'
 import AccountSettings from './pages/accountSettings/AccountSettings.jsx'
 import MyBooks from './pages/myBooks/MyBooks.jsx'
-import Browse from './pages/browse/Browse.jsx'
+import BrowseMainPage from './pages/browse/BrowseMainPage.jsx'
 import BrowseRomance from './pages/browse/browseRomance/BrowseRomance.jsx'
 import NotFound from './pages/notFound/NotFound.jsx'
 import Footer from "./components/footer/footer.jsx";
@@ -52,7 +52,7 @@ function App() {
                 <Route path='/browse/:bookId' element={<BookDetailPage/>}/>
                 <Route path='/:authorId' element={<AuthorPage/>}/>
 
-                <Route path='/browse' element={<Browse/>}/>
+                <Route path='/browse' element={<BrowseMainPage/>}/>
 
                 <Route path='/browse/romance' element={<BrowseRomance/>}/>
                 <Route path='/browse/science_fiction' element={<BrowseScienceFiction/>}/>
