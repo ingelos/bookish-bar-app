@@ -31,9 +31,11 @@ function Navigation() {
                     </ul>
 
                     <div className='nav-search-bar'>
-                        <Link to='/search-results'>
-                    <SearchBar />
-                        </Link>
+                        <NavLink to='/search-results'>
+                    <SearchBar
+                        // disabled={true}
+                    />
+                        </NavLink>
                     </div>
 
                     <div>

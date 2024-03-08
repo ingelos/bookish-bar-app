@@ -1,4 +1,5 @@
 import BrowseSubject from "../../../components/browseSubject/BrowseSubject.jsx";
+import SubjectNavigation from "../../../components/subjectNavigation/SubjectNavigation.jsx";
 
 
 function BrowseMystery() {

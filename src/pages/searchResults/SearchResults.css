@@ -1,3 +1,11 @@
+/*.search-bar-input {*/
+/*    border: 2px solid var(--color-secondary);*/
+/*    border-radius: 25px 0 0 25px;*/
+/*    margin: 20px 0 15px;*/
+/*    padding-left: 10px;*/
+/*    width: 300px;*/
+/*}*/
+
 .result-container {
     width: 100%;
     padding: 20px 0 10px;
@@ -26,14 +34,27 @@
 /*    justify-content: space-between;*/
 /*}*/
 
-#add-button {
-    width: 100%;
+#add-rem-button {
     border: 2px solid var(--color-primary);
-    border-radius: 25px;
     background-color: transparent;
+}
+
+#saved-button {
+    border: 2px solid var(--color-primary);
+    background-color: #e8dbbf;
 }
 
 .result-inner-content-container {
     display: flex;
     flex-direction: row;
+}
+
+.on-my-books-btn-text {
+    text-transform: uppercase;
+    color:  var(--color-primary);
+    font-weight: 700;
+}
+
+.check-icon {
+    height: 14px;
 }
