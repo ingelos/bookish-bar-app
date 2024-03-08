@@ -20,15 +20,11 @@ function SearchResults() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const controller = new AbortController()
-
     const {isAuth} = useContext(AuthContext);
-
     const [myBooks, setMyBooks] = useState([]);
     const [addedBook, setAddedBook] = useState({});
 
-
     useEffect(() => {
-
         const myBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         setMyBooks(myBooks);
         console.log('myBooks:', myBooks)

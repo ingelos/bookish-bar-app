@@ -1,50 +1,40 @@
 import {FaStar} from 'react-icons/fa'
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import './Rating.css'
-import {useParams} from "react-router-dom";
-import {Rating_Messages} from "../../constants/RatingMessages.jsx";
 
-function getRating() {
-    return localStorage.getItem('rating')
-    ? JSON.parse(localStorage.getItem('rating'))
-        : [];
+function getBookRating(bookKey) {
+    const allRatings = JSON.parse(localStorage.getItem('ratings')) || {};
+    return allRatings[bookKey] || 0;
 }
 
-function Rating({hoveredStars, bookKEY})  {
-    const [rating, setRating] = useState(getRating());
+function setBookRating(bookKey, rating) {
+    const allRatings = JSON.parse(localStorage.getItem('ratings')) || {};
+    allRatings[bookKey] = rating;
+    localStorage.setItem('ratings', JSON.stringify(allRatings));
+}
+
+function Rating({hoveredStars, bookKEY}) {
+    const [rating, setRating] = useState(getBookRating(bookKEY));
     const [hover, setHover] = useState(null);
-    const [starCounter, setStarCounter] = useState(1);
 
     useEffect(() => {
-        localStorage.setItem('rating', JSON.stringify(rating))
-        return () => {};
-
-    }, [rating]);
-
-
+        setBookRating(bookKEY, rating);
+    }, [bookKEY, rating]);
 
 
     return (
         <div className='star-rating' key={bookKEY}>
-            {console.log('key', bookKEY)}
             {[...Array(5)].map((star, index) => {
                 const currentRating = index + 1;
-
-
-
-                // setStarCounter(starCounter + 1);
-                // console.log('key', bookKEY)
-                // console.log('counter', starCounter)
 
                 return (
                     <label key={index}>
                         <input
                             type='radio'
-                            name='rating'
+                            name={`rating-${bookKEY}`}
                             value={currentRating}
                             onClick={() => setRating(currentRating)}
                         />
-                        {/*{console.log('rating:', currentRating)}*/}
                         <FaStar
                             className={index <= hoveredStars ? 'hovered-stars' : ''}
                             size={18}
@@ -56,7 +46,7 @@ function Rating({hoveredStars, bookKEY})  {
                 )
 
             })}
-            {/*<p className='rating-message'>{Rating_Messages?.[hoveredStars]}</p>*/}
+
         </div>
     )
 }

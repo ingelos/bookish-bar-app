@@ -1,13 +1,12 @@
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import BookCard from "/src/components/bookCard/BookCard.jsx";
-import Pagination, {BrowsePagination} from "../pagination/Pagination.jsx";
 import Button from "../button/Button.jsx";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import {useNavigate} from "react-router-dom";
 import CheckIcon from "../../assets/icons/check.svg";
 import SubjectNavigation from "../subjectNavigation/SubjectNavigation.jsx";
-
+import './BrowseSubject.css'
 
 function BrowseSubject({subject, subjectTitle}) {
 
@@ -15,25 +14,18 @@ function BrowseSubject({subject, subjectTitle}) {
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
     const [works, setWorks] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const {resultsPerPage} = 20;
-
     const [myBooks, setMyBooks] = useState([]);
     const [addedBook, setAddedBook] = useState({});
-
-    // const [myBooks, setMyBooks] = useState([]);
-    // const [addedBook, setAddedBook] = useState({});
-    // const {isAuth} = useContext(AuthContext);
-    // const navigate = useNavigate();
-    // useEffect(()=> {
-    //     console.log('page', page)
-    // }, [page])
-    //
-    // console.log('page:' , page)
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 20;
 
     useEffect(() => {
+
         const controller = new AbortController();
+
+        const myBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
+        setMyBooks(myBooks);
+        console.log('myBooks:', myBooks)
 
         async function fetchSubject() {
             setError(false);
@@ -42,18 +34,15 @@ function BrowseSubject({subject, subjectTitle}) {
                 setLoading(true);
                 const {data} = await axios.get(`https://openlibrary.org/subjects/${subject}.json`, {
                     signal: controller.signal,
-                    params:  {
-                        limit: 20,
-                        offset: (currentPage - 1) * 20
-                    },
+                    params: {
+                        offset: (currentPage - 1) * pageSize,
+                        limit: pageSize,
+                    }
                 });
-
                 console.log(data);
                 console.log(data.works);
                 setBooks(data.works);
                 setWorks(data.work_count);
-                setTotalPages(Math.ceil(data.numFound / 100));
-
 
             } catch (e) {
                 if (axios.isCancel(e)) {
@@ -69,76 +58,13 @@ function BrowseSubject({subject, subjectTitle}) {
 
         fetchSubject();
 
-
         return function cleanup() {
             controller.abort();
         }
-    }, []);
+    }, [currentPage, subject]);
 
+    const totalPages = Math.ceil(works / pageSize);
 
-
-    // async function pageChangeB(page){
-    //
-    //     setCurrentPage(offset);
-
-        // try {
-        //     const {data} = await axios.get(`https://openlibrary.org/subjects/${subject}.json`, {
-        //         params: {
-        //             limit: 20,
-        //             offset: (offset - 1) * 20
-        //             },
-        //     });
-        //     setBooks(data.docs)
-        // } catch(e) {
-        //     console.error(error);
-        // }
-
-
-    // const startIndex = (currentPage - 1) * resultsPerPage + 1;
-    // const endIndex = Math.min(currentPage * resultsPerPage, totalResults);
-    //
-    //
-
-    const startIndex = (currentPage - 1) * resultsPerPage + 1;
-    const endIndex = Math.min(currentPage * resultsPerPage, totalPages);
-
-    async function pageChange(page = 1, newSearch = true) {
-        if (newSearch) {
-            setCurrentPage(1);
-        } else {
-            setCurrentPage(page);
-        }
-    }
-
-
-
-
-    // async function pageChange(pageNumber) {
-    // setCurrentPage(pageNumber);
-    //
-    //     try {
-    //                 const {data} = await axios.get(`https://openlibrary.org/subjects/${subject}.json`, {
-    //                     params: {
-    //                         limit: 20,
-    //                         offset: (pageNumber - 1) * 20
-    //                         },
-    //                 });
-    //                 setBooks(data.docs)
-    //             } catch(e) {
-    //                 console.error(error);
-    //             }
-    //
-    // }
-
-    // function handleAddToMyBooks(book) {
-    //     const updatedMyBooks = [...myBooks, book];
-    //     setMyBooks(updatedMyBooks);
-    //     localStorage.setItem('mybooks', JSON.stringify(updatedMyBooks))
-    //     setAddedBook((prev) => ({
-    //         ...prev,
-    //         [book.key]: true,
-    //     }));
-    // }
 
     function handleAddToMyBooks(book) {
         const newBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
@@ -227,13 +153,13 @@ function BrowseSubject({subject, subjectTitle}) {
                 </div>
 
                 <div>
-                    <BrowsePagination
-                        // startIndex={startIndex}
-                        // endIndex={endIndex}
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={pageChange}
-                    />
+                    <button onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))} disabled={currentPage === 1}>
+                        Previous
+                    </button>
+                    <span className='page-settings'>{`Page ${currentPage} of ${totalPages}`}</span>
+                    <button onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))} disabled={currentPage === totalPages}>
+                        Next
+                    </button>
                 </div>
                 {/*<div className='pagination'>*/}
                 {/*    <p>{startIndex} to {endIndex}</p>*/}

@@ -46,7 +46,6 @@ function MyBooks() {
                                 <article className='book-card-container'>
                                     <div className='result-content-container'>
                                         <div className='mybooks' >
-                                            {console.log('mybooks', myBooks)}
 
                                         {myBooks.map((book) => (
                                             <div className='books' key={book.key}>
@@ -62,7 +61,6 @@ function MyBooks() {
                                                         <div>
                                                         <h5 className='your-rating'>Your rating:</h5>
                                                         <Rating
-                                                            // bookKEY={`${book.key}-${book.title}`}
                                                             bookKEY={book.key}
                                                         />
                                                         </div>
