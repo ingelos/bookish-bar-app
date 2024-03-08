@@ -84,7 +84,6 @@ function SearchResults() {
         }
     }
 
-
     function handleAddToMyBooks(book) {
         const newBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         const alreadyAdded = newBooks.some((savedBook) => savedBook.key === book.key);

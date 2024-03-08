@@ -1,3 +1,26 @@
-.preview-image {
-    width: 120px;
+/*.edit-profile inner-container {*/
+/*    display: block;*/
+/*    justify-content: center;*/
+/*}*/
+
+.edit-profile-content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+    max-width: 300px;
+    /*border: 2px solid red;*/
+}
+
+.edit-profile-content-container p {
+    font-size: 15px;
+}
+
+.preview-image-container {
+    margin: 10px 0;
+}
+
+.image-preview {
+    margin: 15px 0 0;
+    width: 100%;
 }

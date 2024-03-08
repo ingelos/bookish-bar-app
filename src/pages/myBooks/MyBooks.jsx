@@ -2,14 +2,14 @@ import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import './MyBooks.css'
 import BookCard from "../../components/bookCard/BookCard.jsx";
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import Rating from "../../components/rating/Rating.jsx";
 
 
 function MyBooks() {
     const [myBooks, setMyBooks] = useState([])
-    // const {isAuth} = useContext(AuthContext)
+    const {isAuth} = useContext(AuthContext)
 
     useEffect(() => {
         const myBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
@@ -29,7 +29,7 @@ function MyBooks() {
         <section className='my-books outer-container'>
             <div className='my-books inner-container'>
 
-                {/*{isAuth ?*/}
+                {isAuth ?
                     <div className='result-container'>
                         <div className='subject-container'>
                             <h2 className='result-header-title'>MY BOOKS</h2>
@@ -49,7 +49,6 @@ function MyBooks() {
 
                                         {myBooks.map((book) => (
                                             <div className='books' key={book.key}>
-                                                {/*{console.log('key', book.key)}*/}
                                                 <div className='book-container'>
                                                     <BookCard
                                                         cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
@@ -81,12 +80,12 @@ function MyBooks() {
                         </div>
                     </div>
 
-                {/*    :*/}
-                {/*    <div>*/}
-                {/*        <p className='link-to-login'>Log in <Link to={'/login'}><strong>here</strong></Link> to see your*/}
-                {/*            saved books!</p>*/}
-                {/*    </div>*/}
-                {/*}*/}
+                    :
+                    <div>
+                       <p className='link-to-login'>Log in <Link to={'/login'}><strong>here</strong></Link> to see your
+                           saved books!</p>
+                    </div>
+               }
 
             </div>
         </section>

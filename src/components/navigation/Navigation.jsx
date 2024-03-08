@@ -11,7 +11,6 @@ function Navigation() {
     const {isAuth, logout} = useContext(AuthContext);
 
 
-
     return (
         <>
             <nav>
