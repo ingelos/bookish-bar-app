@@ -103,21 +103,16 @@ function SearchResults() {
         }
     }
 
-
-
     return (
         <section className='search-result-section outer-container'>
             <div className='search-result-section inner-container'>
-
                 <SearchBar
                     query={query}
                     setQuery={setQuery}
                     onSearch={fetchSearchResults}
                 />
-
                 {loading && <p>Loading...</p>}
                 {error && <p>Something went wrong... try again.</p>}
-
                 <div className='result-container'>
                     {!searchSucces ? '' :
                         <h2 className='result-header'>
@@ -134,49 +129,50 @@ function SearchResults() {
                                         id={book.key}
                                         title={book.title}
                                         // author={book.author_name?.join(', ')}
-                                        author={book.author_name}
+                                        author={book.author_name ? book.author_name[0] : ''}
                                         cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
                                         year={`First published in ${book.first_publish_year}`}
                                     />
-                                    {/*{isAuth ?*/}
-
+                                    {isAuth ?
                                         <div>
                                             {!addedBook[book.key] ?
                                                 <Button id='add-rem-button'
                                                         onClick={() => handleAddToMyBooks(book)}
                                                 >
-                                                    {myBooks.some((savedBook) => savedBook.key === book.key) ? <p className='on-my-books-btn-text'>On MyBooks </p> : <p className='add-to-my-books-btn-text'>Add to MyBooks</p>}
+                                                    {myBooks.some((savedBook) => savedBook.key === book.key) ?
+                                                        <p className='on-my-books-btn-text'>On MyBooks </p> :
+                                                        <p className='add-to-my-books-btn-text'>Add to MyBooks</p>}
                                                 </Button>
-                                                : <Button id='saved-button'>Saved <img src={CheckIcon} className='check-icon' alt=''/></Button>
+                                                : <Button id='saved-button'>Saved <img src={CheckIcon}
+                                                                                       className='check-icon'
+                                                                                       alt=''/></Button>
                                             }
                                         </div>
-
-                                {/*        :*/}
-                                {/*        <div>*/}
-                                {/*        <Button*/}
-                                {/*        id='add-button'*/}
-                                {/*        onClick={() => navigate('/login')}*/}
-                                {/*>*/}
-                                {/*    Already on MyBooks*/}
-                                {/*</Button>*/}
-                                {/*</div>*/
-                            }
+                                        :
+                                        <div>
+                                            <Button
+                                                id='add-button'
+                                                onClick={() => navigate('/login')}
+                                            >
+                                                Login to add
+                                            </Button>
+                                        </div>
+                                    }
+                                </div>
+                            ))}
                         </div>
-                        ))}
+                    </article>
+                    <div>
+                        <Pagination
+                            page={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={pageChange}
+                        />
+                    </div>
                 </div>
-            </article>
-
-            <div>
-                <Pagination
-                    page={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={pageChange}
-                />
             </div>
-        </div>
-</div>
-</section>
-)
+        </section>
+    )
 }
 
 export default SearchResults;

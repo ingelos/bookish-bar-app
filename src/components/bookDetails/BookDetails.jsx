@@ -1,4 +1,5 @@
-function BookDetails({cover, title, name, excerpts, links, description}) {
+
+function BookDetails({cover, title, authorName, excerpts, links, description}) {
 
     return (
         <div className='detail-article'>
@@ -9,8 +10,7 @@ function BookDetails({cover, title, name, excerpts, links, description}) {
             </div>
             <div className='detail-info'>
                 <h2>{title}</h2>
-                <h3>{name}</h3>
-
+                <h3>{authorName}</h3>
                 <p className='detail-description'>{description}</p>
                 <p><em>{excerpts}</em></p>
                 <p className='book-link'>{links}</p>

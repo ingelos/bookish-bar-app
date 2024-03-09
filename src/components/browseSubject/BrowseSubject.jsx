@@ -106,26 +106,30 @@ function BrowseSubject({subject, subjectTitle}) {
                         <div className='result-content-container'>
                             {books?.map((book) => (
                                 <div className='book-container' key={book.key}>
-                                <BookCard
-                                    bookId={(book.key).replace("/works/", "")}
-                                    authorId={(book.authors[0].key).replace("/authors/", "")}
-                                    cover={book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}
-                                    // key={`${book.title}-${book.cover_id}`}
-                                    title={book.title}
-                                    author={book.authors[0].name}
-                                    year={`First published in: ${book.first_publish_year}`}
-                                />
+                                    <BookCard
+                                        bookId={(book.key).replace("/works/", "")}
+                                        authorId={(book.authors[0].key).replace("/authors/", "")}
+                                        cover={book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}
+                                        // key={`${book.title}-${book.cover_id}`}
+                                        title={book.title}
+                                        author={book.authors[0].name}
+                                        year={`First published in: ${book.first_publish_year}`}
+                                    />
                                     {isAuth ?
-                                    <div>
-                                        {!addedBook[book.key] ?
-                                            <Button id='add-rem-button'
-                                                    onClick={() => handleAddToMyBooks(book)}
-                                            >
-                                                {myBooks.some((savedBook) => savedBook.key === book.key) ? <p className='on-my-books-btn-text'>On MyBooks </p> : <p className='add-to-my-books-btn-text'>Add to MyBooks</p>}
-                                            </Button>
-                                            : <Button id='saved-button'>Saved <img src={CheckIcon} className='check-icon' alt=''/></Button>
-                                        }
-                                    </div>
+                                        <div>
+                                            {!addedBook[book.key] ?
+                                                <Button id='add-rem-button'
+                                                        onClick={() => handleAddToMyBooks(book)}
+                                                >
+                                                    {myBooks.some((savedBook) => savedBook.key === book.key) ?
+                                                        <p className='on-my-books-btn-text'>On MyBooks </p> :
+                                                        <p className='add-to-my-books-btn-text'>Add to MyBooks</p>}
+                                                </Button>
+                                                : <Button id='saved-button'>Saved <img src={CheckIcon}
+                                                                                       className='check-icon'
+                                                                                       alt=''/></Button>
+                                            }
+                                        </div>
                                         :
                                         <div>
                                             <Button
@@ -136,74 +140,26 @@ function BrowseSubject({subject, subjectTitle}) {
                                             </Button>
                                         </div>
                                     }
-
-
-                                    {/*{isAuth ?*/}
-                                    {/*    <div>*/}
-                                    {/*        {!addedBook[book.key] && (*/}
-                                    {/*            <Button*/}
-                                    {/*                id='add-button'*/}
-                                    {/*                onClick={() => handleAddToMyBooks(book)}*/}
-                                    {/*            >*/}
-                                    {/*                Add to MyBooks*/}
-                                    {/*            </Button>*/}
-                                    {/*        )}*/}
-                                    {/*    </div>*/}
-                                    {/*    :*/}
-                                    {/*    <div>*/}
-                                    {/*        <Button*/}
-                                    {/*            id='add-button'*/}
-                                    {/*            onClick={() => navigate('/login')}*/}
-                                    {/*        >*/}
-                                    {/*            Add to MyBooks*/}
-                                    {/*        </Button>*/}
-                                    {/*    </div>*/}
-                                    {/*}*/}
                                 </div>
                             ))}
                         </div>
                     </article>
                     {books.length === 0 && error && <p>Something went wrong fetching your book data...</p>}
                 </div>
-
                 <div>
-                    <button onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))} disabled={currentPage === 1}>
+                    <button onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}
+                            disabled={currentPage === 1}>
                         Previous
                     </button>
                     <span className='page-settings'>{`Page ${currentPage} of ${totalPages}`}</span>
-                    <button onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))} disabled={currentPage === totalPages}>
+                    <button onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))}
+                            disabled={currentPage === totalPages}>
                         Next
                     </button>
                 </div>
-                {/*<div className='pagination'>*/}
-                {/*    <p>{startIndex} to {endIndex}</p>*/}
-                {/*    {currentPage > 1 && (*/}
-                {/*        <Button*/}
-                {/*            onClick={(e) => pageChange(e, currentPage - 1)}*/}
-                {/*            className='pagination-button'*/}
-                {/*        >*/}
-                {/*            Previous*/}
-                {/*        </Button>*/}
-                {/*    )}*/}
-                {/*    {currentPage < totalPages && (*/}
-                {/*        <Button*/}
-                {/*            onClick={(e) => pageChange(e, currentPage + 1)}*/}
-                {/*            className='pagination-button'*/}
-                {/*        >*/}
-                {/*            Next*/}
-                {/*        </Button>*/}
-                {/*    )}*/}
-                {/*</div>*/}
 
-                {/*<div>*/}
-                {/*    <Pagination*/}
-                {/*        offset={currentPage}*/}
-                {/*        totalPages={totalPages}*/}
-                {/*        onPageChange={pageChange}*/}
-                {/*    />*/}
-                {/*</div>*/}
             </div>
-            <SubjectNavigation />
+            <SubjectNavigation/>
         </section>
     )
 }

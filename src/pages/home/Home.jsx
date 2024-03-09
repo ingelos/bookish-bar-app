@@ -55,15 +55,17 @@ function Home() {
 
             <section className='home-section outer-container'>
                 <div className='home-section inner-container'>
-                    {loading ? <p>Loading...</p> : (
-                        <div className='home-section inner-content-container'>
-                            <div>
-                                <div>
-                                    <h2>Welcome to Bookish Bar!</h2>
-                                    <h3>We like big books and we cannot lie...</h3>
-                                    <h3></h3>
-                                </div>
-
+                    <div className='home-section inner-content-container'>
+                        <div className='welcome-message'>
+                            <h2>Welcome to Bookish Bar!</h2>
+                            <h3>We like big books and we cannot lie...</h3>
+                            <h3 className='link-message'>Feel free to <Link
+                                to={'/search-results'}><strong>search</strong></Link>, <Link
+                                to={'/browse'}><strong>browse</strong></Link> and save books to your <Link
+                                to={'/my-books'}><strong>personal page</strong></Link></h3>
+                        </div>
+                        <div>
+                            {loading ? <p>Loading...</p> : (
                                 <div>
                                     <div className='title-container'>
                                         <h2 className='list-title'>Trending today:</h2>
@@ -86,11 +88,12 @@ function Home() {
                                         )}
                                     </div>
                                 </div>
-                            </div>
-
-
+                            )}
                         </div>
-                    )}
+
+
+                    </div>
+
                 </div>
             </section>
         </>

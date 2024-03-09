@@ -1,20 +1,15 @@
-/*.book-card {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    justify-content: space-between;*/
-/*    flex-basis: 800px;*/
-/*    border-bottom: 1px solid var(--color-primary);*/
-/*}*/
 
 .book-card-list {
     display: flex;
     flex-direction: row;
     list-style: none;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 .book-cover {
     width: 65px;
+    padding: 10px 0;
+
 }
 
 .book-card-info {
