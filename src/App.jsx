@@ -48,12 +48,10 @@ function App() {
                 <Route path='/account-settings' element={<AccountSettings/>}/>
                 <Route path='/my-books' element={<MyBooks/>}/>
                 <Route path='/search-results' element={<SearchResults/>}/>
-                <Route path='/trending' element={<TrendingPage/>}/>
                 <Route path='/browse/:bookId' element={<BookDetailPage/>}/>
                 <Route path='/:authorId' element={<AuthorPage/>}/>
-
+                <Route path='/trending' element={<TrendingPage/>}/>
                 <Route path='/browse' element={<BrowseMainPage/>}/>
-
                 <Route path='/browse/romance' element={<BrowseRomance/>}/>
                 <Route path='/browse/science_fiction' element={<BrowseScienceFiction/>}/>
                 <Route path='/browse/fantasy' element={<BrowseFantasy/>}/>
@@ -63,7 +61,6 @@ function App() {
                 <Route path='/browse/mystery' element={<BrowseMystery/>}/>
                 <Route path='/browse/literature' element={<BrowseLiterature/>}/>
                 <Route path='/browse/thriller' element={<BrowseThriller/>}/>
-
                 <Route path='*' element={<NotFound/>}/>
             </Routes>
             <Footer/>

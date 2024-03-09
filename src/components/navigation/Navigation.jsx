@@ -5,11 +5,12 @@ import {useContext} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import Button from "../button/Button.jsx";
 import SearchBar from "../searchBar/SearchBar.jsx";
+import {UserContext} from "../../context/UserContext.jsx";
 
 function Navigation() {
     const navigate = useNavigate();
     const {isAuth, logout} = useContext(AuthContext);
-
+    const {profilePicture} = useContext(UserContext);
 
     return (
         <>
@@ -32,33 +33,33 @@ function Navigation() {
 
                     <div className='nav-search-bar'>
                         <NavLink to='/search-results'>
-                    <SearchBar
-                        // disabled={true}
-                    />
+                            <SearchBar/>
                         </NavLink>
                     </div>
 
                     <div>
                         {isAuth ?
-                        <div className='user-container'>
-                            <Button
-                                type='button'
-                                className='log-link'
-                                onClick={logout}
+                            <div className='user-container'>
+                                <Button
+                                    type='button'
+                                    className='log-link'
+                                    onClick={logout}
                                 >
-                                Logout
-                            </Button>
-                            <Link to={'/profile'}>
-                                <img src={UserIcon} id='user-icon' alt='user-icon'/>
-                            </Link>
-                        </div>
+                                    Logout
+                                </Button>
+                                <Link to={'/profile'}>
+                                    <div className='nav-profile-container'>
+                                        <img src={profilePicture} id='user-icon-profile' alt='user-icon'/>
+                                    </div>
+                                </Link>
+                            </div>
                             :
                             <div className='user-container'>
                                 <Button
                                     type='button'
                                     className='log-link'
                                     onClick={() => navigate('./login')}
-                                    >
+                                >
                                     Login
                                 </Button>
                                 <img src={UserIcon} id='user-icon' alt='user-icon'/>

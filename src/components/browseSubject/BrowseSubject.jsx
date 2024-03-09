@@ -16,6 +16,7 @@ function BrowseSubject({subject, subjectTitle}) {
     const [works, setWorks] = useState(0);
     const [myBooks, setMyBooks] = useState([]);
     const [addedBook, setAddedBook] = useState({});
+    const {isAuth} = useContext(AuthContext);
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 20;
 
@@ -114,6 +115,7 @@ function BrowseSubject({subject, subjectTitle}) {
                                     author={book.authors[0].name}
                                     year={`First published in: ${book.first_publish_year}`}
                                 />
+                                    {isAuth ?
                                     <div>
                                         {!addedBook[book.key] ?
                                             <Button id='add-rem-button'
@@ -124,6 +126,18 @@ function BrowseSubject({subject, subjectTitle}) {
                                             : <Button id='saved-button'>Saved <img src={CheckIcon} className='check-icon' alt=''/></Button>
                                         }
                                     </div>
+                                        :
+                                        <div>
+                                            <Button
+                                                id='add-button'
+                                                onClick={() => navigate('/login')}
+                                            >
+                                                Login to add
+                                            </Button>
+                                        </div>
+                                    }
+
+
                                     {/*{isAuth ?*/}
                                     {/*    <div>*/}
                                     {/*        {!addedBook[book.key] && (*/}
