@@ -5,9 +5,7 @@
 
 .subject-nav-container {
     background-color: #f1e9da;
-    /*max-width: 200px;*/
-    /*max-height: 500px;*/
-    margin: 135px 0 115px 40px;
+    margin: 114px 0 115px 40px;
     padding: 20px;
     border: 2px solid var(--color-primary);
     border-radius: 5px;
@@ -20,7 +18,7 @@
 }
 
 .active-subject-link {
-    text-decoration: none;
+    text-decoration: underline;
     font-weight: 600;
 }
 

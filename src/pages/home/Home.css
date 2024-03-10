@@ -5,7 +5,20 @@
 
 .welcome-message {
     text-align: center;
-    margin: 40px 0 80px;
+    margin: 40px 0 20px;
+}
+
+.welcome-message h2 {
+    font-size: 24px;
+}
+
+.intro-message {
+    margin: 20px 0 30px;
+}
+
+.intro-message h3 {
+    font-weight: 300;
+    padding-bottom: 5px;
 }
 
 .title-container, .trending-container {
@@ -14,7 +27,7 @@
 }
 
 .link-message {
-    margin-top: 20px;
+    margin-top: 30px;
     font-weight: 300;
 }
 

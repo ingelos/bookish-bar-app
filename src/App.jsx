@@ -25,6 +25,15 @@ import BrowseThriller from "./pages/browse/browseThriller/BrowseThriller.jsx";
 import BrowseHumor from "./pages/browse/browseHumor/BrowseHumor.jsx";
 import TrendingPage from "./pages/trendingPage/TrendingPage.jsx";
 import AuthorPage from "./pages/authorPage/AuthorPage.jsx";
+import BrowsePainting from "./pages/browse/browsePainting/BrowsePainting.jsx";
+import BrowseFilm from "./pages/browse/browseFilm/BrowseFilm.jsx";
+import BrowseMusic from "./pages/browse/browseMusic/BrowseMusic.jsx";
+import BrowsePhotography from "./pages/browse/browsePhotography/BrowsePhotography.jsx";
+import BrowsePoetry from "./pages/browse/browsePoetry/BrowsePoetry.jsx";
+import BrowsePlays from "./pages/browse/browsePlays/BrowsePlays.jsx";
+import BrowseDance from "./pages/browse/browseDance/BrowseDance.jsx";
+import BrowseFashion from "./pages/browse/browseFashion/BrowseFashion.jsx";
+import BrowseDesign from "./pages/browse/browseDesign/BrowseDesign.jsx";
 
 
 function App() {
@@ -61,6 +70,15 @@ function App() {
                 <Route path='/browse/mystery' element={<BrowseMystery/>}/>
                 <Route path='/browse/literature' element={<BrowseLiterature/>}/>
                 <Route path='/browse/thriller' element={<BrowseThriller/>}/>
+                <Route path='/browse/poetry' element={<BrowsePoetry/>}/>
+                <Route path='/browse/plays' element={<BrowsePlays/>}/>
+                <Route path='/browse/painting_and_paintings' element={<BrowsePainting/>}/>
+                <Route path='/browse/film' element={<BrowseFilm/>}/>
+                <Route path='/browse/music' element={<BrowseMusic/>}/>
+                <Route path='/browse/photography' element={<BrowsePhotography/>}/>
+                <Route path='/browse/dance' element={<BrowseDance/>}/>
+                <Route path='/browse/design' element={<BrowseDesign/>}/>
+                <Route path='/browse/fashion' element={<BrowseFashion/>}/>
                 <Route path='*' element={<NotFound/>}/>
             </Routes>
             <Footer/>

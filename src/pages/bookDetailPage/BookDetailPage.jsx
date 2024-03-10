@@ -97,7 +97,7 @@ function BookDetailPage() {
                                 cover={book.covers ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-M.jpg` : 'no cover available'}
                                 title={book.title}
                                 authorName={book.authorName}
-                                description={book.description.value ? book.description.value : book.description}
+                                description={book.description?.value || book.description || ''}
                                 excerpts={book.excerpts ? `First line: ${book.excerpts[0].excerpt}` : ''}
                                 links={book.links ? `${book.links[0].title}: ${book.links[0].url}` : ''}
                             />

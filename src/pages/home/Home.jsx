@@ -58,11 +58,15 @@ function Home() {
                     <div className='home-section inner-content-container'>
                         <div className='welcome-message'>
                             <h2>Welcome to Bookish Bar!</h2>
-                            <h3>We like big books and we cannot lie...</h3>
-                            <h3 className='link-message'>Feel free to <Link
-                                to={'/search-results'}><strong>search</strong></Link>, <Link
-                                to={'/browse'}><strong>browse</strong></Link> and save books to your <Link
-                                to={'/my-books'}><strong>personal page</strong></Link></h3>
+                            <div className='intro-message'>
+                                <h3>We like big books and we cannot lie...</h3>
+                                <h3>If you do too...</h3>
+                                    <h3> <Link
+                                        to={'/search-results'}><strong>Search</strong></Link>, <Link
+                                        to={'/browse'}><strong>browse</strong></Link> and save books to your <Link
+                                        to={'/my-books'}><strong>personal page</strong></Link>!</h3>
+
+                            </div>
                         </div>
                         <div>
                             {loading ? <p>Loading...</p> : (

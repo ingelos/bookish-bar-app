@@ -1,8 +1,7 @@
 import {Link} from "react-router-dom";
 import './BookCard.css'
-import {useContext} from "react";
-import {AuthContext} from "../../context/AuthContext.jsx";
 import NoCoverImage from "../../assets/icons/No_Cover.jpg"
+
 
 function BookCard({cover, bookId, title, id, author, year, authorId}) {
 
