@@ -72,7 +72,7 @@ function Home() {
                             {loading ? <p>Loading...</p> : (
                                 <div>
                                     <div className='title-container'>
-                                        <h2 className='list-title'>Trending today:</h2>
+                                        <h2 className='list-title'>Trending today</h2>
                                     </div>
                                     <div className='trending-container'>
                                         {books.length > 0 && (
@@ -94,10 +94,7 @@ function Home() {
                                 </div>
                             )}
                         </div>
-
-
                     </div>
-
                 </div>
             </section>
         </>

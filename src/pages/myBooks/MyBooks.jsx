@@ -79,11 +79,11 @@ function MyBooks() {
                             )}
                         </div>
                     </div>
-
                     :
-                    <div>
-                       <p className='link-to-login'>Log in <Link to={'/login'}><strong>here</strong></Link> to see your
+                    <div className='mybooks-link-container'>
+                       <p className='link-to-login'><Link to={'/login'}><strong>Log in</strong></Link> to see your
                            saved books!</p>
+                        <p>New here? Make an <Link to={'/register'}><strong>account</strong></Link> to save and rate your books!</p>
                     </div>
                }
 

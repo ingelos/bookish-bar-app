@@ -14,6 +14,7 @@ import BrushIcon from '../../assets/icons/paint-brush.svg';
 import MovieIcon from '../../assets/icons/film-slate.svg';
 import MusicNoteIcon from '../../assets/icons/music-notes.svg';
 import CameraIcon from '../../assets/icons/camera.svg';
+import LightbulbIcon from '../../assets/icons/lightbulb.svg';
 import FeetIcon from '../../assets/icons/footprints.svg';
 import {useNavigate} from "react-router-dom";
 import BrowseSubjectButton from "../../components/browseSubjectButton/BrowseSubjectButton.jsx";
@@ -46,7 +47,7 @@ function BrowseMainPage() {
     return (
         <section className='browse-section outer-container'>
             <div className='browse-section inner-container'>
-                <h3 className='browse-page-subtitle'>Click on any subject and get transported into your world of choice!</h3>
+                <h2 className='browse-page-subtitle'>Click on any subject and get transported into your world of choice!</h2>
                 <article className='browse-article'>
                     <h2 className='browse-title'>Fiction</h2>
                     <div className='browse-section-content'>
@@ -136,7 +137,7 @@ function BrowseMainPage() {
                             subject='Dance'
                         />
                         <BrowseSubjectButton
-                            icon={ScrollIcon}
+                            icon={LightbulbIcon}
                             onClick={handleClickDesign}
                             subject='Design'
                         />
