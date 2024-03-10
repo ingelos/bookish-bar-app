@@ -1,6 +1,13 @@
+.mybooks-link-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 80px 0;
+}
 
-.link-to-login {
+.mybooks-link-container p{
     font-size: 16px;
+    padding: 5px;
 }
 
 .rating-and-remove {

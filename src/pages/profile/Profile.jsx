@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import './Profile.css'
 import {UserContext} from "../../context/UserContext.jsx";
@@ -8,34 +8,39 @@ import Button from "../../components/button/Button.jsx";
 
 function Profile() {
     const {user} = useContext(AuthContext);
-    const {profilePicture} = useContext(UserContext);
+    const {profilePicture, setProfilePicture} = useContext(UserContext);
 
-    console.log(profilePicture);
+    useEffect(() => {
+        const storedProfilePicture = localStorage.getItem('profilePicture');
+        if (storedProfilePicture) {
+            setProfilePicture(storedProfilePicture);
+        }
+    }, [setProfilePicture]);
+
 
     return (
         <>
             <section className='profile-page outer-container'>
                 <div className='profile-page inner-container'>
 
-                    <div className='profile-container'>
-                        <h2>Your profile</h2>
-                        <div className='profile-content-container'>
-                            <div className='profile-information'>
-                                <p>Username: <strong>{user.username}</strong></p>
-                                <p>Email: <strong>{user.email}</strong></p>
-                            </div>
+                    <div className='profile-inner-content-container'>
+                        <h2 className='username-profile'>{user.username}</h2>
+                        {/*<div className='profile-content-container'>*/}
                             <div className='user-profile-picture'>
                                 {profilePicture &&
-                                    <img src={profilePicture} alt='profile' className='profile-picture'/>}
+                                    <div className='profile-picture-container'>
+                                        <img src={profilePicture} alt='profile' className='profile-picture'/>
+                                    </div>
+                                }
                             </div>
+                        {/*</div>*/}
+                        <div className='link-container'>
+                            <p>Go to <Link to={'/my-books'}><strong>MyBooks</strong></Link></p>
                         </div>
                     </div>
                     <div className='edit-link-container'>
                         <Button className='edit-link'><Link to={'/edit-profile'}>Edit profile</Link></Button>
                         <Button className='edit-link'><Link to={'/edit-picture'}>Edit picture</Link></Button>
-                    </div>
-                    <div className='link-container'>
-                        <p>Go to <Link to={'/my-books'}><strong>MyBooks</strong></Link> page</p>
                     </div>
                 </div>
 

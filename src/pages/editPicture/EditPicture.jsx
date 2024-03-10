@@ -10,7 +10,9 @@ function EditPicture() {
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
     const [base64, setBase64] = useState('');
-    const { setProfilePicture } = useContext(UserContext);
+    const {setProfilePicture} = useContext(UserContext);
+    const [updatedPictureSuccess, setUpdatedPictureSuccess] = useState(null);
+    const {profilePicture} = useContext(UserContext);
 
     useEffect(() => {
         let imageUrl;
@@ -18,24 +20,23 @@ function EditPicture() {
             imageUrl = URL.createObjectURL(file);
             setPreview(imageUrl);
         }
+
+        // localStorage.getItem('profilePicture');
+
         return function cleanup() {
             URL.revokeObjectURL(imageUrl);
         }
     }, [file]);
 
     function handleImageChange(e) {
-        console.log(e.target.files[0]);
         setFile(e.target.files[0]);
 
         let reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
-        console.log(e.target.files[0]);
 
         reader.onload = () => {
             console.log("conversion to base64 result:", reader);
             setBase64(reader.result);
-            // console.log("reader result", reader.result);
-            // setProfilePicture(reader.result);
         }
     }
 
@@ -55,10 +56,10 @@ function EditPicture() {
                 }
             );
             const imageUrl = response.data.base64Image;
-            console.log(imageUrl);
             setProfilePicture(imageUrl);
+            setUpdatedPictureSuccess(true);
 
-            console.log("response.data:", response.data);
+            localStorage.setItem('profilePicture', imageUrl);
         } catch (e) {
             console.error(e);
         }
@@ -69,24 +70,37 @@ function EditPicture() {
             <section className='edit-profile-page outer-container'>
                 <div className='edit-profile-page inner-container'>
                     <div className='edit-profile-content-container'>
-                    <h2>Upload and preview picture</h2>
-                    <form onSubmit={sendImage} className='picture-form'>
-                        <label htmlFor='user-image'>
-                            Choose picture:
-                            <input type='file' name='image-file' id='file-field' onChange={handleImageChange}/>
-                        {preview && <article className='preview-image-container'>
-                                <h3>Preview:</h3>
-                                <img alt={file.name} src={preview} className='image-preview'/>
-                            </article>
+                        <h2>Add/ change profile picture</h2>
+
+                        {!updatedPictureSuccess ?
+                            <div>
+                                <form onSubmit={sendImage} className='picture-form'>
+                                    <label htmlFor='user-image'>
+                                        Choose picture:
+                                        <input type='file' name='image-file' id='file-field'
+                                               onChange={handleImageChange}/>
+                                        {preview &&
+                                            <article className='preview-image-container'>
+                                                <h3>Preview:</h3>
+                                                <div className='profile-picture-container'>
+                                                    <img alt={file.name} src={preview} className='image-preview'/>
+                                                </div>
+                                            </article>
+                                        }
+                                    </label>
+                                    {!preview ? <Button disabled={true}>Upload</Button> :
+                                    <Button type='submit'>Upload</Button>
+                                    }
+                                </form>
+                                <p>Back to my <Link to={'/profile'}><strong>Profile</strong></Link></p>
+                            </div>
+                            :
+                            <div className='updated-picture-success-message'>
+                                <p>You've successfully added/updated your profile picture!</p>
+                                <p>See it in your <Link to={'/profile'}><strong>Profile</strong></Link></p>
+                            </div>
                         }
-                        </label>
-                        <button type='submit'>Upload</button>
-                    </form>
-                        <p>Take me back to my <Link to={'/profile'}><strong>Profile</strong></Link></p>
-                    {/*<div>*/}
-                    {/*    <h2>Profile picture:</h2>*/}
-                    {/*    {base64 && <img src={base64} alt='file'/>}*/}
-                    {/*</div>*/}
+
                     </div>
                 </div>
             </section>

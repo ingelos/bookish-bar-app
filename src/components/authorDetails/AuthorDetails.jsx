@@ -2,6 +2,8 @@ import './AuthorDetails.css'
 
 function AuthorDetails({photo, name, bio, birth_date, death_date, links}) {
 
+
+
     return (
         <article className='detail-container'>
             <div className='detail-article'>

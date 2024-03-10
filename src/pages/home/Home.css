@@ -1,7 +1,34 @@
+.inner-content-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome-message {
+    text-align: center;
+    margin: 40px 0 20px;
+}
+
+.welcome-message h2 {
+    font-size: 24px;
+}
+
+.intro-message {
+    margin: 20px 0 30px;
+}
+
+.intro-message h3 {
+    font-weight: 300;
+    padding-bottom: 5px;
+}
 
 .title-container, .trending-container {
     width: 100%;
     border-bottom: 2px solid var(--color-primary);
+}
+
+.link-message {
+    margin-top: 30px;
+    font-weight: 300;
 }
 
 .list-title {

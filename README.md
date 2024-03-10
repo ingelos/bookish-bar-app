@@ -29,6 +29,8 @@ After running this command, the application will start and be accessible at http
 ## Acknowledgements
 
 This project is inspired by Goodreads.
+Icons used are from React icons and Phosphor Icons (https://phosphoricons.com)
+
 All book data used in this project is from the Open Library Api:
 
 https://openlibrary.org/developers/api

@@ -2,7 +2,7 @@
 import './Pagination.css'
 import Button from "../button/Button.jsx";
 
-function Pagination({page, totalPages, onPageChange}) {
+function Pagination({page, totalPages, onPageChange, currentPage}) {
 
     function pageChange(e, pageNumber) {
         e.preventDefault();
@@ -20,6 +20,7 @@ function Pagination({page, totalPages, onPageChange}) {
                     Previous
                 </Button>
             )}
+            <span className='page-settings'>{`Page ${page} of ${totalPages}`}</span>
             {page < totalPages && (
                 <Button
                     onClick={(e) => pageChange(e, page + 1)}

@@ -62,28 +62,12 @@ function AuthorPage() {
                             <AuthorDetails
                                 name={author.name}
                                 bio={JSON.stringify(author.bio)}
-                                // bio={author.bio}
                                 birth_date={author.birth_date}
                                 death_date={author.death_date}
                                 photo={author.photos[0] ? `https://covers.openlibrary.org/b/id/${author.photos[0]}-L.jpg` : ''}
                                 links={author.links ? author.links[0].url : ''}
                             />
-                            // <>
-                            //     <div className='detail-cover'>
-                            //         <img src={author.photos[0] ? `https://covers.openlibrary.org/b/id/${author.photos[0]}-M.jpg` : 'no picture available'} alt={''} className='author-img'/>
-                            //     </div>
-                            //     <div className='detail-info'>
-                            //         <h2>{author.name}</h2>
-                            //         <p>{author.bio}</p>
-                            //         <p>Date of birth: {author.birth_date}</p>
-                            //         <p>{author.links[0].title}: {author.links[0].url}</p>
-                            //
-                            //         {/*<p className='first-line'>{book.excerpts[0].comment}: {book.excerpts[0].excerpt}</p>*/}
-                            //     </div>
-                            // </>
                         }
-
-                        {/*<AddToList />*/}
                     </div>
                 </div>
             </section>
