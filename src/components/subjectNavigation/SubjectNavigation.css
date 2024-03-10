@@ -4,7 +4,7 @@
 }
 
 .subject-nav-container {
-    background-color: #f1e9da;
+    background-color: var(--color-tertiary);
     margin: 114px 0 115px 40px;
     padding: 20px;
     border: 2px solid var(--color-primary);

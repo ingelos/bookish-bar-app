@@ -1,4 +1,3 @@
-import HeartIcon from "../../assets/icons/heartL.svg";
 import Button from "../button/Button.jsx";
 
 function BrowseSubjectButton({icon, onClick, subject}) {

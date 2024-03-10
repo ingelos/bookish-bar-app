@@ -145,37 +145,6 @@ function BrowseMainPage() {
                             onClick={handleClickFashion}
                             subject='Fashion'
                         />
-
-
-
-                        {/*<Button className='browse-section subjects' onClick={handleClick10}>*/}
-                        {/*    <img src={''} className='subject-icon' alt='subject-icon'/>*/}
-                        {/*    <h3 className='subject-title'>Painting</h3>*/}
-                        {/*</Button>*/}
-                        {/*<Button className='browse-section subjects' onClick={handleClick11}>*/}
-                        {/*    <img src={''} className='subject-icon' alt='subject-icon'/>*/}
-                        {/*    <h3 className='subject-title'>Film</h3>*/}
-                        {/*</Button>*/}
-                        {/*<Button className='browse-section subjects' onClick={handleClick12}>*/}
-                        {/*    <img src={''} className='subject-icon' alt='subject-icon'/>*/}
-                        {/*    <h3 className='subject-title'>Music</h3>*/}
-                        {/*</Button>*/}
-                        {/*<Button className='browse-section subjects' onClick={handleClick13}>*/}
-                        {/*    <img src={''} className='subject-icon' alt='subject-icon'/>*/}
-                        {/*    <h3 className='subject-title'>Photography</h3>*/}
-                        {/*</Button>*/}
-                        {/*<Button className='browse-section subjects' onClick={handleClick14}>*/}
-                        {/*    <img src={''} className='subject-icon' alt='subject-icon'/>*/}
-                        {/*    <h3 className='subject-title'>Dance</h3>*/}
-                        {/*</Button>*/}
-                        {/*<Button className='browse-section subjects' onClick={handleClick15}>*/}
-                        {/*    <img src={''} className='subject-icon' alt='subject-icon'/>*/}
-                        {/*    <h3 className='subject-title'>Design</h3>*/}
-                        {/*</Button>*/}
-                        {/*<Button className='browse-section subjects' onClick={handleClick16}>*/}
-                        {/*    <img src={''} className='subject-icon' alt='subject-icon'/>*/}
-                        {/*    <h3 className='subject-title'>Fashion</h3>*/}
-                        {/*</Button>*/}
                     </div>
                 </article>
             </div>
