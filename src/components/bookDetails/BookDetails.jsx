@@ -1,7 +1,8 @@
 import NoCoverImage from "../../assets/icons/No_Cover.jpg";
 import './BookDetails.css'
+import {Link} from "react-router-dom";
 
-function BookDetails({cover, title, authorName, excerpts, links, description}) {
+function BookDetails({cover, title, authorName, excerpts, links, description, firstPublished}) {
 
     const noCoverImage = NoCoverImage;
 
@@ -10,7 +11,7 @@ function BookDetails({cover, title, authorName, excerpts, links, description}) {
     }
 
     return (
-        <div className='detail-article'>
+        <div className='book-detail-article'>
             <div className='detail-cover'>
                 <img
                     src={cover ? cover : noCoverImage}
@@ -19,12 +20,16 @@ function BookDetails({cover, title, authorName, excerpts, links, description}) {
                     className='detail-cover-img'
                 />
             </div>
-            <div className='detail-info'>
+            <div className='book-detail-info'>
                 <h2>{title}</h2>
-                <h3 className='author-name'>{authorName}</h3>
+                <h3 className='author-name'>
+                    {authorName}
+                </h3>
                 <p className='detail-description'>{description}</p>
                 <p><em>{excerpts}</em></p>
+                <p>{firstPublished}</p>
                 <p className='book-link'>{links}</p>
+
             </div>
         </div>
     )

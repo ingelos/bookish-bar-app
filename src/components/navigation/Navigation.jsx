@@ -12,6 +12,8 @@ function Navigation() {
     const {isAuth, logout} = useContext(AuthContext);
     const {profilePicture} = useContext(UserContext);
 
+
+
     return (
         <>
             <nav>
@@ -49,7 +51,10 @@ function Navigation() {
                                 </Button>
                                 <Link to={'/profile'}>
                                     <div className='nav-profile-container'>
-                                        <img src={profilePicture} id='user-icon-profile' alt='user-icon'/>
+                                        <img
+                                            src={profilePicture || UserIcon}
+                                            id='user-icon-profile'
+                                            alt='user-icon'/>
                                     </div>
                                 </Link>
                             </div>

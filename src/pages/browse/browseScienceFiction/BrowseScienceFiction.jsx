@@ -7,7 +7,7 @@ function BrowseScienceFiction() {
     return (
         <>
             <BrowseSubject
-                endpoint={`https://openlibrary.org/subjects/science_fiction.json`}
+                // endpoint={`https://openlibrary.org/subjects/science_fiction.json`}
                 subject={'science_fiction'}
                 subjectTitle='Science Fiction'
             />

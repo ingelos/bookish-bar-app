@@ -5,8 +5,6 @@ import NoCoverImage from "../../assets/icons/No_Cover.jpg"
 
 function BookCard({cover, bookId, title, id, author, year, authorId}) {
 
-    const noCoverImage = NoCoverImage;
-
     function onImageError(e) {
         e.target.src = NoCoverImage
     }
@@ -20,7 +18,7 @@ function BookCard({cover, bookId, title, id, author, year, authorId}) {
                 >
                     <Link to={`/browse/${bookId}`}>
                     <img
-                        src={cover ? cover : noCoverImage}
+                        src={cover ? cover : NoCoverImage}
                         alt=''
                         onError={onImageError}
                         className='book-cover'

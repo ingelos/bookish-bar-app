@@ -1,20 +1,24 @@
 import './AuthorDetails.css'
+import NoAuthorPhoto from "../../assets/icons/No_image_available.svg.png";
 
 function AuthorDetails({photo, name, bio, birth_date, death_date, links}) {
 
-
+function onPhotoError(e) {
+    e.target.src = NoAuthorPhoto;
+}
 
     return (
-        <article className='detail-container'>
-            <div className='detail-article'>
-                <div className='detail-author-img'>
-                    <img src={photo}
-                         alt={`image of ${name}`}
+        <article className='author-detail-container'>
+            <div className='detail-image'>
+                <div className='detail-author-img-container'>
+                    <img src={photo ? photo : NoAuthorPhoto}
+                         alt=''
+                         onError={onPhotoError}
                          className='author-img'
                     />
                 </div>
             </div>
-            <div className='detail-info'>
+            <div className='detail-info-author'>
                 <h2>{name}</h2>
                 <p className='bio-author'>{bio}</p>
                 <p className='date-link'>Date of birth: {birth_date} {death_date ? `- Date of death: ${death_date}` : ''}</p>

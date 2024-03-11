@@ -1,6 +1,8 @@
 .inner-content-container {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    /*border: 2px solid blue;*/
 }
 
 .welcome-message {
@@ -21,7 +23,12 @@
     padding-bottom: 5px;
 }
 
-.title-container, .trending-container {
+.preview-title-container {
+    width: 100%;
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.preview-trending-container {
     width: 100%;
     border-bottom: 2px solid var(--color-primary);
 }
@@ -35,14 +42,20 @@
     padding: 10px 0;
 }
 
-.trending-list {
+
+.trending-inner-container {
+    /*border: 2px dotted pink;*/
+}
+
+.preview-list {
     display: flex;
     flex-wrap: wrap;
     flex-basis: 800px;
     justify-content: space-between;
-    gap: 30px;
+    gap: 10px;
     list-style: none;
     margin-top: 30px;
+    /*border: 2px solid pink;*/
 }
 
 .cover-img-home {

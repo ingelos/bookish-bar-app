@@ -94,7 +94,6 @@ function BrowseSubject({subject, subjectTitle}) {
 
                 {loading && <p>Loading...</p>}
                 {error && <p>Error...</p>}
-
                 <div className='result-container'>
                     <div className='subject-container'>
                         <h2 className='result-header-title'>{subjectTitle}</h2>
@@ -110,7 +109,6 @@ function BrowseSubject({subject, subjectTitle}) {
                                         bookId={(book.key).replace("/works/", "")}
                                         authorId={(book.authors[0].key).replace("/authors/", "")}
                                         cover={book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}
-                                        // key={`${book.title}-${book.cover_id}`}
                                         title={book.title}
                                         author={book.authors[0].name}
                                         year={`First published in: ${book.first_publish_year}`}
@@ -157,7 +155,6 @@ function BrowseSubject({subject, subjectTitle}) {
                         Next
                     </button>
                 </div>
-
             </div>
             <SubjectNavigation/>
         </section>
