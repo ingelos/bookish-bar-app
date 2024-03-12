@@ -61,7 +61,8 @@ function Home() {
                                 <h3>If you do too...</h3>
                                 <h3><Link
                                     to={'/search-results'}><strong>Search</strong></Link>, <Link
-                                    to={'/browse'}><strong>browse</strong></Link> and log in to save books to your <Link
+                                    to={'/browse'}><strong>browse</strong></Link> and <Link
+                                    to={'/login'}><strong>log in</strong></Link> to save books to your <Link
                                     to={'/my-books'}><strong>personal page</strong></Link>!</h3>
                             </div>
                         </div>

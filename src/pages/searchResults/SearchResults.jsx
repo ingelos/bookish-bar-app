@@ -19,15 +19,24 @@ function SearchResults() {
     const [searchSucces, setSearchSucces] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const controller = new AbortController()
+    const controller = new AbortController();
     const {isAuth} = useContext(AuthContext);
     const [myBooks, setMyBooks] = useState([]);
     const [addedBook, setAddedBook] = useState({});
+    // const [dropdownOpen, setDropdownOpen] = useState(false);
+    // const [selectedStatus, setSelectedStatus] = useState('')
+    // const [bookStatuses, setBookStatuses] = useState({});
 
     useEffect(() => {
         const myBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         setMyBooks(myBooks);
         console.log('myBooks:', myBooks)
+
+        // const statusMap = {};
+        // myBooks.forEach(book => {
+        //     statusMap[book.key] = book.status;
+        // });
+        // setBookStatuses(statusMap);
 
         return function cleanup() {
             controller.abort();
@@ -84,23 +93,26 @@ function SearchResults() {
         }
     }
 
-    function handleAddToMyBooks(book) {
+    function handleAddToMyBooks(book, status) {
         const newBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         const alreadyAdded = newBooks.some((savedBook) => savedBook.key === book.key);
-        console.log(book.key)
 
         if (!alreadyAdded) {
-            newBooks.push(book);
+            const newBook = { ...book, status: status || 'want to read'};
+            newBooks.push(newBook);
             localStorage.setItem('mybooks', JSON.stringify(newBooks));
+
             console.log('book added to mybooks')
 
             setAddedBook((prev) => ({
                 ...prev,
                 [book.key]: true,
             }));
+
         } else {
-            console.log('book already added to mybooks')
+            console.log('book already added to mybooks');
         }
+
     }
 
     return (
@@ -128,7 +140,6 @@ function SearchResults() {
                                         authorId={(book.author_key)}
                                         id={book.key}
                                         title={book.title}
-                                        // author={book.author_name?.join(', ')}
                                         author={book.author_name ? book.author_name[0] : ''}
                                         cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
                                         year={`First published in ${book.first_publish_year}`}
@@ -136,41 +147,43 @@ function SearchResults() {
                                     {isAuth ?
                                         <div>
                                             {!addedBook[book.key] ?
-                                                <Button id='add-rem-button'
+                                                <Button className='my-books-button'
                                                         onClick={() => handleAddToMyBooks(book)}
                                                 >
-                                                    {myBooks.some((savedBook) => savedBook.key === book.key) ?
-                                                        <p className='on-my-books-btn-text'>On MyBooks </p> :
-                                                        <p className='add-to-my-books-btn-text'>Add to MyBooks</p>}
+                                                            {myBooks.some((savedBook) => savedBook.key === book.key) ?
+                                                                <p className='on-my-books-btn-text'>On MyBooks</p> :
+                                                                <p className='add-to-my-btn-text'>Add to MyBooks</p>}
                                                 </Button>
-                                                : <Button id='saved-button'>Saved <img src={CheckIcon}
-                                                                                       className='check-icon'
-                                                                                       alt=''/></Button>
+                                                :
+                                                <Button id='saved-button'>
+                                                    Saved
+                                                    <img src={CheckIcon}
+                                                         className='check-icon'
+                                                         alt=''/>
+                                                </Button>
                                             }
                                         </div>
                                         :
-                                        <div>
-                                            <Button
-                                                id='add-button'
-                                                onClick={() => navigate('/login')}
-                                            >
-                                                Login to add
-                                            </Button>
-                                        </div>
+                                        <Button
+                                            className='add-button'
+                                            onClick={() => navigate('/login')}
+                                        >
+                                            Login to add
+                                        </Button>
                                     }
                                 </div>
-                            ))}
+                                ))}
                         </div>
                     </article>
-                    <div>
-                        <Pagination
-                            page={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={pageChange}
-                        />
-                    </div>
+                            {searchSucces ?
+                                <Pagination
+                                    page={currentPage}
+                                    totalPages={totalPages}
+                                    onPageChange={pageChange}
+                                /> : '' }
+
+                        </div>
                 </div>
-            </div>
         </section>
     )
 }

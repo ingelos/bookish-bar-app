@@ -5,16 +5,18 @@ import BookCard from "../../components/bookCard/BookCard.jsx";
 import {Link} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import Rating from "../../components/rating/Rating.jsx";
+// import TrashIcon from "../../assets/icons/trash.svg";
+// import MyBooksNavigation from "../../components/mybooksNavivation/MyBooksNavigation.jsx";
 
 
 function MyBooks() {
-    const [myBooks, setMyBooks] = useState([])
-
+    const [myBooks, setMyBooks] = useState([]);
+    const [filter, setFilter] = useState('all');
     const {isAuth} = useContext(AuthContext)
 
     useEffect(() => {
-        const myBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
-        setMyBooks(myBooks);
+        const storedBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
+        setMyBooks(storedBooks);
 
     }, []);
 
@@ -24,9 +26,30 @@ function MyBooks() {
         localStorage.setItem('mybooks', JSON.stringify(removedFromMyBooks));
     }
 
+    function editReadStatus(bookKey, newStatus) {
+        const updatedBooks = myBooks.map((book) => {
+            if (book.key === bookKey) {
+                return {
+                    ...book,
+                    status: newStatus,
+                };
+            }
+            return book;
+        });
+        setMyBooks(updatedBooks);
+        localStorage.setItem('mybooks', JSON.stringify(updatedBooks));
+    }
+
+    function filterBooks(books) {
+        if (filter === 'read') {
+            return books.filter(book => book.status === 'read');
+        } else if (filter === 'wantToRead') {
+            return books.filter(book => book.status === 'wantToRead');
+        }
+        return books;
+    }
 
     return (
-
         <section className='my-books outer-container'>
             <div className='my-books inner-container'>
 
@@ -44,12 +67,16 @@ function MyBooks() {
                                         to={'/browse'}><strong>browsing</strong></Link></p>
                                 </div>
                             ) : (
-                                <article className='book-card-container'>
-                                    <div className='result-content-container'>
-                                        <div className='mybooks' >
+                                <div>
+                                    <div className='my-books-navigation'>
+                                        <Button onClick={() => setFilter('all')}>All books</Button>
+                                        <Button onClick={() => setFilter('wantToRead')}>Read</Button>
+                                        <Button onClick={() => setFilter('read')}>Want to read</Button>
+                                    </div>
+                                    <article className='book-card-container'>
 
-                                        {myBooks.map((book) => (
-                                            <div className='books' key={book.key}>
+                                        {filterBooks(myBooks).map((book) => (
+                                            <div key={book.key}>
                                                 <div className='book-container'>
                                                     <BookCard
                                                         cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
@@ -57,37 +84,55 @@ function MyBooks() {
                                                         author={book.author_name ? book.author_name[0] : book.authors[0].name}
                                                         bookId={(book.key).replace("/works/", "")}
                                                     />
-                                                    <div className='rating-and-remove'>
-                                                        <div>
-                                                        <h5 className='your-rating'>Your rating:</h5>
-                                                        <Rating
-                                                            bookKEY={book.key}
-                                                        />
+                                                    <div className='status-and-rating-container'>
+                                                        <div className='book-status'>
+                                                            {book.status === 'read' ?
+                                                                <Button
+                                                                    className='status-button'
+                                                                    onClick={() => editReadStatus(book.key, 'wantToRead')}>
+                                                                    Want to read
+                                                                </Button>
+                                                                :
+                                                                <Button
+                                                                    className='status-button-read'
+                                                                    onClick={() => editReadStatus(book.key, 'read')}>
+                                                                    Read
+                                                                </Button>
+                                                            }
                                                         </div>
-                                                        <Button
-                                                            id='add-rem-button'
-                                                            onClick={() => removeFromMyBooks(book.key)}
-                                                        >
-                                                            Remove
-                                                        </Button>
+                                                        <div className='rating-and-remove'>
+                                                            <div>
+                                                                <h5 className='your-rating'>Your rating:</h5>
+                                                                <Rating
+                                                                    bookKEY={book.key}
+                                                                />
+                                                            </div>
+                                                            <Button
+                                                                className='remove-btn'
+                                                                onClick={() => removeFromMyBooks(book.key)}
+                                                            >
+                                                                Remove
+                                                            </Button>
+
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                </div>
+                                            </div>
                                         ))}
-                                        </div>
-                                        </div>
+
                                     </article>
+                                </div>
                             )}
                         </div>
                     </div>
                     :
-                    <div className='mybooks-link-container'>
-                       <p className='link-to-login'><Link to={'/login'}><strong>Log in</strong></Link> to see your
-                           saved books!</p>
-                        <p>New here? Make an <Link to={'/register'}><strong>account</strong></Link> to save and rate your books!</p>
+                    <div className='my-books-link-container'>
+                        <p className='link-to-login'><Link to={'/login'}><strong>Log in</strong></Link> to see your
+                            saved books!</p>
+                        <p>New here? Make an <Link to={'/register'}><strong>account</strong></Link> to save and rate
+                            your books!</p>
                     </div>
-               }
-
+                }
             </div>
         </section>
     )

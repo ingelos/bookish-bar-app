@@ -1,9 +1,15 @@
 
+/*.book-card-result-container {*/
+/*    border: 2px solid green;*/
+/*}*/
+
 .book-card-list {
     display: flex;
     flex-direction: row;
     list-style: none;
     padding: 10px 0;
+    max-width: 500px;
+    /*border: 2px solid yellow;*/
 }
 
 .book-cover {
@@ -30,11 +36,7 @@
     text-decoration: none;
 }
 
-.book-card-result-container {
-    display: flex;
-    flex-direction: row;
-    max-width: 600px;
-}
+
 
 .book-list-add {
     list-style: none;
