@@ -4,6 +4,7 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 import './Profile.css'
 import {UserContext} from "../../context/UserContext.jsx";
 import Button from "../../components/button/Button.jsx";
+import UserIcon from "../../assets/icons/user-circle.svg";
 
 
 function Profile() {
@@ -25,28 +26,39 @@ function Profile() {
 
                     <div className='profile-inner-content-container'>
                         <h2 className='username-profile'>{user.username}</h2>
-                        {/*<div className='profile-content-container'>*/}
-                            <div className='user-profile-picture'>
-                                {profilePicture &&
-                                    <div className='profile-picture-container'>
-                                        <img src={profilePicture} alt='profile' className='profile-picture'/>
-                                    </div>
-                                }
+                        <div className='user-profile-picture'>
+                            {!profilePicture ?
+                                <div className='profile-picture-container'>
+                                    <img
+                                        src={UserIcon}
+                                        alt='profile'
+                                        className='profile-picture-empty'/>
+                                </div> :
+                                <div className='user-profile-picture'>
+                                    {profilePicture &&
+                                        <div className='profile-picture-container'>
+                                            <img
+                                                src={profilePicture}
+                                                alt='profile'
+                                                className='profile-picture'/>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                            <div className='link-container'>
+                                <p>Go to <Link to={'/my-books'}><strong>MyBooks</strong></Link></p>
                             </div>
-                        {/*</div>*/}
-                        <div className='link-container'>
-                            <p>Go to <Link to={'/my-books'}><strong>MyBooks</strong></Link></p>
+                        </div>
+                        <div className='edit-link-container'>
+                            <Button className='edit-link'><Link to={'/edit-profile'}>Edit profile</Link></Button>
+                            <Button className='edit-link'><Link to={'/edit-picture'}>Edit picture</Link></Button>
                         </div>
                     </div>
-                    <div className='edit-link-container'>
-                        <Button className='edit-link'><Link to={'/edit-profile'}>Edit profile</Link></Button>
-                        <Button className='edit-link'><Link to={'/edit-picture'}>Edit picture</Link></Button>
-                    </div>
-                </div>
 
             </section>
         </>
-    )
+)
 }
 
 export default Profile;

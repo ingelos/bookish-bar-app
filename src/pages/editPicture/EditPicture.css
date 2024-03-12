@@ -1,19 +1,22 @@
 .picture-form {
-    display: block;
+    text-align: center;
 }
 
 .edit-profile-content-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    text-align: center;
     margin: 20px;
     max-width: 300px;
-    text-align: center;
-    /*border: 2px dotted black;*/
 }
 
 .edit-profile-content-container p {
     font-size: 15px;
+}
+
+.user-profile-picture-empty {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .preview-image-container {
@@ -25,6 +28,13 @@
 
 .image-preview {
     height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.upload-button {
+    display: block;
+    margin: 0 auto;
 }
 
 .updated-picture-success-message {
@@ -33,4 +43,9 @@
 
 .updated-picture-success-message p {
     margin: 10px 0;
+}
+
+.no-access-message {
+    margin-top: 80px;
+    font-size: 16px;
 }

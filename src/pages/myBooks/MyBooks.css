@@ -1,23 +1,61 @@
-.mybooks-link-container {
+.my-books-link-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 80px 0;
 }
 
-.mybooks-link-container p{
+.my-books-link-container p{
     font-size: 16px;
     padding: 5px;
+}
+
+.book-container {
+    /*border: 2px solid blue;*/
+}
+
+.status-button {
+    background-color: var(--color-tertiary);
+    width: 125px;
+}
+
+.status-button-read {
+    background-color: var(--color-primary);
+    width: 125px;
+}
+
+.status-and-rating-container {
+    display: flex;
+    flex-direction: row;
+    /*border: 2px solid purple;*/
 }
 
 .rating-and-remove {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /*border: 2px solid green;*/
 }
 
 .your-rating {
-    margin-top: 15px;
+    margin-top: 5px;
     font-weight: 100;
 }
 
+.empty-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.empty-container p {
+    font-size: 16px;
+}
+
+.book-status {
+    padding-right: 30px;
+}
+
+.my-books-navigation Button {
+    margin-right: 20px;
+}

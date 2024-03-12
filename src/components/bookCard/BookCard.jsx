@@ -5,22 +5,20 @@ import NoCoverImage from "../../assets/icons/No_Cover.jpg"
 
 function BookCard({cover, bookId, title, id, author, year, authorId}) {
 
-    const noCoverImage = NoCoverImage;
-
     function onImageError(e) {
         e.target.src = NoCoverImage
     }
 
     return (
         <div className='book-card'>
-            <div className='book-card-result-container'>
+            {/*<div className='book-card-result-container'>*/}
                 <div
                     className='book-card-list'
-                    key={id}
+                    // key={id}
                 >
                     <Link to={`/browse/${bookId}`}>
                     <img
-                        src={cover ? cover : noCoverImage}
+                        src={cover ? cover : NoCoverImage}
                         alt=''
                         onError={onImageError}
                         className='book-cover'
@@ -38,7 +36,7 @@ function BookCard({cover, bookId, title, id, author, year, authorId}) {
                         <p className='book-published'>{year}</p>
                     </div>
                 </div>
-            </div>
+            {/*</div>*/}
         </div>
     )
 }

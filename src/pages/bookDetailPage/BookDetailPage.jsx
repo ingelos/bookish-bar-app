@@ -25,7 +25,6 @@ function BookDetailPage() {
                     signal: controller.signal,
                 })
                 console.log(data);
-                // setBook(data);
 
                 const authorKey = data.authors ? data.authors[0].author.key.replace('/authors/', '') : '';
                 if (authorKey) {
@@ -99,6 +98,7 @@ function BookDetailPage() {
                                 authorName={book.authorName}
                                 description={book.description?.value || book.description || ''}
                                 excerpts={book.excerpts ? `First line: ${book.excerpts[0].excerpt}` : ''}
+                                firstPublished={book.first_publish_date ? `First published in: ${book.first_publish_date}` : ''}
                                 links={book.links ? `${book.links[0].title}: ${book.links[0].url}` : ''}
                             />
                         }

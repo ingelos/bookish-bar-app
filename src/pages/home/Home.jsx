@@ -1,7 +1,7 @@
 import './Home.css'
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 function Home() {
@@ -9,7 +9,6 @@ function Home() {
     const [books, setBooks] = useState([]);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-    const {bookId} = useParams();
 
     useEffect(() => {
         const controller = new AbortController();
@@ -52,7 +51,6 @@ function Home() {
 
     return (
         <>
-
             <section className='home-section outer-container'>
                 <div className='home-section inner-container'>
                     <div className='home-section inner-content-container'>
@@ -61,39 +59,38 @@ function Home() {
                             <div className='intro-message'>
                                 <h3>We like big books and we cannot lie...</h3>
                                 <h3>If you do too...</h3>
-                                    <h3> <Link
-                                        to={'/search-results'}><strong>Search</strong></Link>, <Link
-                                        to={'/browse'}><strong>browse</strong></Link> and save books to your <Link
-                                        to={'/my-books'}><strong>personal page</strong></Link>!</h3>
-
+                                <h3><Link
+                                    to={'/search-results'}><strong>Search</strong></Link>, <Link
+                                    to={'/browse'}><strong>browse</strong></Link> and <Link
+                                    to={'/login'}><strong>log in</strong></Link> to save books to your <Link
+                                    to={'/my-books'}><strong>personal page</strong></Link>!</h3>
                             </div>
                         </div>
-                        <div>
-                            {loading ? <p>Loading...</p> : (
-                                <div>
-                                    <div className='title-container'>
-                                        <h2 className='list-title'>Trending today</h2>
-                                    </div>
-                                    <div className='trending-container'>
-                                        {books.length > 0 && (
-                                            <>
-                                                <div className='trending-list'>
-                                                    {books?.map((book) => (
-                                                        <li key={book.key} className='cover-home'>
-                                                            <img
-                                                                src={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
-                                                                alt='' className='cover-img-home'/>
-                                                        </li>
-                                                    ))}
-                                                </div>
-                                                <Link to='/trending'><h3 className='more-link'>More Trending...</h3>
-                                                </Link>
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
-                            )}
+                    {error && <p>Error...</p>}
+                    {loading ? <p>Loading...</p> : (
+                        <div className='trending-inner-container'>
+                            <div className='preview-title-container'>
+                                <h2 className='list-title'>Trending today</h2>
+                            </div>
+                            <div className='preview-trending-container'>
+                                {books.length > 0 && (
+                                    <>
+                                        <div className='preview-list'>
+                                            {books?.map((book) => (
+                                                <li key={book.key} className='cover-home'>
+                                                    <img
+                                                        src={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+                                                        alt='' className='cover-img-home'/>
+                                                </li>
+                                            ))}
+                                        </div>
+                                        <Link to='/trending'><h3 className='more-link'>More Trending...</h3>
+                                        </Link>
+                                    </>
+                                )}
+                            </div>
                         </div>
+                    )}
                     </div>
                 </div>
             </section>

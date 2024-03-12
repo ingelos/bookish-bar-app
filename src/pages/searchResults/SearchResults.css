@@ -34,7 +34,7 @@
 /*    justify-content: space-between;*/
 /*}*/
 
-#add-rem-button {
+.my-books-button {
     border: 2px solid var(--color-primary);
     background-color: transparent;
 }
@@ -58,3 +58,11 @@
 .check-icon {
     height: 14px;
 }
+
+select {
+    border: none ;
+}
+
+/*.on-my-books-btn-text {*/
+/*    background-color: var(--color-primary);*/
+/*}*/

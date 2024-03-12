@@ -64,7 +64,7 @@ function AuthorPage() {
                                 bio={JSON.stringify(author.bio)}
                                 birth_date={author.birth_date}
                                 death_date={author.death_date}
-                                photo={author.photos[0] ? `https://covers.openlibrary.org/b/id/${author.photos[0]}-L.jpg` : ''}
+                                photo={author.photos && author.photos.length > 0 ? `https://covers.openlibrary.org/b/id/${author.photos[0]}-L.jpg` : ''}
                                 links={author.links ? author.links[0].url : ''}
                             />
                         }

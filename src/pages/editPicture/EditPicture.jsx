@@ -5,6 +5,8 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 import {UserContext} from '../../context/UserContext';
 import {Link} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
+import UserIcon from "../../assets/icons/user-circle.svg";
+
 
 function EditPicture() {
     const [file, setFile] = useState(null);
@@ -13,6 +15,7 @@ function EditPicture() {
     const {setProfilePicture} = useContext(UserContext);
     const [updatedPictureSuccess, setUpdatedPictureSuccess] = useState(null);
     const {profilePicture} = useContext(UserContext);
+    const {isAuth} = useContext(AuthContext);
 
     useEffect(() => {
         let imageUrl;
@@ -21,12 +24,20 @@ function EditPicture() {
             setPreview(imageUrl);
         }
 
-        // localStorage.getItem('profilePicture');
+        const storedProfilePicture = localStorage.getItem('profilePicture');
+        if (storedProfilePicture) {
+            setProfilePicture(storedProfilePicture);
+        }
+
+        console.log(profilePicture);
 
         return function cleanup() {
+            if (imageUrl) {
             URL.revokeObjectURL(imageUrl);
+            }
         }
     }, [file]);
+
 
     function handleImageChange(e) {
         setFile(e.target.files[0]);
@@ -37,6 +48,7 @@ function EditPicture() {
         reader.onload = () => {
             console.log("conversion to base64 result:", reader);
             setBase64(reader.result);
+            setPreview(reader.result);
         }
     }
 
@@ -56,10 +68,12 @@ function EditPicture() {
                 }
             );
             const imageUrl = response.data.base64Image;
+
             setProfilePicture(imageUrl);
+            localStorage.setItem('profilePicture', imageUrl);
+
             setUpdatedPictureSuccess(true);
 
-            localStorage.setItem('profilePicture', imageUrl);
         } catch (e) {
             console.error(e);
         }
@@ -69,6 +83,7 @@ function EditPicture() {
         <>
             <section className='edit-profile-page outer-container'>
                 <div className='edit-profile-page inner-container'>
+                    {isAuth ?
                     <div className='edit-profile-content-container'>
                         <h2>Add/ change profile picture</h2>
 
@@ -77,24 +92,56 @@ function EditPicture() {
                                 <form onSubmit={sendImage} className='picture-form'>
                                     <label htmlFor='user-image'>
                                         Choose picture:
-                                        <input type='file' name='image-file' id='file-field'
-                                               onChange={handleImageChange}/>
+                                        <input
+                                            type='file'
+                                            name='image-file'
+                                            id='file-field'
+                                            onChange={handleImageChange}
+                                        />
+
+                                        {profilePicture && !preview &&
+                                            <div className='preview-image-container'>
+                                                <h3>Current profile picture:</h3>
+                                                <div className='profile-picture-container'>
+                                                    <img
+                                                        alt='profile-picture-img'
+                                                        src={profilePicture}
+                                                        className='image-preview'/>
+                                                </div>
+                                            </div>
+                                        }
+
                                         {preview &&
-                                            <article className='preview-image-container'>
+                                            <div className='preview-image-container'>
                                                 <h3>Preview:</h3>
                                                 <div className='profile-picture-container'>
-                                                    <img alt={file.name} src={preview} className='image-preview'/>
+                                                    <img
+                                                        alt={file.name}
+                                                        src={preview}
+                                                        className='image-preview'
+                                                    />
                                                 </div>
-                                            </article>
+                                            </div>
                                         }
+
+                                        {(!profilePicture && !preview) &&
+                                            <div className='user-profile-picture-empty'>
+                                                <div className='profile-picture-container'>
+                                                    <img
+                                                        alt='user-icon'
+                                                        src={UserIcon}
+                                                        className='profile-picture-empty'
+                                                    />
+                                                </div>
+                                            </div>
+                                        }
+                                        <Button disabled={!preview} className='upload-button'>Upload</Button>
                                     </label>
-                                    {!preview ? <Button disabled={true}>Upload</Button> :
-                                    <Button type='submit'>Upload</Button>
-                                    }
                                 </form>
+
                                 <p>Back to my <Link to={'/profile'}><strong>Profile</strong></Link></p>
                             </div>
-                            :
+                             :
                             <div className='updated-picture-success-message'>
                                 <p>You've successfully added/updated your profile picture!</p>
                                 <p>See it in your <Link to={'/profile'}><strong>Profile</strong></Link></p>
@@ -102,6 +149,9 @@ function EditPicture() {
                         }
 
                     </div>
+                        :
+                        <p className='no-access-message'>Oops! You need to <Link to={'/login'}><strong>log in</strong></Link> to access this page!</p>
+                    }
                 </div>
             </section>
         </>

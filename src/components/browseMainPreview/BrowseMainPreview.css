@@ -1,0 +1,28 @@
+/*.title-container, .trending-container {*/
+/*    width: 100%;*/
+/*    border-bottom: 2px solid var(--color-primary);*/
+/*}*/
+
+/*.browse-section inner-container {*/
+/*    padding: 30px;*/
+/*}*/
+
+/*.preview-list {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    flex-basis: 800px;*/
+/*    justify-content: space-between;*/
+/*    gap: 30px;*/
+/*    list-style: none;*/
+/*    margin-top: 30px;*/
+/*}*/
+
+/*.preview-container {*/
+/*    width: 100%;*/
+/*}*/
+
+
+.cover-img-browse {
+    width: 100%;
+    height: 180px;
+}

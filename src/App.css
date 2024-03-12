@@ -10,9 +10,14 @@
     display: flex;
     flex-basis: 800px;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 40px;
     margin: 10px 0 20px;
     /*border: 2px dotted blue;*/
+}
+
+.result-container {
+    max-width: 800px;
+    /*border: 2px solid peru;*/
 }
 
 .header-container {
