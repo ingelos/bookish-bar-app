@@ -11,7 +11,6 @@ function SubjectNavigation() {
                     subject='Romance'
                     subjectNav={'/browse/romance'}
                 />
-
                 <SubjectNavigationLink
                     subject='Science Fiction'
                     subjectNav={'/browse/science_fiction'}

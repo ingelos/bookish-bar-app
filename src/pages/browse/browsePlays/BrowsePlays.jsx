@@ -5,7 +5,6 @@ function BrowsePlays() {
     return (
         <>
             <BrowseSubject
-                endpoint={`https://openlibrary.org/subjects/plays.json`}
                 subject={'plays'}
                 subjectTitle='Plays'
             />

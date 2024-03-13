@@ -29,7 +29,7 @@ function EditPicture() {
             setProfilePicture(storedProfilePicture);
         }
 
-        console.log(profilePicture);
+        // console.log('profilePicture:', profilePicture);
 
         return function cleanup() {
             if (imageUrl) {
@@ -85,7 +85,7 @@ function EditPicture() {
                 <div className='edit-profile-page inner-container'>
                     {isAuth ?
                     <div className='edit-profile-content-container'>
-                        <h2>Add/ change profile picture</h2>
+                        <h2>Change profile picture</h2>
 
                         {!updatedPictureSuccess ?
                             <div>
@@ -101,7 +101,7 @@ function EditPicture() {
 
                                         {profilePicture && !preview &&
                                             <div className='preview-image-container'>
-                                                <h3>Current profile picture:</h3>
+                                                <h3>Current picture:</h3>
                                                 <div className='profile-picture-container'>
                                                     <img
                                                         alt='profile-picture-img'
@@ -147,7 +147,6 @@ function EditPicture() {
                                 <p>See it in your <Link to={'/profile'}><strong>Profile</strong></Link></p>
                             </div>
                         }
-
                     </div>
                         :
                         <p className='no-access-message'>Oops! You need to <Link to={'/login'}><strong>log in</strong></Link> to access this page!</p>

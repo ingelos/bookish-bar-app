@@ -33,10 +33,15 @@ function Register() {
             console.log(`You've created an account!`);
             setSubmitSucces(true);
 
-        } catch (e) {
-            console.error(e.response);
-            setError(true);
-            console.log('something went wrong')
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                const errorMessage = error.response.data.message || 'Username already in use';
+                console.error('Authentication failed:', errorMessage);
+                setError(true);
+            } else {
+                console.error('Error:', error.message);
+                setError(true);
+            }
         }
     }
 
@@ -50,6 +55,7 @@ function Register() {
                         {!submitSuccess ?
 
                             <form className='register-form' onSubmit={handleSubmit(handleFormSubmit)}>
+                                {error && <p className='error-message-register'>Authentication failed: This username is already in use</p>}
                                 <h2 className='register-title'>Create account</h2>
                                 <p className='register-subtitle'>Fill in your email and choose your username and
                                     password</p>
@@ -105,7 +111,6 @@ function Register() {
                                 >
                                     Create account
                                 </Button>
-                                {error && <p className='error-message'>Something went wrong, try again.</p>}
 
                             </form>
                             : <>

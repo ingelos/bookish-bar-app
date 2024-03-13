@@ -30,9 +30,9 @@ function BrowseSubject({subject, subjectTitle}) {
 
         async function fetchSubject() {
             setError(false);
-
+            setLoading(true);
             try {
-                setLoading(true);
+
                 const {data} = await axios.get(`https://openlibrary.org/subjects/${subject}.json`, {
                     signal: controller.signal,
                     params: {
@@ -67,13 +67,14 @@ function BrowseSubject({subject, subjectTitle}) {
     const totalPages = Math.ceil(works / pageSize);
 
 
-    function handleAddToMyBooks(book) {
+    function handleAddToMyBooks(book, status) {
         const newBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         const alreadyAdded = newBooks.some((savedBook) => savedBook.key === book.key);
         console.log(book.key)
 
         if (!alreadyAdded) {
-            newBooks.push(book);
+            const newBook = { ...book, status: status || 'read'};
+            newBooks.push(newBook);
             localStorage.setItem('mybooks', JSON.stringify(newBooks));
             console.log('book added to mybooks')
 
@@ -116,16 +117,19 @@ function BrowseSubject({subject, subjectTitle}) {
                                     {isAuth ?
                                         <div>
                                             {!addedBook[book.key] ?
-                                                <Button id='add-rem-button'
+                                                <Button className='my-books-button'
                                                         onClick={() => handleAddToMyBooks(book)}
                                                 >
                                                     {myBooks.some((savedBook) => savedBook.key === book.key) ?
                                                         <p className='on-my-books-btn-text'>On MyBooks </p> :
                                                         <p className='add-to-my-books-btn-text'>Add to MyBooks</p>}
                                                 </Button>
-                                                : <Button id='saved-button'>Saved <img src={CheckIcon}
-                                                                                       className='check-icon'
-                                                                                       alt=''/></Button>
+                                                : <Button id='saved-button'>
+                                                    Saved
+                                                    <img src={CheckIcon}
+                                                         className='check-icon'
+                                                         alt=''/>
+                                                </Button>
                                             }
                                         </div>
                                         :
