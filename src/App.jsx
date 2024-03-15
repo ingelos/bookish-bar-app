@@ -5,7 +5,6 @@ import Home from './pages/home/Home.jsx'
 import Register from './pages/register/Register.jsx'
 import Login from './pages/login/Login.jsx'
 import Profile from './pages/profile/Profile.jsx'
-import EditProfile from './pages/editProfile/EditProfile.jsx'
 import AccountSettings from './pages/accountSettings/AccountSettings.jsx'
 import MyBooks from './pages/myBooks/MyBooks.jsx'
 import BrowseMainPage from './pages/browse/BrowseMainPage.jsx'
@@ -52,9 +51,8 @@ function App() {
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/profile' element={<Profile/>}/>
-                <Route path='/edit-profile' element={<EditProfile/>}/>
-                <Route path='/edit-picture' element={<EditPicture/>}/>
                 <Route path='/account-settings' element={<AccountSettings/>}/>
+                <Route path='/edit-picture' element={<EditPicture/>}/>
                 <Route path='/my-books' element={<MyBooks/>}/>
                 <Route path='/search-results' element={<SearchResults/>}/>
                 <Route path='/browse/:bookId' element={<BookDetailPage/>}/>

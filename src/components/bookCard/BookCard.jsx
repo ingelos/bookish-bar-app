@@ -3,7 +3,7 @@ import './BookCard.css'
 import NoCoverImage from "../../assets/icons/No_Cover.jpg"
 
 
-function BookCard({cover, bookId, title, id, author, year, authorId}) {
+function BookCard({cover, bookId, title, author, year, authorId}) {
 
     function onImageError(e) {
         e.target.src = NoCoverImage
@@ -11,10 +11,8 @@ function BookCard({cover, bookId, title, id, author, year, authorId}) {
 
     return (
         <div className='book-card'>
-            {/*<div className='book-card-result-container'>*/}
                 <div
                     className='book-card-list'
-                    // key={id}
                 >
                     <Link to={`/browse/${bookId}`}>
                     <img
@@ -33,10 +31,9 @@ function BookCard({cover, bookId, title, id, author, year, authorId}) {
                             <Link to={`/${authorId}`}>
                                 {author}
                             </Link></h4>
-                        <p className='book-published'>{year}</p>
+                        <p className='book-published'>{year ? year : ''}</p>
                     </div>
                 </div>
-            {/*</div>*/}
         </div>
     )
 }

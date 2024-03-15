@@ -29,11 +29,9 @@ function EditPicture() {
             setProfilePicture(storedProfilePicture);
         }
 
-        // console.log('profilePicture:', profilePicture);
-
         return function cleanup() {
             if (imageUrl) {
-            URL.revokeObjectURL(imageUrl);
+                URL.revokeObjectURL(imageUrl);
             }
         }
     }, [file]);
@@ -68,10 +66,7 @@ function EditPicture() {
                 }
             );
             const imageUrl = response.data.base64Image;
-
             setProfilePicture(imageUrl);
-            localStorage.setItem('profilePicture', imageUrl);
-
             setUpdatedPictureSuccess(true);
 
         } catch (e) {
@@ -79,81 +74,82 @@ function EditPicture() {
         }
     }
 
+    function handleDeleteProfilePicture() {
+        setProfilePicture('');
+        localStorage.removeItem('profilePicture');
+    }
+
     return (
-        <>
             <section className='edit-profile-page outer-container'>
                 <div className='edit-profile-page inner-container'>
                     {isAuth ?
-                    <div className='edit-profile-content-container'>
-                        <h2>Change profile picture</h2>
+                        <div className='edit-profile-content-container'>
+                            <h2>Change profile picture</h2>
 
-                        {!updatedPictureSuccess ?
-                            <div>
-                                <form onSubmit={sendImage} className='picture-form'>
-                                    <label htmlFor='user-image'>
-                                        Choose picture:
-                                        <input
-                                            type='file'
-                                            name='image-file'
-                                            id='file-field'
-                                            onChange={handleImageChange}
-                                        />
-
-                                        {profilePicture && !preview &&
-                                            <div className='preview-image-container'>
-                                                <h3>Current picture:</h3>
-                                                <div className='profile-picture-container'>
-                                                    <img
-                                                        alt='profile-picture-img'
-                                                        src={profilePicture}
-                                                        className='image-preview'/>
+                            {!updatedPictureSuccess ?
+                                <div>
+                                    <form onSubmit={sendImage} className='picture-form'>
+                                        <label htmlFor='user-image'>
+                                            Choose picture:
+                                            <input
+                                                type='file'
+                                                name='image-file'
+                                                id='file-field'
+                                                onChange={handleImageChange}
+                                            />
+                                            {profilePicture && !preview &&
+                                                <div className='preview-image-container'>
+                                                    <h3>Current picture:</h3>
+                                                    <div className='profile-picture-container'>
+                                                        <img
+                                                            alt='profile-picture-img'
+                                                            src={profilePicture}
+                                                            className='image-preview'/>
+                                                    </div>
+                                                    <Button onClick={handleDeleteProfilePicture}>Delete</Button>
                                                 </div>
-                                            </div>
-                                        }
-
-                                        {preview &&
-                                            <div className='preview-image-container'>
-                                                <h3>Preview:</h3>
-                                                <div className='profile-picture-container'>
-                                                    <img
-                                                        alt={file.name}
-                                                        src={preview}
-                                                        className='image-preview'
-                                                    />
+                                            }
+                                            {preview &&
+                                                <div className='preview-image-container'>
+                                                    <h3>Preview:</h3>
+                                                    <div className='profile-picture-container'>
+                                                        <img
+                                                            alt={file.name}
+                                                            src={preview}
+                                                            className='image-preview'
+                                                        />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        }
-
-                                        {(!profilePicture && !preview) &&
-                                            <div className='user-profile-picture-empty'>
-                                                <div className='profile-picture-container'>
-                                                    <img
-                                                        alt='user-icon'
-                                                        src={UserIcon}
-                                                        className='profile-picture-empty'
-                                                    />
+                                            }
+                                            {(!profilePicture && !preview) &&
+                                                <div className='user-profile-picture-empty'>
+                                                    <div className='profile-picture-container'>
+                                                        <img
+                                                            alt='user-icon'
+                                                            src={UserIcon}
+                                                            className='profile-picture-empty'
+                                                        />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        }
-                                        <Button disabled={!preview} className='upload-button'>Upload</Button>
-                                    </label>
-                                </form>
-
-                                <p>Back to my <Link to={'/profile'}><strong>Profile</strong></Link></p>
-                            </div>
-                             :
-                            <div className='updated-picture-success-message'>
-                                <p>You've successfully added/updated your profile picture!</p>
-                                <p>See it in your <Link to={'/profile'}><strong>Profile</strong></Link></p>
-                            </div>
-                        }
-                    </div>
+                                            }
+                                            <Button disabled={!preview} className='upload-button'>Upload</Button>
+                                        </label>
+                                    </form>
+                                    <p>Back to my <Link to={'/profile'}><strong>Profile</strong></Link></p>
+                                </div>
+                                :
+                                <div className='updated-picture-success-message'>
+                                    <p>You've successfully added/updated your profile picture!</p>
+                                    <p>See it in your <Link to={'/profile'}><strong>Profile</strong></Link></p>
+                                </div>
+                            }
+                        </div>
                         :
-                        <p className='no-access-message'>Oops! You need to <Link to={'/login'}><strong>log in</strong></Link> to access this page!</p>
+                        <p className='no-access-message'>Oops! You need to <Link to={'/login'}><strong>log
+                            in</strong></Link> to access this page!</p>
                     }
                 </div>
             </section>
-        </>
     )
 }
 

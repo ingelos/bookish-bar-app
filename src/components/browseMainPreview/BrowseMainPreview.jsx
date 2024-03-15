@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {Link, useParams} from "react-router-dom";
 import NoCoverImage from "../../assets/icons/No_Cover.jpg";
+import './BrowseMainPreview.css'
 
 function BrowseMainPreview({subject, subjectTitle}) {
 
@@ -53,24 +54,23 @@ function BrowseMainPreview({subject, subjectTitle}) {
 
     return (
         <>
+
             {error && <p>error</p>}
             {loading ? <p>Loading...</p> : (
                 <div className='browse-preview-inner-container'>
                     <div className='preview-title-container'>
                         <h2 className='list-title'>{subjectTitle}</h2>
                     </div>
-                    <div className='preview-container'>
+                    <div className='browse-preview-container'>
                         {books.length > 0 && (
                             <>
-                                <div className='preview-list'>
+                                <div className='browse-preview-list'>
                                     {books?.map((book) => (
-                                        <li key={book.key} className='cover-home'>
+                                        <li key={book.key} className='cover-browse'>
                                             <img
-                                                // src={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
                                                 src={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : noCoverImage}
-                                                // src={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` || book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : noCoverImage}
-
-                                                alt='' className='cover-img-home'/>
+                                                alt=''
+                                                className='cover-img-browse'/>
                                         </li>
                                     ))}
                                 </div>

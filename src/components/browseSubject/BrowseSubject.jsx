@@ -19,6 +19,7 @@ function BrowseSubject({subject, subjectTitle}) {
     const {isAuth} = useContext(AuthContext);
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 20;
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -110,8 +111,8 @@ function BrowseSubject({subject, subjectTitle}) {
                                         bookId={(book.key).replace("/works/", "")}
                                         authorId={(book.authors[0].key).replace("/authors/", "")}
                                         cover={book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}
-                                        title={book.title}
-                                        author={book.authors[0].name}
+                                        title={book.title ? book.title : ''}
+                                        author={book.authors ? book.authors[0].name : ''}
                                         year={`First published in: ${book.first_publish_year}`}
                                     />
                                     {isAuth ?

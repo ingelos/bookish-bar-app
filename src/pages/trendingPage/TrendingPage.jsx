@@ -1,10 +1,8 @@
-import BrowseSubject from "../../components/browseSubject/BrowseSubject.jsx";
 
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import BookCard from "/src/components/bookCard/BookCard.jsx";
-import Pagination from "../../components/pagination/Pagination.jsx";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import CheckIcon from "../../assets/icons/check.svg";
 import {AuthContext} from "../../context/AuthContext.jsx";
@@ -17,12 +15,12 @@ function Trending() {
     const [loading, setLoading] = useState(false);
     const [myBooks, setMyBooks] = useState([]);
     const [addedBook, setAddedBook] = useState({});
-    const {isAuth} = useContext(AuthContext)
-    const [currentPage, setCurrentPage] = useState(1);
+    const {isAuth} = useContext(AuthContext);
     const pageSize = 20;
     const navigate = useNavigate();
 
     useEffect(() => {
+
         const controller = new AbortController();
 
         const myBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
@@ -31,17 +29,16 @@ function Trending() {
 
         async function fetchTrending() {
             setError(false);
+            setLoading(true);
 
             try {
-                setLoading(true);
                 const {data} = await axios.get(`https://openlibrary.org/trending/daily.json`, {
                     signal: controller.signal,
                     params:  {
-                        offset: (currentPage - 1) * pageSize,
+                        offset: 0,
                         limit: pageSize
                     },
                 });
-
                 console.log(data);
                 console.log(data.works);
                 setBooks(data.works);
@@ -63,20 +60,19 @@ function Trending() {
 
         return function cleanup() {
             controller.abort();
-            localStorage.clear();
         }
-    }, [currentPage]);
+    }, []);
 
 
-    function handleAddToMyBooks(book) {
+    function handleAddToMyBooks(book, status) {
         const newBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         const alreadyAdded = newBooks.some((savedBook) => savedBook.key === book.key);
-        console.log(book.key)
 
         if (!alreadyAdded) {
-            newBooks.push(book);
+            const newBook = { ...book, status: status || 'read'};
+            newBooks.push(newBook);
             localStorage.setItem('mybooks', JSON.stringify(newBooks));
-            console.log('book added to mybooks')
+            console.log('book added to mybooks', newBook)
 
             setAddedBook((prev) => ({
                 ...prev,
@@ -92,31 +88,39 @@ function Trending() {
         <section className='romance-section outer-container'>
             <div className='romance-section inner-container'>
                 {loading && <p>Loading...</p>}
+                {error && <p>Something went wrong... try again</p>}
                 <div className='result-container'>
                     <div className='subject-container'>
                         <h2 className='result-header-title'>Trending today</h2>
                     </div>
                     <article className='book-card-container'>
                         <div className='result-content-container'>
-                            {books?.map((book) => (
+                            {books.map((book) => (
                                 <div className='book-container' key={book.key}>
                                 <BookCard
                                     bookId={(book.key).replace("/works/", "")}
+                                    authorId={book.author_key ? book.author_key[0] : ''}
                                     cover={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : ''}
-                                    key={`${book.title}-${book.cover_edition_key}`}
-                                    title={book.title}
-                                    author={book.author_name}
-                                    year={`First published in: ${book.first_publish_year}`}
+                                    title={book.title ? book.title : ''}
+                                    author={book.author_name ? book.author_name[0] : ''}
+                                    year={book.first_publish_year ? `First published in: ${book.first_publish_year}` : ''}
                                 />
                                     {isAuth ?
                                     <div>
                                         {!addedBook[book.key] ?
-                                            <Button id='add-rem-button'
+                                            <Button className='my-books-button'
                                                     onClick={() => handleAddToMyBooks(book)}
                                             >
-                                                {myBooks.some((savedBook) => savedBook.key === book.key) ? <p className='on-my-books-btn-text'>On MyBooks </p> : <p className='add-to-my-books-btn-text'>Add to MyBooks</p>}
+                                                {myBooks.some((savedBook) => savedBook.key === book.key) ?
+                                                    <p className='on-my-books-btn-text'>On MyBooks </p> :
+                                                    <p className='add-to-my-books-btn-text'>Add to MyBooks</p>}
                                             </Button>
-                                            : <Button id='saved-button'>Saved <img src={CheckIcon} className='check-icon' alt=''/></Button>
+                                            : <Button id='saved-button'>
+                                                Saved
+                                                <img src={CheckIcon}
+                                                     className='check-icon'
+                                                     alt=''/>
+                                            </Button>
                                         }
                                     </div>
                                     :
@@ -133,7 +137,6 @@ function Trending() {
                             ))}
                         </div>
                     </article>
-                    {books.length === 0 && error && <p>Something went wrong fetching your book data...</p>}
                 </div>
             </div>
         </section>

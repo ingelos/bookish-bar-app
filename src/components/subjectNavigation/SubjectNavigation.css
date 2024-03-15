@@ -5,7 +5,7 @@
 
 .subject-nav-container {
     background-color: var(--color-tertiary);
-    margin: 114px 0 115px 40px;
+    margin: 114px 20px 115px;
     padding: 20px;
     border: 2px solid var(--color-primary);
     border-radius: 3px;
@@ -25,3 +25,10 @@
 .default-subject-link {
     text-decoration: none;
 }
+
+@media screen and (max-width: 768px) {
+    .subject-nav-container {
+        margin: 114px 0 115px;
+    }
+}
+

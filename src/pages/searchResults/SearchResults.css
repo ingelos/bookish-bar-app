@@ -28,7 +28,7 @@
 
 #saved-button {
     border: 2px solid var(--color-primary);
-    background-color: #e8dbbf;
+    background-color: var(--color-tertiary);
     width: 140px;
 }
 

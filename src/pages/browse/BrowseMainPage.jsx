@@ -51,9 +51,8 @@ function BrowseMainPage() {
 
     return (
         <section className='browse-section outer-container'>
-            <div className='browse-section-inner-container'>
+            <div className='browse-section inner-container'>
                 <div className='browse-section-inner-content-container'>
-
                     <div className='preview-container'>
 
                         <BrowseMainPreview
@@ -69,7 +68,7 @@ function BrowseMainPage() {
                             subjectTitle='Film'
                         />
                         <div className='buttons-container'>
-                            <h3>More subjects:</h3>
+                            <h3 className='buttons-container-title'>More subjects:</h3>
                             <div className='preview-link-buttons-container'>
                                 <BrowseSubjectButton
                                     icon={DetectiveIcon}

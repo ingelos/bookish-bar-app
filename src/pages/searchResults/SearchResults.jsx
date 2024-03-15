@@ -101,7 +101,6 @@ function SearchResults() {
             const newBook = { ...book, status: status || 'read'};
             newBooks.push(newBook);
             localStorage.setItem('mybooks', JSON.stringify(newBooks));
-
             console.log('book added to mybooks')
 
             setAddedBook((prev) => ({
@@ -140,8 +139,8 @@ function SearchResults() {
                                     <BookCard
                                         bookId={(book.key).replace("/works/", "")}
                                         authorId={(book.author_key)}
-                                        id={book.key}
-                                        title={book.title}
+                                        // id={book.key}
+                                        title={book.title ? book.title : ''}
                                         author={book.author_name ? book.author_name[0] : ''}
                                         cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
                                         year={`First published in ${book.first_publish_year}`}

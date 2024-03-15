@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import './MyBooks.css'
 import BookCard from "../../components/bookCard/BookCard.jsx";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import Rating from "../../components/rating/Rating.jsx";
 import TrashIcon from "../../assets/icons/trash.svg";
@@ -16,7 +16,7 @@ function MyBooks() {
     useEffect(() => {
         const storedBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         setMyBooks(storedBooks);
-
+        console.log(storedBooks);
 
     }, []);
 
@@ -103,6 +103,7 @@ function MyBooks() {
                                                         title={book.title}
                                                         author={book.author_name ? book.author_name[0] : book.authors[0].name}
                                                         bookId={(book.key).replace("/works/", "")}
+                                                        authorId={book.author_key ? (Array.isArray(book.author_key) ? book.author_key[0] : book.author_key) : (book.authors ? (Array.isArray(book.authors) ? book.authors[0].key.replace("/authors/", "") : book.authors.key) : '')}
                                                     />
                                                     <div className='status-and-rating-container'>
                                                         <div className='book-status'>
@@ -122,7 +123,6 @@ function MyBooks() {
                                                         </div>
                                                         <div className='rating-and-remove'>
                                                             <div className='rating-container'>
-                                                                {/*<h5 className='your-rating'>Your rating:</h5>*/}
                                                                 <Rating
                                                                     bookKEY={book.key}
                                                                 />

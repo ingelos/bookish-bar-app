@@ -15,20 +15,18 @@
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 1px solid var(--color-primary);
-    /*font-weight: 600;*/
+    font-weight: 600;
     padding: 5px 0;
 }
 
 .overview-one {
     display: flex;
     flex-direction: row;
-    /*border: 2px solid red;*/
 }
 
 .overview-two {
     display: flex;
     flex-direction: row;
-    /*border: 2px solid pink;*/
 }
 
 .overview-one p {
@@ -36,7 +34,7 @@
 }
 
 .overview-two p {
-    margin-left: 110px;
+    margin-left: 100px;
 }
 
 .overview-two div {
@@ -47,14 +45,7 @@
 
 #click-to-change {
     font-size: 10px;
-}
-
-.book-card-container {
-    /*border: 2px solid pink;*/
-}
-
-.book-container {
-    /*border: 2px solid blue;*/
+    font-weight: 300;
 }
 
 .my-books-navigation Button {
@@ -83,11 +74,6 @@
     align-items: flex-end;
 }
 
-/*.your-rating {*/
-/*    margin-top: 5px;*/
-/*    font-weight: 100;*/
-/*}*/
-
 .rating-container {
     margin-top: 10px;
 }
@@ -103,7 +89,7 @@
 }
 
 .book-status {
-    padding-right: 30px;
+    padding-right: 20px;
 }
 
 .remove-btn {
@@ -124,12 +110,26 @@
 
 .activeButton {
     background-color: var(--color-tertiary);
-    /*font-weight: 600;*/
     border: 2px solid var(--color-primary)
 }
 
 .inactiveButton {
-    /*font-weight: 600;*/
     background-color: white;
     border: 2px solid var(--color-primary);
+}
+
+@media screen and (max-width: 768px) {
+    .book-status {
+        padding-left: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .result-container {
+        margin: 0 20px;
+    }
+
+    .book-card-container {
+        max-width: 400px;
+    }
 }

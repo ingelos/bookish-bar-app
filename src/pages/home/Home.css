@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    /*border: 2px solid blue;*/
 }
 
 .welcome-message {
@@ -41,11 +40,6 @@
     padding: 10px 0;
 }
 
-
-.trending-inner-container {
-    /*border: 2px dotted pink;*/
-}
-
 .preview-list {
     display: flex;
     flex-wrap: wrap;
@@ -54,7 +48,6 @@
     gap: 10px;
     list-style: none;
     margin-top: 30px;
-    /*border: 2px solid pink;*/
 }
 
 .cover-img-home {
@@ -69,3 +62,22 @@
     padding: 15px 0;
     text-decoration: underline;
 }
+
+@media screen and (max-width: 840px) {
+    .cover-img-home {
+        height: 150px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .cover-img-home {
+        height: 120px;
+        padding: 0 10px;
+    }
+
+    .preview-list {
+        justify-content: center;
+        gap: 5px;
+    }
+}
+

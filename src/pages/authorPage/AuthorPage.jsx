@@ -5,7 +5,6 @@ import './AuthorPage.css';
 import AuthorDetails from "../../components/authorDetails/AuthorDetails.jsx";
 
 
-
 function AuthorPage() {
 
     const [author, setAuthor] = useState({});
@@ -61,7 +60,8 @@ function AuthorPage() {
 
                             <AuthorDetails
                                 name={author.name}
-                                bio={JSON.stringify(author.bio)}
+                                // bio={JSON.stringify(author.bio)}
+                                bio={author.bio?.value || author.bio || ''}
                                 birth_date={author.birth_date}
                                 death_date={author.death_date}
                                 photo={author.photos && author.photos.length > 0 ? `https://covers.openlibrary.org/b/id/${author.photos[0]}-L.jpg` : ''}
