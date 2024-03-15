@@ -19,24 +19,18 @@ function SearchResults() {
     const [searchSucces, setSearchSucces] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const controller = new AbortController();
     const {isAuth} = useContext(AuthContext);
     const [myBooks, setMyBooks] = useState([]);
     const [addedBook, setAddedBook] = useState({});
-    // const [dropdownOpen, setDropdownOpen] = useState(false);
-    // const [selectedStatus, setSelectedStatus] = useState('')
-    // const [bookStatuses, setBookStatuses] = useState({});
+    const [noResults, setNoResults] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
+        const controller = new AbortController();
+
         const myBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         setMyBooks(myBooks);
         console.log('myBooks:', myBooks)
-
-        // const statusMap = {};
-        // myBooks.forEach(book => {
-        //     statusMap[book.key] = book.status;
-        // });
-        // setBookStatuses(statusMap);
 
         return function cleanup() {
             controller.abort();
@@ -56,11 +50,17 @@ function SearchResults() {
                     offset: (currentPage - 1) * 20
                 }
             });
-            console.log(data);
-            setBooks(data.docs);
-            setTotalPages(Math.ceil(data.numFound / 100));
-            setQuery(query);
-            setSearchSucces(data.docs)
+
+            if (data.docs.length === 0) {
+                setNoResults(true);
+            } else {
+                console.log(data);
+                setBooks(data.docs);
+                setTotalPages(Math.ceil(data.numFound / 100));
+                setQuery(query);
+                setSearchSucces(data.docs);
+                setNoResults(false);
+            }
 
         } catch (error) {
             if (axios.isCancel(error)) {
@@ -98,10 +98,9 @@ function SearchResults() {
         const alreadyAdded = newBooks.some((savedBook) => savedBook.key === book.key);
 
         if (!alreadyAdded) {
-            const newBook = { ...book, status: status || 'want to read'};
+            const newBook = { ...book, status: status || 'read'};
             newBooks.push(newBook);
             localStorage.setItem('mybooks', JSON.stringify(newBooks));
-
             console.log('book added to mybooks')
 
             setAddedBook((prev) => ({
@@ -126,6 +125,8 @@ function SearchResults() {
                 {loading && <p>Loading...</p>}
                 {error && <p>Something went wrong... try again.</p>}
                 <div className='result-container'>
+                    {noResults && <p className='no-results-found'>There were no results found for your search query. Try something else!</p>}
+
                     {!searchSucces ? '' :
                         <h2 className='result-header'>
                             Search results:
@@ -138,8 +139,8 @@ function SearchResults() {
                                     <BookCard
                                         bookId={(book.key).replace("/works/", "")}
                                         authorId={(book.author_key)}
-                                        id={book.key}
-                                        title={book.title}
+                                        // id={book.key}
+                                        title={book.title ? book.title : ''}
                                         author={book.author_name ? book.author_name[0] : ''}
                                         cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
                                         year={`First published in ${book.first_publish_year}`}
@@ -164,12 +165,14 @@ function SearchResults() {
                                             }
                                         </div>
                                         :
+                                        <div>
                                         <Button
                                             className='add-button'
                                             onClick={() => navigate('/login')}
                                         >
                                             Login to add
                                         </Button>
+                                        </div>
                                     }
                                 </div>
                                 ))}

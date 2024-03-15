@@ -20,8 +20,8 @@ function onPhotoError(e) {
             </div>
             <div className='detail-info-author'>
                 <h2>{name}</h2>
-                <p className='bio-author'>{bio}</p>
-                <p className='date-link'>Date of birth: {birth_date} {death_date ? `- Date of death: ${death_date}` : ''}</p>
+                <p className='bio-author'>{bio ? `Bio: ${bio}` : ''}</p>
+                <p className='date-link'>{(birth_date ? `Date of birth: ${birth_date}` : '')} {death_date ? `- Date of death: ${death_date}` : ''}</p>
                 <p className='author-link'>{links}</p>
             </div>
         </article>

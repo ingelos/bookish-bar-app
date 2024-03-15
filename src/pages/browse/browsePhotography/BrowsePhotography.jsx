@@ -5,7 +5,6 @@ function BrowsePhotography() {
     return (
         <>
             <BrowseSubject
-                endpoint={`https://openlibrary.org/subjects/photography.json`}
                 subject={'photography'}
                 subjectTitle='Photography'
             />

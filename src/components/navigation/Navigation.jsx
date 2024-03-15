@@ -13,7 +13,6 @@ function Navigation() {
     const {profilePicture} = useContext(UserContext);
 
 
-
     return (
         <>
             <nav>

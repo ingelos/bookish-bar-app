@@ -9,7 +9,7 @@ nav {
 
 .nav-container {
     flex-basis: 1200px;
-    margin: 0 50px 0 50px;
+    margin: 0 30px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -55,7 +55,6 @@ nav a:hover {
     width: 30px;
     text-align: center;
     overflow: hidden;
-
     border-radius: 50%;
     border: 1px solid var(--color-secondary);
 }
@@ -81,3 +80,54 @@ nav a:hover {
 .default-menu-link {
     text-decoration: none;
 }
+
+
+@media screen and (max-width: 840px) {
+    nav {
+        height: 150px;
+    }
+
+    .nav-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navigation-links {
+        margin: 15px 0 0 0;
+    }
+
+    .user-container {
+        margin-bottom: 10px;
+    }
+
+    .log-link {
+        padding-bottom: 5px;
+    }
+
+}
+
+/*@media screen and (max-width: 768px) {*/
+/*    nav {*/
+/*        border: 2px solid green;*/
+/*        height: 150px;*/
+/*    }*/
+
+/*    .nav-container {*/
+/*        display: flex;*/
+/*        flex-direction: column;*/
+/*        margin: 0;*/
+/*        border: 2px solid blue;*/
+/*    }*/
+
+/*    .navigation-links {*/
+/*        margin: 10px 0 0 0;*/
+/*    }*/
+
+/*    .log-link {*/
+/*        padding-bottom: 5px;*/
+/*    }*/
+/*}*/
+
+/*@media screen and (max-width: 576px) {*/
+
+/*}*/

@@ -6,7 +6,6 @@ function BrowseLiterature() {
     return (
         <>
             <BrowseSubject
-                endpoint={`https://openlibrary.org/subjects/literature.json`}
                 subject={'literature'}
                 subjectTitle='Literature'
             />

@@ -51,7 +51,7 @@ function Profile() {
                             </div>
                         </div>
                         <div className='edit-link-container'>
-                            <Button className='edit-link'><Link to={'/edit-profile'}>Edit profile</Link></Button>
+                            <Button className='edit-link'><Link to={'/account-settings'}>Account Settings</Link></Button>
                             <Button className='edit-link'><Link to={'/edit-picture'}>Edit picture</Link></Button>
                         </div>
                     </div>
