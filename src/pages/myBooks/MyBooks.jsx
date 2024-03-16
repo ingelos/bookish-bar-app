@@ -59,7 +59,7 @@ function MyBooks() {
                             {myBooks.length === 0 ? (
                                 <div className='empty-container'>
                                     <div className='subject-container'>
-                                        <h2 className='result-header-title'>MY BOOKS</h2>
+                                        <h2 className='result-header-title'>My Books</h2>
                                     </div>
                                     <p>You have not saved any books yet!</p>
                                     <p>Find your favorite books by <Link

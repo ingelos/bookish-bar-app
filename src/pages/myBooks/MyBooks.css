@@ -10,6 +10,10 @@
     padding: 5px;
 }
 
+.result-header-title {
+    text-transform: uppercase;
+}
+
 .my-books-overview {
     display: flex;
     flex-direction: row;
@@ -117,6 +121,7 @@
     background-color: white;
     border: 2px solid var(--color-primary);
 }
+
 
 @media screen and (max-width: 768px) {
     .book-status {

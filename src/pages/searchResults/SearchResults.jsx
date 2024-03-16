@@ -122,6 +122,7 @@ function SearchResults() {
                     setQuery={setQuery}
                     onSearch={fetchSearchResults}
                 />
+
                 {loading && <p>Loading...</p>}
                 {error && <p>Something went wrong... try again.</p>}
                 <div className='result-container'>

@@ -1,6 +1,5 @@
 .browse-preview-container {
     width: 100%;
-    /*border: 2px solid green;*/
 }
 
 .browse-preview-list {
@@ -11,7 +10,6 @@
     gap: 10px;
     list-style: none;
     margin-top: 30px;
-    border: 2px solid yellow;
 }
 
 .cover-img-browse {
