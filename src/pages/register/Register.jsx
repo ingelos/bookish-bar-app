@@ -51,9 +51,7 @@ function Register() {
             <div className='register-page outer-container'>
                 <div className='register-page inner-container'>
                     <div className='inner-content-container'>
-
                         {!submitSuccess ?
-
                             <form className='register-form' onSubmit={handleSubmit(handleFormSubmit)}>
                                 {error && <p className='error-message-register'>Authentication failed: This username is already in use</p>}
                                 <h2 className='register-title'>Create account</h2>

@@ -53,14 +53,10 @@ function AuthorPage() {
                 <div className='detail-page inner-container'>
                     {loading && <p>Loading...</p>}
                     {error && <p>{error}</p>}
-
                     <div className='detail-content-container'>
-
                         {Object.keys(author).length > 0 &&
-
                             <AuthorDetails
                                 name={author.name}
-                                // bio={JSON.stringify(author.bio)}
                                 bio={author.bio?.value || author.bio || ''}
                                 birth_date={author.birth_date}
                                 death_date={author.death_date}

@@ -1,6 +1,4 @@
 import './BrowseMainPage.css';
-import HeartIcon from '../../assets/icons/heartL.svg';
-import FlyingSaucerIcon from '../../assets/icons/flying-saucer.svg';
 import DetectiveIcon from '../../assets/icons/detective.svg';
 import MaskIcon from '../../assets/icons/mask-happy.svg';
 import MoonIcon from '../../assets/icons/moon-stars.svg';
@@ -11,26 +9,18 @@ import PencilIcon from '../../assets/icons/pencil.svg';
 import PenInkIcon from '../../assets/icons/pen-nib.svg';
 import ScrollIcon from '../../assets/icons/scroll.svg';
 import BrushIcon from '../../assets/icons/paint-brush.svg';
-import MovieIcon from '../../assets/icons/film-slate.svg';
 import MusicNoteIcon from '../../assets/icons/music-notes.svg';
 import CameraIcon from '../../assets/icons/camera.svg';
 import LightbulbIcon from '../../assets/icons/lightbulb.svg';
 import FeetIcon from '../../assets/icons/footprints.svg';
 import {useNavigate} from "react-router-dom";
 import BrowseSubjectButton from "../../components/browseSubjectButton/BrowseSubjectButton.jsx";
-import BrowseSubject from "../../components/browseSubject/BrowseSubject.jsx";
 import BrowseMainPreview from "../../components/browseMainPreview/BrowseMainPreview.jsx";
-import SubjectNavigation from "../../components/subjectNavigation/SubjectNavigation.jsx";
 
 
 function BrowseMainPage() {
 
     const navigate = useNavigate();
-
-    // const handleClickRomance = () => navigate('/browse/romance')
-    // const handleClickSciFi = () => navigate('/browse/science_fiction')
-
-    // const handleClickFilm = () => navigate('/browse/film')
 
     const handleClickMystery = () => navigate('/browse/mystery')
     const handleClickHumor = () => navigate('/browse/humor')
@@ -149,9 +139,6 @@ function BrowseMainPage() {
                             </div>
                         </div>
                     </div>
-                    {/*<div className='navigation-side'>*/}
-                    {/*    /!*<SubjectNavigation/>*!/*/}
-                    {/*</div>*/}
                 </div>
         </section>
     )

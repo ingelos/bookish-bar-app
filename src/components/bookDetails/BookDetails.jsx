@@ -1,6 +1,6 @@
 import NoCoverImage from "../../assets/icons/No_Cover.jpg";
 import './BookDetails.css'
-import {Link} from "react-router-dom";
+
 
 function BookDetails({cover, title, authorName, excerpts, links, description, firstPublished}) {
 

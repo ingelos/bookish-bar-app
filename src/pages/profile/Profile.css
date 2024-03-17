@@ -12,7 +12,6 @@
     width: 175px;
     height: 175px;
     overflow: hidden;
-
     border-radius: 50%;
     border: 2px solid var(--color-secondary);
 }

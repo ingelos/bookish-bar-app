@@ -103,31 +103,4 @@ nav a:hover {
     .log-link {
         padding-bottom: 5px;
     }
-
 }
-
-/*@media screen and (max-width: 768px) {*/
-/*    nav {*/
-/*        border: 2px solid green;*/
-/*        height: 150px;*/
-/*    }*/
-
-/*    .nav-container {*/
-/*        display: flex;*/
-/*        flex-direction: column;*/
-/*        margin: 0;*/
-/*        border: 2px solid blue;*/
-/*    }*/
-
-/*    .navigation-links {*/
-/*        margin: 10px 0 0 0;*/
-/*    }*/
-
-/*    .log-link {*/
-/*        padding-bottom: 5px;*/
-/*    }*/
-/*}*/
-
-/*@media screen and (max-width: 576px) {*/
-
-/*}*/

@@ -52,7 +52,6 @@ function MyBooks() {
     return (
         <section className='my-books outer-container'>
             <div className='my-books inner-container'>
-
                 {isAuth ?
                     <div className='result-container'>
                         <div>
@@ -133,13 +132,11 @@ function MyBooks() {
                                                             >
                                                                 <img src={TrashIcon} alt='' className='trash-icon'/>
                                                             </button>
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         ))}
-
                                     </article>
                                 </div>
                             )}
@@ -156,7 +153,6 @@ function MyBooks() {
             </div>
         </section>
     )
-
 }
 
 export default MyBooks;

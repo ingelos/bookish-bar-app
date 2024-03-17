@@ -44,9 +44,7 @@ function Rating({hoveredStars, bookKEY}) {
                         />
                     </label>
                 )
-
             })}
-
         </div>
     )
 }

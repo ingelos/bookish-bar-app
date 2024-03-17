@@ -11,7 +11,6 @@ function BrowseFantasy() {
                 subject={'fantasy'}
                 subjectTitle='Fantasy'
             />
-
         </>
     )
 }

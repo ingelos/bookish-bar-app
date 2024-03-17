@@ -185,7 +185,6 @@ function SearchResults() {
                                     totalPages={totalPages}
                                     onPageChange={pageChange}
                                 /> : '' }
-
                         </div>
                 </div>
         </section>

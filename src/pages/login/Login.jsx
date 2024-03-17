@@ -1,5 +1,5 @@
 import './Login.css'
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import {useContext, useEffect, useState} from "react";
@@ -41,7 +41,6 @@ function Login() {
             } else {
                 console.error('Error:', error.response || error.message || error);
                 setError(true);
-                // console.log('something went wrong');
             }
         }
     }
@@ -104,8 +103,6 @@ function Login() {
                             </>
                         }
                     </div>
-
-
                 </div>
             </div>
         </>

@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 import NoCoverImage from "../../assets/icons/No_Cover.jpg";
 import './BrowseMainPreview.css'
 
@@ -54,8 +54,7 @@ function BrowseMainPreview({subject, subjectTitle}) {
 
     return (
         <>
-
-            {error && <p>error</p>}
+            {error && <p>Something went wrong...</p>}
             {loading ? <p>Loading...</p> : (
                 <div className='browse-preview-inner-container'>
                     <div className='preview-title-container'>
