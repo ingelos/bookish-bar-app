@@ -10,7 +10,6 @@ function BrowseMagic() {
                 subject={'magic'}
                 subjectTitle='Magic'
             />
-
         </>
     )
 }

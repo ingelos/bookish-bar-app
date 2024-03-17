@@ -2,7 +2,7 @@
 import './Pagination.css'
 import Button from "../button/Button.jsx";
 
-function Pagination({page, totalPages, onPageChange, currentPage}) {
+function Pagination({page, totalPages, onPageChange}) {
 
     function pageChange(e, pageNumber) {
         e.preventDefault();

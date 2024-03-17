@@ -1,4 +1,3 @@
-import {NavLink} from "react-router-dom";
 import './SubjectNavigation.css'
 import SubjectNavigationLink from "../subjectNavigationLink/SubjectNagivationLink.jsx";
 

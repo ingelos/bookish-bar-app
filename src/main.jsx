@@ -7,7 +7,7 @@ import AuthContextProvider from "./context/AuthContext.jsx";
 import UserProvider from "./context/UserContext.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
+  <React.StrictMode>
       <Router>
           <AuthContextProvider>
               <UserProvider>
@@ -15,6 +15,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               </UserProvider>
           </AuthContextProvider>
       </Router>
-  // </React.StrictMode>
+  </React.StrictMode>
 ,
 );

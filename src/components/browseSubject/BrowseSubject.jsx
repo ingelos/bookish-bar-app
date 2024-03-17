@@ -65,8 +65,8 @@ function BrowseSubject({subject, subjectTitle}) {
         }
     }, [currentPage, subject]);
 
-    const totalPages = Math.ceil(works / pageSize);
 
+    const totalPages = Math.ceil(works / pageSize);
 
     function handleAddToMyBooks(book, status) {
         const newBooks = JSON.parse(localStorage.getItem('mybooks')) || [];

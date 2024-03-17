@@ -11,9 +11,7 @@ function BookCard({cover, bookId, title, author, year, authorId}) {
 
     return (
         <div className='book-card'>
-                <div
-                    className='book-card-list'
-                >
+                <div className='book-card-list'>
                     <Link to={`/browse/${bookId}`}>
                     <img
                         src={cover ? cover : NoCoverImage}

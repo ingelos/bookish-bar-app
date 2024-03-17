@@ -1,8 +1,8 @@
 import './SearchBar.css'
-import {useContext, useState} from "react";
+import { useState} from "react";
 
 
-function SearchBar({onSearch, disabled}) {
+function SearchBar({onSearch}) {
 
     const [searchQuery, setSearchQuery] = useState('')
 
@@ -10,7 +10,6 @@ function SearchBar({onSearch, disabled}) {
         if (event) {
             event.preventDefault();
             onSearch(searchQuery);
-
         }
     }
 
@@ -23,7 +22,6 @@ function SearchBar({onSearch, disabled}) {
         <div className='search-bar-container'>
             <form className='search-bar' onSubmit={handleSubmit}>
                 <input
-                    // disabled={disabled}
                     type='text'
                     className='search-bar-input'
                     placeholder='Search by title or author...'

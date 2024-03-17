@@ -3,7 +3,6 @@ form {
     flex-direction: column;
     max-width: 450px;
     padding: 20px 0;
-    /*flex-basis: 450px;*/
 }
 
 label {
@@ -20,20 +19,12 @@ input {
     max-width: 300px;
 }
 
-
-
 @media screen and (max-width: 840px) {
     form {
         padding: 0;
         margin: 0;
     }
 }
-
-/*@media screen and (max-width: 768px) {*/
-/*    form {*/
-/*        padding: 0;*/
-/*    }*/
-/*}*/
 
 @media screen and (max-width: 480px) {
     form {
