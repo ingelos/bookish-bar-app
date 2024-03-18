@@ -13,6 +13,7 @@ import MusicNoteIcon from '../../assets/icons/music-notes.svg';
 import CameraIcon from '../../assets/icons/camera.svg';
 import LightbulbIcon from '../../assets/icons/lightbulb.svg';
 import FeetIcon from '../../assets/icons/footprints.svg';
+import FilmIcon from '../../assets/icons/film-slate.svg';
 import {useNavigate} from "react-router-dom";
 import BrowseSubjectButton from "../../components/browseSubjectButton/BrowseSubjectButton.jsx";
 import BrowseMainPreview from "../../components/browseMainPreview/BrowseMainPreview.jsx";
@@ -37,6 +38,7 @@ function BrowseMainPage() {
     const handleClickDesign = () => navigate('/browse/design')
     const handleClickFashion = () => navigate('/browse/fashion')
     const handleClickFantasy = () => navigate('/browse/fantasy')
+    const handleClickFilm = () => navigate('/browse/film')
 
 
     return (
@@ -53,10 +55,6 @@ function BrowseMainPage() {
                             subject={'science_fiction'}
                             subjectTitle='Science Fiction'
                         />
-                        <BrowseMainPreview
-                            subject={'film'}
-                            subjectTitle='Film'
-                        />
                         <div className='buttons-container'>
                             <h3 className='buttons-container-title'>More subjects:</h3>
                             <div className='preview-link-buttons-container'>
@@ -64,6 +62,11 @@ function BrowseMainPage() {
                                     icon={DetectiveIcon}
                                     onClick={handleClickMystery}
                                     subject='Mystery'
+                                />
+                                <BrowseSubjectButton
+                                    icon={MoonIcon}
+                                    onClick={handleClickFantasy}
+                                    subject='Fantasy'
                                 />
                                 <BrowseSubjectButton
                                     icon={MaskIcon}
@@ -131,10 +134,10 @@ function BrowseMainPage() {
                                     subject='Fashion'
                                 />
                                 <BrowseSubjectButton
-                                    icon={MoonIcon}
-                                    onClick={handleClickFantasy}
-                                    subject='Fantasy'
-                                />
+                                    icon={FilmIcon}
+                                    onClick={handleClickFilm}
+                                    subject='Film'
+                                    />
                                 </div>
                             </div>
                         </div>

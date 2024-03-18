@@ -6,11 +6,13 @@ import {Link} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import Rating from "../../components/rating/Rating.jsx";
 import TrashIcon from "../../assets/icons/trash.svg";
+import Pagination from "../../components/pagination/Pagination.jsx";
 
 
 function MyBooks() {
     const [myBooks, setMyBooks] = useState([]);
     const [filter, setFilter] = useState('all');
+    const [currentPage, setCurrentPage] = useState(1);
     const {isAuth} = useContext(AuthContext)
 
     useEffect(() => {
@@ -44,10 +46,22 @@ function MyBooks() {
         if (filter === 'wantToRead') {
             return books.filter(book => book.status === 'wantToRead');
         } else if (filter === 'read') {
-            return books.filter(book => book.status === 'read');
+            return  books.filter(book => book.status === 'read');
         }
         return books;
     }
+
+    const booksPerPage = 20;
+    const indexOfLastBook = currentPage * booksPerPage;
+    const indexOfFirstBook = indexOfLastBook - booksPerPage;
+    const currentBooks = filterBooks(myBooks).slice(indexOfFirstBook, indexOfLastBook);
+
+    const totalPages = Math.ceil(filterBooks(myBooks).length / booksPerPage);
+
+    const onPageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    }
+
 
     return (
         <section className='my-books outer-container'>
@@ -94,7 +108,7 @@ function MyBooks() {
                                                 <p>rating</p>
                                             </div>
                                         </div>
-                                        {filterBooks(myBooks).map((book) => (
+                                        {currentBooks.map((book) => (
                                             <div key={book.key}>
                                                 <div className='book-container'>
                                                     <BookCard
@@ -138,6 +152,11 @@ function MyBooks() {
                                             </div>
                                         ))}
                                     </article>
+                                        <Pagination
+                                            currentPage={currentPage}
+                                            totalPages={totalPages}
+                                            onPageChange={onPageChange}
+                                            />
                                 </div>
                             )}
                         </div>
@@ -150,7 +169,9 @@ function MyBooks() {
                             your books!</p>
                     </div>
                 }
+
             </div>
+
         </section>
     )
 }

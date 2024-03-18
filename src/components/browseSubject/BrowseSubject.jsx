@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import CheckIcon from "../../assets/icons/check.svg";
 import SubjectNavigation from "../subjectNavigation/SubjectNavigation.jsx";
 import './BrowseSubject.css'
+import Pagination from "../pagination/Pagination.jsx";
 
 function BrowseSubject({subject, subjectTitle}) {
 
@@ -66,12 +67,10 @@ function BrowseSubject({subject, subjectTitle}) {
     }, [currentPage, subject]);
 
 
-    const totalPages = Math.ceil(works / pageSize);
-
     function handleAddToMyBooks(book, status) {
         const newBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         const alreadyAdded = newBooks.some((savedBook) => savedBook.key === book.key);
-        console.log(book.key)
+        // console.log(book.key)
 
         if (!alreadyAdded) {
             const newBook = { ...book, status: status || 'read'};
@@ -88,6 +87,11 @@ function BrowseSubject({subject, subjectTitle}) {
         }
     }
 
+    const totalPages = Math.ceil(works / pageSize);
+
+    const onPageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    }
 
     return (
 
@@ -109,7 +113,9 @@ function BrowseSubject({subject, subjectTitle}) {
                                 <div className='book-container' key={book.key}>
                                     <BookCard
                                         bookId={(book.key).replace("/works/", "")}
-                                        authorId={(book.authors[0].key).replace("/authors/", "")}
+                                        authorId={book.author_key ? (Array.isArray(book.author_key) ? book.author_key[0] : book.author_key) : (book.authors ? (Array.isArray(book.authors) ? book.authors[0].key.replace("/authors/", "") : book.authors.key) : '')}
+
+                                        // authorId={(book.authors[0].key).replace("/authors/", "")}
                                         cover={book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}
                                         title={book.title ? book.title : ''}
                                         author={book.authors ? book.authors[0].name : ''}
@@ -150,15 +156,11 @@ function BrowseSubject({subject, subjectTitle}) {
                     {books.length === 0 && error && <p>Something went wrong fetching your book data...</p>}
                 </div>
                 <div>
-                    <button onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}
-                            disabled={currentPage === 1}>
-                        Previous
-                    </button>
-                    <span className='page-settings'>{`Page ${currentPage} of ${totalPages}`}</span>
-                    <button onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))}
-                            disabled={currentPage === totalPages}>
-                        Next
-                    </button>
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={onPageChange}
+                        />
                 </div>
             </div>
             <SubjectNavigation/>

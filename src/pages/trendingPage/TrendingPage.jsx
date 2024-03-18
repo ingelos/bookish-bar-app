@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import CheckIcon from "../../assets/icons/check.svg";
 import {AuthContext} from "../../context/AuthContext.jsx";
+import Pagination from "../../components/pagination/Pagination.jsx";
 
 
 function Trending() {
@@ -16,7 +17,6 @@ function Trending() {
     const [myBooks, setMyBooks] = useState([]);
     const [addedBook, setAddedBook] = useState({});
     const {isAuth} = useContext(AuthContext);
-    const pageSize = 20;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -36,7 +36,7 @@ function Trending() {
                     signal: controller.signal,
                     params:  {
                         offset: 0,
-                        limit: pageSize
+                        limit: 50
                     },
                 });
                 console.log(data);
@@ -99,7 +99,9 @@ function Trending() {
                                 <div className='book-container' key={book.key}>
                                 <BookCard
                                     bookId={(book.key).replace("/works/", "")}
-                                    authorId={book.author_key ? book.author_key[0] : ''}
+                                    authorId={book.author_key ? (Array.isArray(book.author_key) ? book.author_key[0] : book.author_key) : (book.authors ? (Array.isArray(book.authors) ? book.authors[0].key.replace("/authors/", "") : book.authors.key) : '')}
+
+                                    // authorId={book.author_key ? book.author_key[0] : ''}
                                     cover={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : ''}
                                     title={book.title ? book.title : ''}
                                     author={book.author_name ? book.author_name[0] : ''}

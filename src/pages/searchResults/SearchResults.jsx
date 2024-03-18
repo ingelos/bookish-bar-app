@@ -139,7 +139,10 @@ function SearchResults() {
                                 <div className='book-container' key={book.key}>
                                     <BookCard
                                         bookId={(book.key).replace("/works/", "")}
-                                        authorId={(book.author_key)}
+                                        authorId={book.author_key ? (Array.isArray(book.author_key) ? book.author_key[0] : book.author_key) : (book.authors ? (Array.isArray(book.authors) ? book.authors[0].key.replace("/authors/", "") : book.authors.key) : '')}
+
+
+                                        // authorId={(book.author_key)}
                                         // id={book.key}
                                         title={book.title ? book.title : ''}
                                         author={book.author_name ? book.author_name[0] : ''}
@@ -181,7 +184,7 @@ function SearchResults() {
                     </article>
                             {searchSucces ?
                                 <Pagination
-                                    page={currentPage}
+                                    currentPage={currentPage}
                                     totalPages={totalPages}
                                     onPageChange={pageChange}
                                 /> : '' }
