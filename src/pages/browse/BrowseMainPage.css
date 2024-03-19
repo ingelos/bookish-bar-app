@@ -1,8 +1,7 @@
 .browse-section-inner-content-container {
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    margin: 20px 0 20px;
+    margin: 10px 0 20px;
 }
 
 .browse-page-subtitle {

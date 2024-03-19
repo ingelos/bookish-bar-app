@@ -73,7 +73,7 @@ function BrowseSubject({subject, subjectTitle}) {
 
 
         if (!alreadyAdded) {
-            const newBook = { ...book, status: status || 'read'};
+            const newBook = {...book, status: status || 'read'};
             const newBooks = [newBook, ...existingBooks];
             localStorage.setItem('mybooks', JSON.stringify(newBooks));
             console.log('book added to mybooks')
@@ -158,7 +158,7 @@ function BrowseSubject({subject, subjectTitle}) {
                         currentPage={currentPage}
                         totalPages={totalPages}
                         onPageChange={onPageChange}
-                        />
+                    />
                 </div>
             </div>
             <SubjectNavigation/>
