@@ -22,9 +22,7 @@ function BookDetails({cover, title, authorName, excerpts, links, description, fi
             </div>
             <div className='book-detail-info'>
                 <h2>{title}</h2>
-                <h3 className='author-name'>
-                    {authorName}
-                </h3>
+                <h3 className='author-name'>{authorName}</h3>
                 <p className='detail-description'>{description}</p>
                 <p><em>{excerpts}</em></p>
                 <p>{firstPublished}</p>

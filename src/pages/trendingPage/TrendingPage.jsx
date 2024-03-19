@@ -65,14 +65,14 @@ function Trending() {
 
 
     function handleAddToMyBooks(book, status) {
-        const newBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
-        const alreadyAdded = newBooks.some((savedBook) => savedBook.key === book.key);
+        const existingBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
+        const alreadyAdded = existingBooks.some((savedBook) => savedBook.key === book.key);
 
         if (!alreadyAdded) {
             const newBook = { ...book, status: status || 'read'};
-            newBooks.push(newBook);
+            const newBooks = [newBook, ...existingBooks];
             localStorage.setItem('mybooks', JSON.stringify(newBooks));
-            console.log('book added to mybooks', newBook)
+            console.log('book added to mybooks')
 
             setAddedBook((prev) => ({
                 ...prev,
@@ -100,8 +100,6 @@ function Trending() {
                                 <BookCard
                                     bookId={(book.key).replace("/works/", "")}
                                     authorId={book.author_key ? (Array.isArray(book.author_key) ? book.author_key[0] : book.author_key) : (book.authors ? (Array.isArray(book.authors) ? book.authors[0].key.replace("/authors/", "") : book.authors.key) : '')}
-
-                                    // authorId={book.author_key ? book.author_key[0] : ''}
                                     cover={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : ''}
                                     title={book.title ? book.title : ''}
                                     author={book.author_name ? book.author_name[0] : ''}

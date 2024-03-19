@@ -39,6 +39,7 @@ function MyBooks() {
             return book;
         });
         setMyBooks(updatedBooks);
+        console.log(updatedBooks)
         localStorage.setItem('mybooks', JSON.stringify(updatedBooks));
     }
 
@@ -61,6 +62,7 @@ function MyBooks() {
     const onPageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     }
+
 
 
     return (
@@ -113,8 +115,8 @@ function MyBooks() {
                                                 <div className='book-container'>
                                                     <BookCard
                                                         cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
-                                                        title={book.title}
-                                                        author={book.author_name ? book.author_name[0] : book.authors[0].name}
+                                                        title={book.title ? book.title : ''}
+                                                        author={book.author_name ? book.author_name[0] || book.authors[0].name : ''}
                                                         bookId={(book.key).replace("/works/", "")}
                                                         authorId={book.author_key ? (Array.isArray(book.author_key) ? book.author_key[0] : book.author_key) : (book.authors ? (Array.isArray(book.authors) ? book.authors[0].key.replace("/authors/", "") : book.authors.key) : '')}
                                                     />

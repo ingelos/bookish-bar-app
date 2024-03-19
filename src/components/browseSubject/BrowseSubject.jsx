@@ -68,13 +68,13 @@ function BrowseSubject({subject, subjectTitle}) {
 
 
     function handleAddToMyBooks(book, status) {
-        const newBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
-        const alreadyAdded = newBooks.some((savedBook) => savedBook.key === book.key);
-        // console.log(book.key)
+        const existingBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
+        const alreadyAdded = existingBooks.some((savedBook) => savedBook.key === book.key);
+
 
         if (!alreadyAdded) {
             const newBook = { ...book, status: status || 'read'};
-            newBooks.push(newBook);
+            const newBooks = [newBook, ...existingBooks];
             localStorage.setItem('mybooks', JSON.stringify(newBooks));
             console.log('book added to mybooks')
 
@@ -114,8 +114,6 @@ function BrowseSubject({subject, subjectTitle}) {
                                     <BookCard
                                         bookId={(book.key).replace("/works/", "")}
                                         authorId={book.author_key ? (Array.isArray(book.author_key) ? book.author_key[0] : book.author_key) : (book.authors ? (Array.isArray(book.authors) ? book.authors[0].key.replace("/authors/", "") : book.authors.key) : '')}
-
-                                        // authorId={(book.authors[0].key).replace("/authors/", "")}
                                         cover={book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}
                                         title={book.title ? book.title : ''}
                                         author={book.authors ? book.authors[0].name : ''}

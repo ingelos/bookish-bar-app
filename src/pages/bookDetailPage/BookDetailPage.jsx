@@ -89,9 +89,7 @@ function BookDetailPage() {
                     {loading && <p>Loading...</p>}
                     {error && <p>{error}</p>}
                     <div className='detail-content-container'>
-
                         {Object.keys(book).length > 0 &&
-
                             <BookDetails
                                 cover={book.covers ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-M.jpg` : 'no cover available'}
                                 title={book.title ? book.title : ''}
