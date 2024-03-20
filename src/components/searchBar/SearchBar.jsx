@@ -2,7 +2,7 @@ import './SearchBar.css'
 import { useState} from "react";
 
 
-function SearchBar({onSearch}) {
+function SearchBar({onSearch, searchInputRef}) {
 
     const [searchQuery, setSearchQuery] = useState('')
 
@@ -23,6 +23,7 @@ function SearchBar({onSearch}) {
             <form className='search-bar' onSubmit={handleSubmit}>
                 <input
                     type='text'
+                    ref={searchInputRef}
                     className='search-bar-input'
                     placeholder='Search by title or author...'
                     value={searchQuery}

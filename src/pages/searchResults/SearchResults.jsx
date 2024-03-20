@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import axios from "axios";
 import BookCard from "../../components/bookCard/BookCard.jsx";
 import './SearchResults.css'
@@ -24,6 +24,7 @@ function SearchResults() {
     const [addedBook, setAddedBook] = useState({});
     const [noResults, setNoResults] = useState(false);
     const navigate = useNavigate();
+    const searchInputRef = useRef(null);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -31,6 +32,8 @@ function SearchResults() {
         const myBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         setMyBooks(myBooks);
         console.log('myBooks:', myBooks)
+
+        searchInputRef.current.focus();
 
         return function cleanup() {
             controller.abort();
@@ -119,6 +122,7 @@ function SearchResults() {
                 <SearchBar
                     query={query}
                     setQuery={setQuery}
+                    searchInputRef={searchInputRef}
                     onSearch={fetchSearchResults}
                 />
 

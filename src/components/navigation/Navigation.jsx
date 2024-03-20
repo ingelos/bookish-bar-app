@@ -34,7 +34,7 @@ function Navigation() {
 
                     <div className='nav-search-bar'>
                         <NavLink to='/search-results'>
-                            <SearchBar/>
+                            <SearchBar />
                         </NavLink>
                     </div>
 

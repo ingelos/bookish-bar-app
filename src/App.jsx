@@ -37,7 +37,6 @@ import BrowseDesign from "./pages/browse/browseDesign/BrowseDesign.jsx";
 
 function App() {
 
-
     return (
         <>
             <header>
@@ -45,7 +44,7 @@ function App() {
                     <h1 className='header-title'>BOOKISH BAR</h1>
                 </div>
             </header>
-            <Navigation/>
+            <Navigation />
             <Routes>
                 <Route path='/' element={<Home/>}/>
                 <Route path='/register' element={<Register/>}/>
@@ -54,7 +53,7 @@ function App() {
                 <Route path='/account-settings' element={<AccountSettings/>}/>
                 <Route path='/edit-picture' element={<EditPicture/>}/>
                 <Route path='/my-books' element={<MyBooks/>}/>
-                <Route path='/search-results' element={<SearchResults/>}/>
+                <Route path='/search-results' element={<SearchResults />}/>
                 <Route path='/browse/:bookId' element={<BookDetailPage/>}/>
                 <Route path='/:authorId' element={<AuthorPage/>}/>
                 <Route path='/trending' element={<TrendingPage/>}/>
