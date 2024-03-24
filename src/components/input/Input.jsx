@@ -2,6 +2,7 @@ import './Input.css'
 
 
 function Input({ inputId, inputLabel, inputType, inputName, validationRules, register, errors }) {
+
     return (
         <>
             <label htmlFor={inputId}>

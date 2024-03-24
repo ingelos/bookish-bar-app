@@ -29,7 +29,7 @@ function Register() {
                 password: data.password,
                 role: [data.user],
             });
-            console.log(response);
+            console.log('response:', response);
             console.log(`You've created an account!`);
             setSubmitSucces(true);
 

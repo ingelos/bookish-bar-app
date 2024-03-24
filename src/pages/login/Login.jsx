@@ -28,6 +28,7 @@ function Login() {
             const response = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin', {
                 username: data.username,
                 password: data.password,
+                signal: controller.signal,
             });
             console.log(response.data.accessToken);
             login(response.data.accessToken);

@@ -19,6 +19,14 @@ input {
     max-width: 300px;
 }
 
+textarea {
+    border: 2px solid var(--color-secondary);
+    border-radius: 4px;
+    padding: 5px;
+    margin: 5px 0;
+    max-width: 300px;
+}
+
 @media screen and (max-width: 840px) {
     form {
         padding: 0;
