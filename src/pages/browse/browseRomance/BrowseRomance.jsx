@@ -1,5 +1,3 @@
-
-import './BrowseRomance.css'
 import BrowseSubject from "../../../components/browseSubject/BrowseSubject.jsx";
 
 

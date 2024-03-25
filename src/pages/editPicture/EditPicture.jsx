@@ -67,6 +67,7 @@ function EditPicture() {
             );
             const imageUrl = response.data.base64Image;
             setProfilePicture(imageUrl);
+            localStorage.setItem('profilePicture', imageUrl);
             setUpdatedPictureSuccess(true);
 
         } catch (e) {
@@ -82,7 +83,6 @@ function EditPicture() {
     return (
             <section className='edit-profile-page outer-container'>
                 <div className='edit-profile-page inner-container'>
-                    {isAuth ?
                         <div className='edit-profile-content-container'>
                             <h2>Change profile picture</h2>
 
@@ -144,10 +144,6 @@ function EditPicture() {
                                 </div>
                             }
                         </div>
-                        :
-                        <p className='no-access-message'>Oops! You need to <Link to={'/login'}><strong>log
-                            in</strong></Link> to access this page!</p>
-                    }
                 </div>
             </section>
     )

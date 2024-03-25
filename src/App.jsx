@@ -1,5 +1,5 @@
 import './App.css'
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import Navigation from './components/navigation/Navigation.jsx'
 import Home from './pages/home/Home.jsx'
 import Register from './pages/register/Register.jsx'
@@ -33,9 +33,12 @@ import BrowsePlays from "./pages/browse/browsePlays/BrowsePlays.jsx";
 import BrowseDance from "./pages/browse/browseDance/BrowseDance.jsx";
 import BrowseFashion from "./pages/browse/browseFashion/BrowseFashion.jsx";
 import BrowseDesign from "./pages/browse/browseDesign/BrowseDesign.jsx";
+import {useContext} from "react";
+import {AuthContext} from "./context/AuthContext.jsx";
 
 
 function App() {
+    const {isAuth} = useContext(AuthContext);
 
     return (
         <>
@@ -49,9 +52,9 @@ function App() {
                 <Route path='/' element={<Home/>}/>
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/login' element={<Login/>}/>
-                <Route path='/profile' element={<Profile/>}/>
-                <Route path='/account-settings' element={<AccountSettings/>}/>
-                <Route path='/edit-picture' element={<EditPicture/>}/>
+                <Route path='/profile' element={isAuth ? <Profile/> : <Navigate to='/'/>}/>
+                <Route path='/account-settings' element={isAuth ? <AccountSettings/> : <Navigate to='/'/>}/>
+                <Route path='/edit-picture' element={isAuth ? <EditPicture/> : <Navigate to='/'/>}/>
                 <Route path='/my-books' element={<MyBooks/>}/>
                 <Route path='/search-results' element={<SearchResults />}/>
                 <Route path='/browse/:bookId' element={<BookDetailPage/>}/>

@@ -10,7 +10,6 @@ function Pagination({ totalPages, onPageChange, currentPage}) {
     }
 
     return (
-
         <div className='pagination'>
                 <Button
                     onClick={(e) => pageChange(e, currentPage - 1)}

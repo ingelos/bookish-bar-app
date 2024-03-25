@@ -27,7 +27,6 @@ function BookDetails({cover, title, authorName, excerpts, links, description, fi
                 <p><em>{excerpts}</em></p>
                 <p>{firstPublished}</p>
                 <p className='book-link'>{links}</p>
-
             </div>
         </div>
     )

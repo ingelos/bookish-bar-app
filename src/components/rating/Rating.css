@@ -7,6 +7,6 @@ input[type=radio]{
     display: none;
 }
 
-.star {
+.star-rating label:hover {
     cursor: pointer;
 }

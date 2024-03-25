@@ -17,6 +17,10 @@
     height: 180px;
 }
 
+.subject-container {
+    margin-bottom: 15px;
+}
+
 @media screen and (max-width: 900px) {
     .cover-img-browse {
         width: 100%;

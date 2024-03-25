@@ -94,10 +94,8 @@ function BrowseSubject({subject, subjectTitle}) {
     }
 
     return (
-
         <section className='romance-section outer-container'>
             <div className='romance-section inner-container'>
-
                 {loading && <p>Loading...</p>}
                 {error && <p>Error...</p>}
                 <div className='result-container'>

@@ -58,19 +58,8 @@ function Home() {
                     <div className='home-section inner-content-container'>
                         <div className='welcome-message'>
                             <div className='intro-message'>
-                                <div className='title-message'>
                                 <h2>Welcome to Bookish Bar!</h2>
                                 <h2>The bar that serves books...</h2>
-                                </div>
-                              <div className='subtitle-message'>
-                                <h4><Link
-                                    to={'/search-results'}><strong>Search</strong></Link> and <Link
-                                    to={'/browse'}><strong>browse</strong></Link> for your favourite books
-                                    </h4>
-                                <h4><Link
-                                    to={'/login'}><strong>log in</strong></Link> to save them to your <Link
-                                    to={'/my-books'}><strong>MyBooks</strong></Link> page</h4>
-                              </div>
                             </div>
                             <div className='dictionary-bookish'>
                                 <h4><strong>bookish</strong> [ book-ish ]</h4>
@@ -94,8 +83,7 @@ function Home() {
                                                 </li>
                                             ))}
                                         </div>
-                                        <Link to='/trending'><h3 className='more-link'>More Trending...</h3>
-                                        </Link>
+                                        <Link to='/trending'><h3 className='more-link'>More Trending...</h3></Link>
                                     </>
                                 )}
                             </div>

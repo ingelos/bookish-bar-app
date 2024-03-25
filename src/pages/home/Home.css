@@ -1,43 +1,27 @@
-
-.dictionary-bookish {
-    border: 2px dotted black;
-    text-align: left;
-    padding: 10px;
-    max-width: 250px;
-}
-
-.dictionary-bookish h4 {
-    font-weight: 300;
-}
-
 .welcome-message {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
-    margin: 15px 0 40px;
+    text-align: center;
+    margin: 10px 0 30px;
     width: 100%;
 }
 
 .welcome-message h2 {
     font-size: 26px;
-    padding-bottom: 5px;
     font-weight: 300;
 }
 
-.title-message {
-    margin-bottom: 10px;
-    text-align: center;
+.dictionary-bookish {
+    border: 2px dotted black;
+    text-align: left;
+    padding: 10px;
+    margin-top: 25px;
+    max-width: 450px;
 }
 
-.subtitle-message {
-    margin-top: 15px;
-    text-align: center;
-}
-
-.intro-message h4 {
+.dictionary-bookish h4 {
     font-weight: 300;
-    padding-bottom: 5px;
 }
 
 .preview-title-container {

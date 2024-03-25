@@ -114,7 +114,7 @@ function MyBooks() {
                                             <div key={book.key}>
                                                 <div className='book-container'>
                                                     <BookCard
-                                                        cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
+                                                        cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` || `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}
                                                         title={book.title ? book.title : ''}
                                                         author={book.author_name ? book.author_name[0] || book.authors[0].name : ''}
                                                         bookId={(book.key).replace("/works/", "")}
