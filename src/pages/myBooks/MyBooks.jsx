@@ -19,8 +19,8 @@ function MyBooks() {
         const storedBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         setMyBooks(storedBooks);
         console.log(storedBooks);
-
     }, []);
+
 
     function removeFromMyBooks(bookKey) {
         const removedFromMyBooks = myBooks.filter((book) => book.key !== bookKey);
@@ -114,9 +114,9 @@ function MyBooks() {
                                             <div key={book.key}>
                                                 <div className='book-container'>
                                                     <BookCard
-                                                        cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` || `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}
+                                                        cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : '' || book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}
                                                         title={book.title ? book.title : ''}
-                                                        author={book.author_name ? book.author_name[0] || book.authors[0].name : ''}
+                                                        author={book.author_name ? book.author_name[0] : '' || book.authors ? book.authors[0].name : ''}
                                                         bookId={(book.key).replace("/works/", "")}
                                                         authorId={book.author_key ? (Array.isArray(book.author_key) ? book.author_key[0] : book.author_key) : (book.authors ? (Array.isArray(book.authors) ? book.authors[0].key.replace("/authors/", "") : book.authors.key) : '')}
                                                     />

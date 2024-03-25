@@ -100,7 +100,7 @@ function Trending() {
                                 <BookCard
                                     bookId={(book.key).replace("/works/", "")}
                                     authorId={book.author_key ? (Array.isArray(book.author_key) ? book.author_key[0] : book.author_key) : (book.authors ? (Array.isArray(book.authors) ? book.authors[0].key.replace("/authors/", "") : book.authors.key) : '')}
-                                    cover={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : ''}
+                                    cover={book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : '' || book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
                                     title={book.title ? book.title : ''}
                                     author={book.author_name ? book.author_name[0] : ''}
                                     year={book.first_publish_year ? `First published in: ${book.first_publish_year}` : ''}
