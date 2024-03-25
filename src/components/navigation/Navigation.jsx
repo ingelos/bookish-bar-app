@@ -1,7 +1,7 @@
 import './Navigation.css'
 import {Link, NavLink, useNavigate} from "react-router-dom";
 import UserIcon from "../../assets/icons/user-circle.svg";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import Button from "../button/Button.jsx";
 import SearchBar from "../searchBar/SearchBar.jsx";
@@ -10,7 +10,15 @@ import {UserContext} from "../../context/UserContext.jsx";
 function Navigation() {
     const navigate = useNavigate();
     const {isAuth, logout} = useContext(AuthContext);
-    const {profilePicture} = useContext(UserContext);
+    const {profilePicture, setProfilePicture} = useContext(UserContext);
+
+
+    useEffect(() => {
+        const storedProfilePicture = localStorage.getItem('profilePicture');
+        if (storedProfilePicture) {
+            setProfilePicture(storedProfilePicture);
+        }
+    }, [setProfilePicture]);
 
 
     return (
@@ -31,13 +39,11 @@ function Navigation() {
                                      to='/browse'>Browse</NavLink>
                         </li>
                     </ul>
-
                     <div className='nav-search-bar'>
                         <NavLink to='/search-results'>
-                            <SearchBar/>
+                            <SearchBar />
                         </NavLink>
                     </div>
-
                     <div>
                         {isAuth ?
                             <div className='user-container'>

@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {useContext, useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
 import './Profile.css'
 import {UserContext} from "../../context/UserContext.jsx";
@@ -12,10 +12,17 @@ function Profile() {
     const {profilePicture, setProfilePicture} = useContext(UserContext);
 
     useEffect(() => {
+    const controller = new AbortController();
+
         const storedProfilePicture = localStorage.getItem('profilePicture');
         if (storedProfilePicture) {
             setProfilePicture(storedProfilePicture);
         }
+
+        return function cleanup() {
+            controller.abort();
+        }
+
     }, [setProfilePicture]);
 
 
@@ -23,7 +30,6 @@ function Profile() {
         <>
             <section className='profile-page outer-container'>
                 <div className='profile-page inner-container'>
-
                     <div className='profile-inner-content-container'>
                         <h2 className='username-profile'>{user.username}</h2>
                         <div className='user-profile-picture'>
@@ -55,10 +61,9 @@ function Profile() {
                             <Button className='edit-link'><Link to={'/edit-picture'}>Edit picture</Link></Button>
                         </div>
                     </div>
-
             </section>
         </>
-)
+    )
 }
 
 export default Profile;

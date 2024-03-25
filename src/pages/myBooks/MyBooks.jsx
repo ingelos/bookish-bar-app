@@ -6,19 +6,21 @@ import {Link} from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import Rating from "../../components/rating/Rating.jsx";
 import TrashIcon from "../../assets/icons/trash.svg";
+import Pagination from "../../components/pagination/Pagination.jsx";
 
 
 function MyBooks() {
     const [myBooks, setMyBooks] = useState([]);
     const [filter, setFilter] = useState('all');
+    const [currentPage, setCurrentPage] = useState(1);
     const {isAuth} = useContext(AuthContext)
 
     useEffect(() => {
         const storedBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         setMyBooks(storedBooks);
         console.log(storedBooks);
-
     }, []);
+
 
     function removeFromMyBooks(bookKey) {
         const removedFromMyBooks = myBooks.filter((book) => book.key !== bookKey);
@@ -37,6 +39,7 @@ function MyBooks() {
             return book;
         });
         setMyBooks(updatedBooks);
+        console.log(updatedBooks)
         localStorage.setItem('mybooks', JSON.stringify(updatedBooks));
     }
 
@@ -44,10 +47,23 @@ function MyBooks() {
         if (filter === 'wantToRead') {
             return books.filter(book => book.status === 'wantToRead');
         } else if (filter === 'read') {
-            return books.filter(book => book.status === 'read');
+            return  books.filter(book => book.status === 'read');
         }
         return books;
     }
+
+    const booksPerPage = 20;
+    const indexOfLastBook = currentPage * booksPerPage;
+    const indexOfFirstBook = indexOfLastBook - booksPerPage;
+    const currentBooks = filterBooks(myBooks).slice(indexOfFirstBook, indexOfLastBook);
+
+    const totalPages = Math.ceil(filterBooks(myBooks).length / booksPerPage);
+
+    const onPageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    }
+
+
 
     return (
         <section className='my-books outer-container'>
@@ -94,13 +110,13 @@ function MyBooks() {
                                                 <p>rating</p>
                                             </div>
                                         </div>
-                                        {filterBooks(myBooks).map((book) => (
+                                        {currentBooks.map((book) => (
                                             <div key={book.key}>
                                                 <div className='book-container'>
                                                     <BookCard
-                                                        cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
-                                                        title={book.title}
-                                                        author={book.author_name ? book.author_name[0] : book.authors[0].name}
+                                                        cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : '' || book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : ''}
+                                                        title={book.title ? book.title : ''}
+                                                        author={book.author_name ? book.author_name[0] : '' || book.authors ? book.authors[0].name : ''}
                                                         bookId={(book.key).replace("/works/", "")}
                                                         authorId={book.author_key ? (Array.isArray(book.author_key) ? book.author_key[0] : book.author_key) : (book.authors ? (Array.isArray(book.authors) ? book.authors[0].key.replace("/authors/", "") : book.authors.key) : '')}
                                                     />
@@ -138,6 +154,11 @@ function MyBooks() {
                                             </div>
                                         ))}
                                     </article>
+                                        <Pagination
+                                            currentPage={currentPage}
+                                            totalPages={totalPages}
+                                            onPageChange={onPageChange}
+                                            />
                                 </div>
                             )}
                         </div>
@@ -150,7 +171,9 @@ function MyBooks() {
                             your books!</p>
                     </div>
                 }
+
             </div>
+
         </section>
     )
 }

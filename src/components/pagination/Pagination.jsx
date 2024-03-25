@@ -2,33 +2,30 @@
 import './Pagination.css'
 import Button from "../button/Button.jsx";
 
-function Pagination({page, totalPages, onPageChange}) {
+function Pagination({ totalPages, onPageChange, currentPage}) {
 
-    function pageChange(e, pageNumber) {
+    function pageChange(e, pageNumber ) {
         e.preventDefault();
         onPageChange(pageNumber);
     }
 
     return (
-
         <div className='pagination'>
-            {page > 1 && (
                 <Button
-                    onClick={(e) => pageChange(e, page - 1)}
+                    onClick={(e) => pageChange(e, currentPage - 1)}
                     className='pagination-button'
+                    disabled={currentPage === 1}
                 >
                     Previous
                 </Button>
-            )}
-            <span className='page-settings'>{`Page ${page} of ${totalPages}`}</span>
-            {page < totalPages && (
+            <span className='page-settings'>{`Page ${currentPage} of ${totalPages}`}</span>
                 <Button
-                    onClick={(e) => pageChange(e, page + 1)}
+                    onClick={(e) => pageChange(e, currentPage + 1)}
                     className='pagination-button'
+                    disabled={currentPage === totalPages}
                 >
                     Next
                 </Button>
-            )}
         </div>
     )
 }

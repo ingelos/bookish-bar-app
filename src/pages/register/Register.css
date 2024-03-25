@@ -50,3 +50,19 @@
 .error-message-register {
     color: red;
 }
+
+.back-to-login {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.back-to-login-link {
+    display: flex;
+    align-items: flex-start;
+    padding-right: 285px;
+}
+
+.caret-left {
+    height: 15px;
+}

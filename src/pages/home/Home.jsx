@@ -18,7 +18,7 @@ function Home() {
             setError(false);
 
             try {
-                setLoading(true);
+                // setLoading(true);
                 const {data} = await axios.get(`https://openlibrary.org/trending/daily.json`, {
                     signal: controller.signal,
                     params: {
@@ -53,21 +53,20 @@ function Home() {
         <>
             <section className='home-section outer-container'>
                 <div className='home-section inner-container'>
-                    <div className='home-section inner-content-container'>
-                        <div className='welcome-message'>
-                            <h2>Welcome to Bookish Bar!</h2>
-                            <div className='intro-message'>
-                                <h3>We like big books and we cannot lie...</h3>
-                                <h3>If you do too...</h3>
-                                <h3><Link
-                                    to={'/search-results'}><strong>Search</strong></Link>, <Link
-                                    to={'/browse'}><strong>browse</strong></Link> and <Link
-                                    to={'/login'}><strong>log in</strong></Link> to save books to your <Link
-                                    to={'/my-books'}><strong>personal page</strong></Link>!</h3>
-                            </div>
-                        </div>
                     {error && <p>Error...</p>}
                     {loading ? <p>Loading...</p> : (
+                    <div className='home-section inner-content-container'>
+                        <div className='welcome-message'>
+                            <div className='intro-message'>
+                                <h2>Welcome to Bookish Bar!</h2>
+                                <h2>The bar that serves books...</h2>
+                            </div>
+                            <div className='dictionary-bookish'>
+                                <h4><strong>bookish</strong> [ book-ish ]</h4>
+                                <h4><em>adjective</em></h4>
+                                <h4>1. (of a person or way of life) devoted to reading and studying</h4>
+                            </div>
+                        </div>
                         <div className='trending-inner-container'>
                             <div className='preview-title-container'>
                                 <h2 className='list-title'>Trending today</h2>
@@ -84,14 +83,13 @@ function Home() {
                                                 </li>
                                             ))}
                                         </div>
-                                        <Link to='/trending'><h3 className='more-link'>More Trending...</h3>
-                                        </Link>
+                                        <Link to='/trending'><h3 className='more-link'>More Trending...</h3></Link>
                                     </>
                                 )}
                             </div>
                         </div>
-                    )}
                     </div>
+                    )}
                 </div>
             </section>
         </>

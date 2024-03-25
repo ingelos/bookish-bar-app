@@ -19,6 +19,11 @@ input {
     max-width: 300px;
 }
 
+.input-error-message {
+    color: red;
+}
+
+
 @media screen and (max-width: 840px) {
     form {
         padding: 0;

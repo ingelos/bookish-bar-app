@@ -2,6 +2,7 @@ import './Input.css'
 
 
 function Input({ inputId, inputLabel, inputType, inputName, validationRules, register, errors }) {
+
     return (
         <>
             <label htmlFor={inputId}>
@@ -12,7 +13,7 @@ function Input({ inputId, inputLabel, inputType, inputName, validationRules, reg
                     {...register(inputName, validationRules)}
                     />
             </label>
-            {errors[inputName] && <p>{errors[inputName].message}</p>}
+            {errors[inputName] && <p className='input-error-message'>{errors[inputName].message}</p>}
         </>
     )
 }

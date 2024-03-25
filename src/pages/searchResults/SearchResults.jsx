@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import axios from "axios";
 import BookCard from "../../components/bookCard/BookCard.jsx";
 import './SearchResults.css'
@@ -24,6 +24,7 @@ function SearchResults() {
     const [addedBook, setAddedBook] = useState({});
     const [noResults, setNoResults] = useState(false);
     const navigate = useNavigate();
+    const searchInputRef = useRef(null);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -31,6 +32,8 @@ function SearchResults() {
         const myBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
         setMyBooks(myBooks);
         console.log('myBooks:', myBooks)
+
+        searchInputRef.current.focus();
 
         return function cleanup() {
             controller.abort();
@@ -94,12 +97,12 @@ function SearchResults() {
     }
 
     function handleAddToMyBooks(book, status) {
-        const newBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
-        const alreadyAdded = newBooks.some((savedBook) => savedBook.key === book.key);
+        const existingBooks = JSON.parse(localStorage.getItem('mybooks')) || [];
+        const alreadyAdded = existingBooks.some((savedBook) => savedBook.key === book.key);
 
         if (!alreadyAdded) {
             const newBook = { ...book, status: status || 'read'};
-            newBooks.push(newBook);
+            const newBooks = [newBook, ...existingBooks];
             localStorage.setItem('mybooks', JSON.stringify(newBooks));
             console.log('book added to mybooks')
 
@@ -111,7 +114,6 @@ function SearchResults() {
         } else {
             console.log('book already added to mybooks');
         }
-
     }
 
     return (
@@ -120,6 +122,7 @@ function SearchResults() {
                 <SearchBar
                     query={query}
                     setQuery={setQuery}
+                    searchInputRef={searchInputRef}
                     onSearch={fetchSearchResults}
                 />
 
@@ -139,11 +142,10 @@ function SearchResults() {
                                 <div className='book-container' key={book.key}>
                                     <BookCard
                                         bookId={(book.key).replace("/works/", "")}
-                                        authorId={(book.author_key)}
-                                        // id={book.key}
+                                        authorId={book.author_key ? (Array.isArray(book.author_key) ? book.author_key[0] : book.author_key) : (book.authors ? (Array.isArray(book.authors) ? book.authors[0].key.replace("/authors/", "") : book.authors.key) : '')}
                                         title={book.title ? book.title : ''}
                                         author={book.author_name ? book.author_name[0] : ''}
-                                        cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : ''}
+                                        cover={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : '' || book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg` : ''}
                                         year={`First published in ${book.first_publish_year}`}
                                     />
                                     {isAuth ?
@@ -181,7 +183,7 @@ function SearchResults() {
                     </article>
                             {searchSucces ?
                                 <Pagination
-                                    page={currentPage}
+                                    currentPage={currentPage}
                                     totalPages={totalPages}
                                     onPageChange={pageChange}
                                 /> : '' }
